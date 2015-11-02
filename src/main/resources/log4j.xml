@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- Información en: http://www.javatutoriales.com/2011/04/log4j-para-creacion-de-eventos-de-log.html -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}:%L] %m%n" />
+			                                      
+		</layout>
+	</appender>
+	
+	<!-- # Set root logger level to DEBUG and its only appender to A1.
+           log4j.rootLogger=INFO, A1 
+           # A1 is set to be a ConsoleAppender. 
+           log4j.appender.A1=org.apache.log4j.ConsoleAppender 
+           # A1 uses PatternLayout. 
+           log4j.appender.A1.layout=org.apache.log4j.PatternLayout 
+           log4j.appender.A1.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n -->
+                                                 <!-- %-4r [%t] %-5p %c - %m%n -->
+                                                 <!-- %-5p: %c - %m%n -->
+
+	<!-- Application logger -->
+	<logger name="elmercadilloagricola">
+		<level value="info" />
+	</logger>
+
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.beans">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="org.springframework.jdbc">
+		<level value="warn" />
+	</logger>
+
+	<logger name="org.springframework.transaction">
+		<level value="warn" />
+	</logger>
+
+	<logger name="org.springframework.orm">
+		<level value="warn" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="warn" />
+	</logger>
+
+	<logger name="org.springframework.webflow">
+		<level value="warn" />
+	</logger>
+	
+	<!-- Root Logger -->
+	<root>
+		<priority value="info"/>
+		<!-- Muestra desde el que se pone hasta el de mayor prioridad. 
+		     
+		     Si se pone trace: muestra todo, si se pone info muestra info, warn, error y falta. 
+		     En producción se recomienda warn
+		    
+		    Nivel:
+			    TRACE: Se usa para información más detallada que el nivel debug.  
+				DEBUG: Se utiliza para mensajes de información detallada que son útiles para debugear una aplicación.
+				INFO: Se utiliza para mensajes de información que resaltan el progreso de la aplicación de una forma general.
+				WARN: Se utiliza para situaciones que podrían ser potencialmente dañinas.
+				ERROR: Se usa para eventos de error que podrían permitir que la aplicación continúe ejecutándose.
+				FATAL: Se usa para errores muy graves, que podrían hacer que la aplicación dejara de fu -->
+		
+		<appender-ref ref="console" />
+	</root>
+	
+	
+	<!-- Si ademas se quiere guardar en un archivo -->
+	<!--
+	<appender name="archivo" class="org.apache.log4j.FileAppender">
+        <param name="file" value="archivo.log" />
+        <layout class="org.apache.log4j.EnhancedPatternLayout">
+            <param name="ConversionPattern" value="%d{ABSOLUTE} [%t] %-5p %c %x - %m%n" />
+        </layout>
+    </appender>
+    
+     
+    <logger name="log4j.xml">
+        <level value="warn" />
+        <appender-ref ref="archivo" />
+    </logger> -->
+	
+</log4j:configuration>

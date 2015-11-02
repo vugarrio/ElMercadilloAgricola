@@ -1,0 +1,226 @@
+.result-item-categoria {
+    padding-bottom: 10px;
+}
+.result-item-provincia {
+    margin-top: 7px;
+}
+.result-item-features li{
+	margin-bottom:0px;
+}
+
+
+.breadcrumb.menu-group-categoria {
+  padding: 0px 15px;
+  margin-bottom: 5px;
+  margin-top: -15px;
+  
+}  
+.breadcrumb.menu-group-categoria li a {
+    color: #8cc152;
+}
+
+.result-item .sin-resultados {
+    padding: 20px;
+}
+
+.results-container-paginacion {
+    text-align: center;
+}
+.results-container-paginacion .pagination {
+    margin: 5px 0;
+}
+
+.anuncio-contacto-in a,
+.anuncio-contacto-in a:hover,
+.anuncio-contacto-in a:focus {
+    color:#8cc152;
+}
+
+
+
+.contactar-widget{
+	border:1px solid #eee;
+        font-weight:normal;
+}
+.contactar-widget h4{
+	padding:10px 15px;
+	margin-bottom: 0px!important;
+	border-bottom:1px solid #eee;
+}
+.contactar-widget label{
+	display:block;        
+}
+.contactar-widget .form-control{ 
+    font-weight:normal;
+}
+.contactar-widget label.checkbox-inline{
+	display: block;
+        margin: 0 0 5px 5px;
+	font-weight:normal;
+}
+.contactar-widget .loan-contactar{
+	font-size:30px;
+	font-weight:700;
+	display:block;
+	margin-top:10px;
+}
+.contactar-widget .loan-contactar small{
+	font-size:45%;
+	font-weight:400;
+	color:#222;
+}
+
+.loan-contactar:before, .loan-contactar:after{
+	content:" ";
+	display:table;
+}
+.loan-contactar:after{
+	clear:both;
+}
+.loan-contactar{
+	background:#f9f9f9;
+	padding:15px;
+	padding-bottom:15px;
+        margin-top: 0px!important;
+}
+.loan-contactar .btn{
+	padding-left:16px;
+	padding-right:16px;
+        margin-top: 10px;
+}
+
+.loan-contactar #message {
+    margin-top: 0;
+}
+
+.contactar-widget .vehicle-enquiry-foot{
+	background:#ffffff;
+	border-radius:3px;
+	padding:13px 20px;
+	font-size:11px;
+	margin-top:0px;
+	border:1px solid #eee;
+}
+
+.contactar-widget a,
+.contactar-widget a:hover,
+.contactar-widget a:focus {
+    color:#8cc152;
+}
+
+
+.badge-premium-listing  a,
+.badge-premium-listing a:hover,
+.badge-premium-listing a:focus {
+    color:#ffffff;
+}
+
+.form-group .fa { font-size: 20px; }
+
+
+.form-validate-vu .alert {
+    margin-top: 15px; 
+    margin-bottom: 0px;
+    font-size: 14px; 
+    font-weight:normal;
+}
+
+.form-group-progress {
+    margin-top: -8px; 
+}
+
+#formContactar .form-control-feedback  {
+    top: -2px;
+}
+
+#formRegistroCorto .form-control-feedback  {
+    top: 3px;
+}
+#formRegistroCorto .group-password .form-control-feedback  {
+    right: 32px;
+}
+
+.regular-signup #message, .loan-contactar #message {
+    display: none;
+}
+
+
+#formPublicarAnuncio .panel-info.price-suggestion {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#formPublicarAnuncio .eres {
+    padding-bottom: 10px;
+}
+
+#formPublicarAnuncio .form-control-feedback  {
+    top: 31px;
+}
+
+#formPublicarAnuncio .input-group .form-control-feedback  {
+    top: 3px;
+}
+#formPublicarAnuncio .elemento-izq .form-control-feedback   {
+    right: 25px;
+}
+#formPublicarAnuncio .panel-info .elemento-izq .form-control-feedback   {
+    top: 0px;
+    right: 35px;
+    font-size: 20px;
+}
+
+#formPublicarAnuncio .input-group.checkbox .form-control-feedback  {
+    top: -6px;
+    right: -33px;
+    font-size: 20px;
+}
+
+
+#formPublicarAnuncio .bootstrap-select.form-control {
+    margin-bottom: 5px!important;
+}
+
+
+.upload-imagen-principal .panel-body,  .upload-imagen .panel-body {
+    padding: 5px;
+}
+
+.upload-imagen-principal .panel-heading {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+} 
+
+.upload-imagen .panel-heading {
+  color: #999;
+  background-color: #f9f9f9;
+  border-color: #eee;
+}
+
+.upload-imagen { 
+  border-color: #eee;
+}
+ 
+.user-login-panel-mensaje{
+	float:right;
+	position:relative;
+         top:-5px;
+}
+
+
+.single-listing-images .featured-image img {
+    width: 720px;
+}
+
+.patrocinadores-slider h3 {
+    margin-top: 15px;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .loan-contactar .btn{
+		padding-left:13px;
+		padding-right:13px;
+                margin-top: 10px;
+	}
+}

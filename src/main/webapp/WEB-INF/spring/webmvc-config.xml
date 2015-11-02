@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+		
+		
+		
+   	
+		
+		
+	   <!-- Apunta al directorio que contiene los controladores -->
+	   <!-- Scans the classpath of this application for @Components to deploy as beans -->
+       <context:component-scan base-package="es.ugarrio.elmercadilloagricola.web" />
+
+       <!-- Configures the @Controller programming model -->
+       <mvc:annotation-driven/>
+       
+       <!-- Directorio donde estan los css, js, etc... -->
+	   <mvc:resources mapping="/resources/**" location="/resources/"/>
+       
+       <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	        <property name="basename" value="classpath:/META-INF/properties/messages"/>
+	        <property name="defaultEncoding" value="UTF-8"/> 
+	    </bean>
+       
+          
+        <mvc:interceptors>
+	        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	            <property name="paramName" value="lang"/>
+	        </bean>
+	    </mvc:interceptors>
+	
+	    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	        <property name="defaultLocale" value="es"/>
+	        <property name="cookieName" value="localeCookieName"/>
+	        <property name="cookieMaxAge" value="3600"/>
+	    </bean>
+       
+       
+       <!-- CON TEMPLATES JSP
+       <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+         <property name="prefix" value="/WEB-INF/views/"></property>
+         <property name="suffix" value=".jsp"></property>        
+       </bean> -->
+	   
+	   <!-- CON TEMPLATES TILES -->
+	   <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+	        <property name="definitions" value="/WEB-INF/definitions/general_definition.xml"/>
+	   </bean>
+	
+	   <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+	   </bean>
+	    
+	 
+</beans>

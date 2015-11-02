@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+	http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	
+	<persistence-unit name="elmercadilloagricolaPU" transaction-type="RESOURCE_LOCAL">
+		<class>es.ugarrio.elmercadilloagricola.domain.Anuncio</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.AnuncioEstado</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.AnuncioImagen</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.AnuncioMensaje</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.Categoria</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.HorarioLlamada</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.Provincia</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.Usuario</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.UsuarioEstado</class>
+		<class>es.ugarrio.elmercadilloagricola.domain.VendedorTipo</class>
+			        
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+            <property name="hibernate.use_sql_comments" value="true" />
+            <property name="hibernate.show.sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />            
+            <!-- value="create" to build a new database on each run; value="update" to modify an existing database; value="create-drop" means the same as "create" but also drops tables when Hibernate closes; value="validate" makes no changes to the database -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
+            <property name="hibernate.connection.charSet" value="UTF-8" />
+            <property name="hibernate.connection.characterEncoding" value="UTF-8" />
+            <property name="hibernate.connection.useUnicode" value="true" />
+            <!-- Procesamiento por lotes -->
+            <property name="hibernate.jdbc.batch_size" value="30" />
+            <property name="hibernate.jdbc.fetch_size" value="100" />
+
+        </properties>
+	
+	</persistence-unit>
+</persistence>
