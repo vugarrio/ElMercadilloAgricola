@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/anuncios")
 public class AnuncioController {
 	
-	@Autowired
+	//@Autowired
 	//private AnuncioService AnuncioService;
 	
 	/** Logger for this class and subclasses */

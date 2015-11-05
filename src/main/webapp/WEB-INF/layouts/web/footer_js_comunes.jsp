@@ -9,7 +9,7 @@
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/bootstrap.js"></script> <!-- UI -->
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/init.js"></script> <!-- All Scripts -->
 <script src="${pageContext.servletContext.contextPath}/resources/web/vendor/flexslider/js/jquery.flexslider.js"></script> <!-- FlexSlider -->
-<script src="${pageContext.servletContext.contextPath}/resources/web/http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/validaciones.js"></script> 
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/jquery.validaFormulariosVUBootstrap.js"></script> 
 <%--

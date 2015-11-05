@@ -15,11 +15,13 @@
 		  <put-attribute name="footer_js_comunes" value="/WEB-INF/layouts/web/footer_js_comunes.jsp" />
 	 </definition>
 	 
-	 <definition name="web/home" extends="baseLayoutWeb">
-		  <put-attribute name="title" value="Home"/>
-		  <put-attribute name="body" value="/WEB-INF/views/web/home.jsp" />		  
-	 </definition> 
 	 
+	 <definition name="web/home" extends="baseLayoutWeb">	 
+		  <put-attribute name="title" value="Home"/>		  		  
+		  <put-attribute name="body" value="/WEB-INF/views/web/home.jsp" />		  
+	 </definition>  
+	 	 
+		 
 	 
 	 
 	 <!-- ***************** INICIO PLANTILLAS DE PRUEBAS *******************  -->
