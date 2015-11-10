@@ -143,30 +143,54 @@
                     </div>
                 </div>
                 <div class="spacer-75"></div>
-                <!-- Recently Listed Vehicles -->
-                <section class="listing-block recent-vehicles">
-                	<div class="listing-header">
-                    	<h3>Últimos anuncios publicados</h3>
-                    </div>
-                    <div class="listing-container">
-                        <div class="carousel-wrapper">
-                            <div class="row">
-                                <ul class="owl-carousel carousel-fw" id="vehicle-slider" data-columns="4" data-autoplay="" data-pagination="yes" data-arrows="no" data-single-item="no" data-items-desktop="4" data-items-desktop-small="3" data-items-tablet="2" data-items-mobile="1">
-                                    
-                                    <%--TODO: PENDIENTE PONER BIEN --%>
-                                    <c:if test="${not empty listLastAnuncios}">
-										<c:forEach var="anuncioLast" items="${listLastAnuncios}">
-											<p><fmt:formatDate pattern="dd/MM/yyyy H:m" value="${anuncioLast.getFechaPublicacion()}" /> - idAnuncio = ${anuncioLast.getIdAnuncio()} }</p>
-										</c:forEach>
-									</c:if>	
-                                    
-                                   
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 
+                <c:if test="${not empty listLastAnuncios}">
+	                <!-- Recently Listed Vehicles -->
+	                <section class="listing-block recent-vehicles">
+	                	<div class="listing-header">
+	                    	<h3>Últimos anuncios publicados</h3>
+	                    </div>
+	                    <div class="listing-container">
+	                        <div class="carousel-wrapper">
+	                            <div class="row">
+	                                <ul class="owl-carousel carousel-fw" id="vehicle-slider" data-columns="4" data-autoplay="" data-pagination="yes" data-arrows="no" data-single-item="no" data-items-desktop="4" data-items-desktop-small="3" data-items-tablet="2" data-items-mobile="1">
+	                                    
+	                                    <%--TODO: PENDIENTE PONER BIEN --%>
+	                                    <fmt:setLocale value="es_ES"/>
+										<c:forEach var="anuncioLast" items="${listLastAnuncios}">
+										
+											<li class="item">
+		                                        <div class="vehicle-block format-standard">
+		                                        	<c:if test="${not empty anuncioLast.getUrlImagen()}">
+		                                            	<a href="anuncio.jsp?idanuncio=${anuncioLast.getIdAnuncio()}" class="media-box"><img src="${pageContext.servletContext.contextPath}/resources/web/${anuncioLast.getUrlImagen()}" alt=""></a>
+		                                             </c:if>
+		                                            <div class="vehicle-block-content">
+		                                                <span class="label label-default vehicle-age">${anuncioLast.getTxtFechaPublicado()}</span>
+		                                                <span class="label label-success premium-listing">${anuncioLast.getCategoria().getNombreCategoria()}</span>
+		                                                <h5 class="vehicle-title"><a href="anuncio.jsp?idanuncio=${anuncioLast.getIdAnuncio()}">${anuncioLast.getTitulo()}</a></h5>
+		                                                
+		                                                <c:if test="${not empty anuncioLast.getTxtDescripcionDestacado()}">
+		                                               	 	<span class="vehicle-meta">${anuncioLast.getTxtDescripcionDestacado()}</span>
+		                                                </c:if>	
+		                                                <%--<a href="results-list.html" title="View all Sedans" class="vehicle-body-type"><img src="${pageContext.servletContext.contextPath}/resources/web/images/body-types/sedan.png" width="30" alt=""></a> --%>
+		                                                
+		                                                <fmt:formatNumber value="${anuncioLast.getPrecio()}" type="number" var="precio" /> 
+		                                                <span class="vehicle-cost">${precio} €</span>
+		                                            </div>
+		                                        </div>
+		                                    </li>
+											
+											<%-- <p><fmt:formatDate pattern="dd/MM/yyyy H:m" value="${anuncioLast.getFechaPublicacion()}" /> - idAnuncio = ${anuncioLast.getIdAnuncio()} }</p> --%>
+										</c:forEach>
+										
+	                                    
+	                                   
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </section>
+                </c:if>	
              	
            </div>
             <div class="spacer-50"></div>

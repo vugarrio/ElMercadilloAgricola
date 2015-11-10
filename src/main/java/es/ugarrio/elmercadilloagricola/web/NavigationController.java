@@ -1,5 +1,6 @@
 package es.ugarrio.elmercadilloagricola.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
 import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
+import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 @Controller
 public class NavigationController {
@@ -32,8 +34,12 @@ public class NavigationController {
 		
 		logger.info("Controller --> home");
 		
-		List<Anuncio> listLastAnuncios = anuncioService.findLast(5);
-		model.addAttribute("listLastAnuncios", listLastAnuncios);
+		List<Anuncio> listLastAnuncios = anuncioService.findLast(8);
+		List<AnuncioDTO> listLastAnunciosDAO = new ArrayList<AnuncioDTO>();
+		for (Anuncio anuncio : listLastAnuncios) {
+			listLastAnunciosDAO.add(new AnuncioDTO(anuncio));
+		}
+		model.addAttribute("listLastAnuncios", listLastAnunciosDAO);
 		
 		//return new ModelAndView("web/home");
 		return "web/home";

@@ -104,11 +104,11 @@ public class Anuncio implements Serializable {
 	private VendedorTipo vendedoresTipo;
 
 	//bi-directional many-to-one association to AnuncioImagen
-	@OneToMany(mappedBy="anuncio")
+	@OneToMany(mappedBy="anuncio", fetch = FetchType.LAZY)
 	private List<AnuncioImagen> anunciosImagenes;
 
 	//bi-directional many-to-one association to AnuncioMensaje
-	@OneToMany(mappedBy="anuncio")
+	@OneToMany(mappedBy="anuncio", fetch = FetchType.LAZY)
 	private List<AnuncioMensaje> anunciosMensajes;
 
 	public Anuncio() {

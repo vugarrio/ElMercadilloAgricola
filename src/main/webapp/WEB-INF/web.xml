@@ -38,5 +38,20 @@
         <param-name>spring.profiles.default</param-name>
         <param-value>dev</param-value>  <!-- dev (develper) / prod (production) -->
     </context-param>
+    
+    
+    <!-- 
+    	Por defento la relaciones entre entidades OneToMany, si son "fetch = FetchType.LAZY", 
+    	se cargan de forma perezosa, cuando son demandadas no al crear el ojeto. 
+    	Para que no de error de session se ponene estos filtros.   	
+     -->
+    <filter>
+	    <filter-name>SpringOpenEntityManagerInViewFilter</filter-name>
+	    <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>SpringOpenEntityManagerInViewFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
 </web-app>
