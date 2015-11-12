@@ -6,9 +6,10 @@ package es.ugarrio.elmercadilloagricola.service;
 import java.util.List;
 
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
+import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 /**
- * @author Tente
+ * @author Vicente Ugarrio
  *
  */
 public interface AnuncioService {
@@ -19,6 +20,6 @@ public interface AnuncioService {
 	 * 
 	 * @return LISTADO DE LOS ULTIMOS NUM REGISTROS PUBLICADOS
 	 */	
-	public List<Anuncio> findLast(int num);
+	public List<AnuncioDTO> findLast(int num);
 	
 }

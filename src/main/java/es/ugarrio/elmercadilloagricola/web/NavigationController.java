@@ -3,8 +3,6 @@ package es.ugarrio.elmercadilloagricola.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
-import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
 import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 @Controller
@@ -34,14 +30,10 @@ public class NavigationController {
 		
 		logger.info("Controller --> home");
 		
-		List<Anuncio> listLastAnuncios = anuncioService.findLast(8);
-		List<AnuncioDTO> listLastAnunciosDAO = new ArrayList<AnuncioDTO>();
-		for (Anuncio anuncio : listLastAnuncios) {
-			listLastAnunciosDAO.add(new AnuncioDTO(anuncio));
-		}
-		model.addAttribute("listLastAnuncios", listLastAnunciosDAO);
+		//Obtenemos y añadimos a la vista los ultimos anuncios publicados.
+		List<AnuncioDTO> listLastAnuncios = anuncioService.findLast(8);		
+		model.addAttribute("listLastAnuncios", listLastAnuncios);
 		
-		//return new ModelAndView("web/home");
 		return "web/home";
 		
 		

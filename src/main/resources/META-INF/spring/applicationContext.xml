@@ -77,5 +77,8 @@
 	
 	<!-- Scans interface witch JpaRepository  -->
 	<jpa:repositories base-package="es.ugarrio.elmercadilloagricola.repository" />
-
+	
+	<!-- For bootstrapping the Spring Repository 
+	<jpa:repositories base-package="es.ugarrio.elmercadilloagricola.repository" repository-impl-postfix="DetectPostfixToken"/> -->
+     
 </beans>
