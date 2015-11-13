@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
+import es.ugarrio.elmercadilloagricola.domain.Provincia;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
+import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
 import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 @Controller
@@ -20,6 +22,9 @@ public class NavigationController {
 	
 	@Autowired
 	private AnuncioService anuncioService;
+	
+	@Autowired
+	private ProvinciaService provinciaService;
 	
 	/** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
@@ -29,6 +34,11 @@ public class NavigationController {
 	public String index(Model model) {
 		
 		logger.info("Controller --> home");
+		
+		//Obtenemos y añadimos el listado de provincias.
+		List<Provincia> listProvincias = provinciaService.findAll();		
+		model.addAttribute("listProvincias", listProvincias);
+		
 		
 		//Obtenemos y añadimos a la vista los ultimos anuncios publicados.
 		List<AnuncioDTO> listLastAnuncios = anuncioService.findLast(8);		

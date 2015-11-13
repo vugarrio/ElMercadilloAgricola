@@ -27,8 +27,8 @@ import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
 public class ProvinciaServiceImpl  implements ProvinciaService {
 	
 	
-	@PersistenceContext
-	private EntityManager em;
+	/*@PersistenceContext
+	private EntityManager em;*/
 	
 	@Inject
 	private ProvinciaRepository provinciaRepository;
@@ -68,7 +68,7 @@ public class ProvinciaServiceImpl  implements ProvinciaService {
 		//updatedProvincia.setEmplNumber(provincia.getEmplNumber());
 		provinciaRepository.save(updatedProvincia);
 		return updatedProvincia;
-	}
+	} 
 	
 	@Override
 	public Provincia findById(int id) {
@@ -77,17 +77,17 @@ public class ProvinciaServiceImpl  implements ProvinciaService {
 
 	@Override
 	public List<Provincia> findAll() {
-		return provinciaRepository.findAll();
+		return provinciaRepository.findAllActivas();
 	}
 	
-	@Override
+	/*@Override
 	public List<Provincia> findByCodProvincia(String codProvincia) {
 
 	    TypedQuery query = em.createQuery("select p from Provincia p where p.codProvincia = ?1", Provincia.class);
 	    query.setParameter(1, codProvincia);
 
 	    return query.getResultList();
-	}
+	}*/
 	
 	
 }

@@ -36,6 +36,15 @@
                             <div class="col-md-3">
                                 <label>Provincias</label>
                                 <%-- beanBuscadorAnuncios.pintaComboBuscadorProvincias("f_idprovincia", "", "", "", filtros) --%>
+                                <select name="${provincia.getNombreProvincia()} }" class="form-control selectpicker ">
+                                	 <option value=""></option>
+                                	 <c:forEach var="rowProv" items="${listProvincias}">                                	 	                              	 	
+	                                	<option value="${rowProv.getIdProvincia()}"> ${rowProv.getNombreProvincia()}</option>
+	                                	<%--  ${rowProv.getIdProvincia() eq value_selected ? 'selected': ''} --%>
+                                	</c:forEach>
+                                </select>
+                               
+                                
                             </div>
                             
                            

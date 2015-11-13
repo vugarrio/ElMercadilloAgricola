@@ -13,7 +13,7 @@ public interface ProvinciaService {
 	public Provincia update(Provincia provincia) throws EMCAException;
 	public List<Provincia> findAll();
 	public Provincia findById(int id);
-	List<Provincia> findByCodProvincia(String codProvincia);
+	//List<Provincia> findByCodProvincia(String codProvincia);
 	
 	
 	
