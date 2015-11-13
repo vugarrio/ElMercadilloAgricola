@@ -10,7 +10,7 @@ import es.ugarrio.elmercadilloagricola.domain.Provincia;
 
 public interface ProvinciaRepository extends JpaRepository<Provincia, Integer> {
 
-	@Query("from Provincia as p where esActivo = 1 order by nombreProvincia desc")
+	@Query("from Provincia as p where esActivo = 1 order by nombreProvincia")
 	List<Provincia> findAllActivas();
 	
 }
