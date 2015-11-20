@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
+import es.ugarrio.elmercadilloagricola.domain.Categoria;
 import es.ugarrio.elmercadilloagricola.domain.Provincia;
+import es.ugarrio.elmercadilloagricola.exception.EMCAException;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
+import es.ugarrio.elmercadilloagricola.service.CategoriaService;
 import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
 import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
@@ -25,6 +28,9 @@ public class NavigationController {
 	
 	@Autowired
 	private ProvinciaService provinciaService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 	
 	/** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
@@ -43,6 +49,20 @@ public class NavigationController {
 		//Obtenemos y añadimos a la vista los ultimos anuncios publicados.
 		List<AnuncioDTO> listLastAnuncios = anuncioService.findLast(8);		
 		model.addAttribute("listLastAnuncios", listLastAnuncios);
+		
+		//Obtenemosy añadimos el num de anuncios activos
+		int countAnunciosActivos = anuncioService.countActivos();
+		model.addAttribute("countAnunciosActivos", countAnunciosActivos);
+		
+		//Obtenemos y añadimos las categorias del primer nivel.
+		List<Categoria> listCategoriasN1 = new ArrayList<>();
+		try {
+			listCategoriasN1 = categoriaService.findByNivel(1);
+		} catch (EMCAException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		model.addAttribute("listCategoriasN1", listCategoriasN1);
 		
 		return "web/home";
 		

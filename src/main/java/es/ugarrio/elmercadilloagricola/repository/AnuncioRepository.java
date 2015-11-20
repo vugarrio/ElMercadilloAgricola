@@ -5,7 +5,7 @@ package es.ugarrio.elmercadilloagricola.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.jpa.repository.Query;
 
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.repository.custom.AnuncioRepositoryCustom;
@@ -18,7 +18,11 @@ import es.ugarrio.elmercadilloagricola.repository.custom.AnuncioRepositoryCustom
 public interface AnuncioRepository extends JpaRepository<Anuncio, Integer>, AnuncioRepositoryCustom { 
 	 
 	
-	 //Mirar http://docs.spring.io/spring-data/jpa/docs/1.3.0.RELEASE/reference/html/jpa.repositories.html
+	@Query("select count(a) from Anuncio a where a.anunciosEstado.idAnuncioEstado = 1")
+	long countActivos();
+	
+	
+	//Mirar http://docs.spring.io/spring-data/jpa/docs/1.3.0.RELEASE/reference/html/jpa.repositories.html
 	 
 	 /*  Informacion de como customizar JpaRepository: 
 	  * http://www.javabeat.net/spring-data-custom-repository/

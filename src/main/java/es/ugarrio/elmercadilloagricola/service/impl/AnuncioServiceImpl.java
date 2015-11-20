@@ -60,6 +60,9 @@ public class AnuncioServiceImpl implements AnuncioService {
 		return listLastAnunciosDAO;		
 	}
 	
-	
+	@Override
+	public int countActivos() {
+		return (int)anuncioRepository.countActivos();
+	}
 	
 }

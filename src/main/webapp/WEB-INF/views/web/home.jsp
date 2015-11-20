@@ -22,16 +22,13 @@
         			<button class="btn btn-primary" type="submit">Buscar</button>
       				</span>
                         </div>
-                        <span class="label label-warning pull-right"><%-- 	TODO PENDIENTE DE HACER beanBuscadorAnuncios.getNumAnucnios() --%>xxx Anuncios publicados</span>
+                        <span class="label label-warning pull-right"><%-- 	TODO PENDIENTE DE HACER beanBuscadorAnuncios.getNumAnucnios() --%>${countAnunciosActivos} Anuncios publicados</span>
                         <%--<span class="label label-success pull-right">10 Anuncios de venta</span>--%>
                         <a href="#" class="search-advanced-trigger">Búsqueda avanzada <i class="fa fa-arrow-down"></i></a>
                         <div class="row advanced-search-row">
                             
-                            <%--
-                                Map<String,String> filtros = new HashMap();
-                                String[] anArray = {"100", "500", "1.000", "5.000", "10.000", "20.000", "30.000", "40.000", "50.000", "60.000", "10.000", "20.000", "90.000", "100.000"};
-                            --%>
-                            
+                                                        
+                            <c:set var="anArray" value='<%=new String[] {"100", "500", "1.000", "5.000", "10.000", "20.000", "30.000", "40.000", "50.000", "60.000", "10.000", "20.000", "90.000", "100.000"} %>'/>
                             
                             <div class="col-md-3">
                                 <label>Provincias</label>
@@ -53,11 +50,9 @@
                                 <label>Precio Mínimo</label>
                                 <select name="f_precio_desde" id="f_precio_desde" class="form-control selectpicker">
                                     <option value=""></option>
-                                    <%-- <%
-                                        for (String num: anArray) {
-                                    <option value="<%= num.replace(".", "") %>"><%= num %> €</option><%
-                                        }
-                                    %> --%>                                                                                                           
+                                    <c:forEach var="num" items="${anArray}">
+                                    	<option value="${num.replace(".", "")}">${num}</option>
+                                    </c:forEach>                                                                                                                                                
                                 </select>
                             </div>  
                                 
@@ -65,11 +60,9 @@
                                 <label>Precio Máximo</label>
                                 <select name="f_precio_hasta" id="f_precio_hasta" class="form-control selectpicker">
                                     <option value=""></option>
-                                    <%--
-                                        for (String num: anArray) {
-                                    <option value="<%= num.replace(".", "") %>"><%= num %> €</option><%
-                                        }
-                                    %>  --%>                                                                                                          
+                                    <c:forEach var="num" items="${anArray}">
+                                    	<option value="${num.replace(".", "")}">${num}</option>
+                                    </c:forEach>                                                                                                         
                                 </select>
                             </div>      
                                 

@@ -22,4 +22,10 @@ public interface AnuncioService {
 	 */	
 	public List<AnuncioDTO> findLast(int num);
 	
+	
+	/**
+	 * @return NUMERO DE ANUNCIOS ACTIVOS
+	 */	
+	public int countActivos();
+	
 }
