@@ -118,7 +118,16 @@
     		<div class="container">
                	<div class="row">
                   	<ul class="owl-carousel carousel-alt" data-columns="6" data-autoplay="" data-pagination="no" data-arrows="yes" data-single-item="no" data-items-desktop="6" data-items-desktop-small="4" data-items-mobile="3" data-items-tablet="4">
-                            <%-- TODO PENDIENTE ${beanCategorias.getHTMLListLICategoriasN1("item")} --%> PENDIENTE
+                            <%-- TODO PENDIENTE ${beanCategorias.getHTMLListLICategoriasN1("item")} --%> 
+                            <c:forEach var="rowCat" items="${listCategoriasN1}">   
+                            	<li class="item">
+                            		<a href="anuncios.jsp?f_idcategoria=${rowCat.getIdCategoria()}">
+                            			<c:if test="${not empty rowCat.getUrlImagen()}">
+                            				<img src="${pageContext.servletContext.contextPath}/resources/web/${rowCat.getUrlImagen()}" alt="${rowCat.getNombreCategoria()}"/>
+                            			</c:if>
+                            		<span>${rowCat.getNombreCategoria()}</span></a>
+                            	</li>
+                            </c:forEach>
                     </ul>
                	</div>
             </div>

@@ -14,7 +14,7 @@ import es.ugarrio.elmercadilloagricola.repository.custom.AnuncioRepositoryCustom
  */
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 
-	@Query("from Categorias c where c.nivel = ?1 order by c.orden, c.nombreCategoria")
-	List<Categoria> findByNivel(long nivel);
+	@Query("from Categoria c where c.nivel = ?1 order by c.orden, c.nombreCategoria")
+	List<Categoria> findByNivel(int nivel);
 	
 }

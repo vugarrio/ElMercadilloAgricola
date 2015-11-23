@@ -13,7 +13,7 @@ public interface CategoriaService {
 	 * 
 	 * @return LISTADO DE CATEGORIAS
 	 */	
-	public List<Categoria> findByNivel(long nivel) throws EMCAException;
+	public List<Categoria> findByNivel(int nivel) throws EMCAException;
 	
 	
 }

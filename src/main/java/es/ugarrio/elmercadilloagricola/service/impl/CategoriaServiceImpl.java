@@ -23,7 +23,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Categoria> findByNivel(long nivel) throws EMCAException {
+	public List<Categoria> findByNivel(int nivel) throws EMCAException {
 		return categoriaRepository.findByNivel(nivel);
 	}
 	
