@@ -54,7 +54,11 @@ public class NavigationController {
 		int countAnunciosActivos = anuncioService.countActivos();
 		model.addAttribute("countAnunciosActivos", countAnunciosActivos);
 		
-		//Obtenemos y añadimos las categorias del primer nivel.
+		
+		
+		/* *********  INICIO COMUN PARA TODAS LAS PLANTILLAS ****************** */
+		
+		//Obtenemos y añadimos las categorias del primer nivel (Menu --> Anuncios)
 		List<Categoria> listCategoriasN1 = new ArrayList<>();
 		try {
 			listCategoriasN1 = categoriaService.findByNivel(1);
@@ -63,6 +67,8 @@ public class NavigationController {
 			e.printStackTrace();
 		}		
 		model.addAttribute("listCategoriasN1", listCategoriasN1);
+		
+		/* *********  FIN COMUN PARA TODAS LAS PLANTILLAS ****************** */
 		
 		return "web/home";
 		

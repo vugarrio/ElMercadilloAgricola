@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
    <div class="navbar">
             <div class="container sp-cont">
@@ -31,11 +32,21 @@
                                                 </ul>
                                             </div>
                                             <div class="mm-col col-md-5">
-                                                <span class="megamenu-sub-title">Por una categoría</span>
-                                                <ul class="body-type-widget">
-                                                    <%-- [***] ${beanCategorias.getHTMLListLICategoriasN1("")}  --%>                                                   
-                                                </ul>
-                                                    <%--<a href="results-list.html" class="basic-link">view all</a>--%>
+                                            	<c:if test="${not empty listCategoriasN1}">
+	                                                <span class="megamenu-sub-title">Por una categoría</span>
+	                                                <ul class="body-type-widget">
+	                                                    <c:forEach var="rowCatMenu" items="${listCategoriasN1}">   
+							                            	<li class="">
+							                            		<a href="anuncios.jsp?f_idcategoria=${rowCatMenu.getIdCategoria()}">
+							                            			<c:if test="${not empty rowCatMenu.getUrlImagen()}">
+							                            				<img src="${pageContext.servletContext.contextPath}/resources/web/${rowCatMenu.getUrlImagen()}" alt="${rowCatMenu.getNombreCategoria()}"/>
+							                            			</c:if>
+							                            		<span>${rowCatMenu.getNombreCategoria()}</span></a>
+							                            	</li>
+							                            </c:forEach>                                               
+	                                                </ul>
+	                                                <%--<a href="results-list.html" class="basic-link">view all</a>--%>
+	                                            </c:if>
                                             </div>
                                             <div class="mm-col col-md-5">
                                                 <span class="megamenu-sub-title">Patrocinadores</span>
