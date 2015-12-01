@@ -16,4 +16,7 @@ public interface CategoriaService {
 	public List<Categoria> findByNivel(int nivel) throws EMCAException;
 	
 	
+	
+	
+	
 }

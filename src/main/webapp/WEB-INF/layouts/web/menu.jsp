@@ -24,11 +24,11 @@
                                         <div class="row">
                                             <div class="mm-col col-md-2">
                                                 <ul class="sub-menu">
-                                                    <li><a href="anuncios.jsp">Todo los anuncios</a></li> 
-                                                    <li><a href="anuncios.jsp?f_idprovincia=45">Toledo</a></li>
-                                                    <li><a href="anuncios.jsp?f_idprovincia=28">Madrid</a></li>
-                                                    <li><a href="anuncios.jsp?f_idprovincia=50">Zaragoza</a></li>
-                                                    <li><a href="anuncios.jsp?f_idprovincia=2">Albacete</a></li>
+                                                    <li><a href="${pageContext.servletContext.contextPath}/anuncios">Todo los anuncios</a></li> 
+                                                    <li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=45">Toledo</a></li>
+                                                    <li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=28">Madrid</a></li>
+                                                    <li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=50">Zaragoza</a></li>
+                                                    <li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=2">Albacete</a></li>
                                                 </ul>
                                             </div>
                                             <div class="mm-col col-md-5">
@@ -37,7 +37,7 @@
 	                                                <ul class="body-type-widget">
 	                                                    <c:forEach var="rowCatMenu" items="${listCategoriasN1}">   
 							                            	<li class="">
-							                            		<a href="anuncios.jsp?f_idcategoria=${rowCatMenu.getIdCategoria()}">
+							                            		<a href="${pageContext.servletContext.contextPath}/anuncios?f_idcategoria=${rowCatMenu.getIdCategoria()}">
 							                            			<c:if test="${not empty rowCatMenu.getUrlImagen()}">
 							                            				<img src="${pageContext.servletContext.contextPath}/resources/web/${rowCatMenu.getUrlImagen()}" alt="${rowCatMenu.getNombreCategoria()}"/>
 							                            			</c:if>

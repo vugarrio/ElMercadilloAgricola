@@ -15,7 +15,7 @@
           	<h2>¿Buscas maquinaria agrícola?</h2>
                 <p>En nuestro portal podrás encontrar todo tipo de maquinaria agrícola.</p>
                 <div class="search-form-inner">
-                    <form action="anuncios.jsp" method="get">
+                    <form action="${pageContext.servletContext.contextPath}/anuncios" method="get">
                     	<div class="input-group input-group-lg">
       				<input type="text" class="form-control" name="f_txt" id="f_txt" placeholder="Título, Marca, Modelo...">
                         	<span class="input-group-btn">
@@ -33,7 +33,7 @@
                             <div class="col-md-3">
                                 <label>Provincias</label>
                                 <%-- beanBuscadorAnuncios.pintaComboBuscadorProvincias("f_idprovincia", "", "", "", filtros) --%>
-                                <select name="${provincia.getNombreProvincia()} }" class="form-control selectpicker ">
+                                <select name="f_idprovincia" class="form-control selectpicker ">
                                 	 <option value=""></option>
                                 	 <c:forEach var="rowProv" items="${listProvincias}">                                	 	                              	 	
 	                                	<option value="${rowProv.getIdProvincia()}"> ${rowProv.getNombreProvincia()}</option>
@@ -169,16 +169,17 @@
 	                                    <%--TODO: PENDIENTE PONER BIEN --%>
 	                                    <fmt:setLocale value="es_ES"/>
 										<c:forEach var="anuncioLast" items="${listLastAnuncios}">
-										
+											
+											
 											<li class="item">
 		                                        <div class="vehicle-block format-standard">
 		                                        	<c:if test="${not empty anuncioLast.getUrlImagen()}">
-		                                            	<a href="anuncio.jsp?idanuncio=${anuncioLast.getIdAnuncio()}" class="media-box"><img src="${pageContext.servletContext.contextPath}/resources/web/${anuncioLast.getUrlImagen()}" alt=""></a>
+		                                            	<a href="${pageContext.servletContext.contextPath}/anuncio/${anuncioLast.getIdAnuncio()}" class="media-box"><img src="${pageContext.servletContext.contextPath}/resources/web/${anuncioLast.getUrlImagen()}" alt=""></a>
 		                                             </c:if>
 		                                            <div class="vehicle-block-content">
 		                                                <span class="label label-default vehicle-age">${anuncioLast.getTxtFechaPublicado()}</span>
 		                                                <span class="label label-success premium-listing">${anuncioLast.getCategoria().getNombreCategoria()}</span>
-		                                                <h5 class="vehicle-title"><a href="anuncio.jsp?idanuncio=${anuncioLast.getIdAnuncio()}">${anuncioLast.getTitulo()}</a></h5>
+		                                                <h5 class="vehicle-title"><a href="${anuncioLast.getTxtFechaPublicado()}">${anuncioLast.getTitulo()}</a></h5>
 		                                                
 		                                                <c:if test="${not empty anuncioLast.getTxtDescripcionDestacado()}">
 		                                               	 	<span class="vehicle-meta">${anuncioLast.getTxtDescripcionDestacado()}</span>

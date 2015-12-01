@@ -1,6 +1,9 @@
 package es.ugarrio.elmercadilloagricola.web;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
 
+import es.ugarrio.elmercadilloagricola.domain.Anuncio;
+import es.ugarrio.elmercadilloagricola.domain.Categoria;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
 import es.ugarrio.elmercadilloagricola.service.CategoriaService;
 import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
+import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 
 @Controller
@@ -36,8 +42,6 @@ public class AnuncioController {
 	
 	/** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
-    
-    
     
     
     @RequestMapping(value = { "/anuncios", "/anuncios/" }, method = RequestMethod.GET)
@@ -58,6 +62,83 @@ public class AnuncioController {
 		}
 		
 		
+		//Procesamos los parametros de entrada. 
+		String filtro_id_anuncio = ""; 
+	    String filtro_id_usuario = "";                    
+	    String filtro_id_categoria = "";
+	    String filtro_id_provincia = "";
+	    String filtro_cp = "";
+	    String filtro_txt = "";
+	    String filtro_precio_desde = "";
+	    String filtro_precio_hasta = "";
+	    String listado_vista = "results-list-view";
+	    //String listado_num_registros_mostrar = "5";
+	    String listado_ordenar_por = "a.fechaPublicacion desc";
+	    int pagina = 1;
+	    int listado_num_registros_mostrar = 5;    
+	    Map<String,String> filtros = new HashMap<>();
+	    
+	    //Seleccionamos los anuncios con estado a activos
+	    filtros.put("filtro_id_anuncio_estado", "1"); //Activo
+	    
+	    if (allRequestParams.get("f_idanuncio") != null && !allRequestParams.get("f_idanuncio").trim().equals("")) {
+	        filtro_id_anuncio = allRequestParams.get("f_idanuncio");
+	        filtros.put("filtro_id_anuncio", filtro_id_anuncio);
+	    }
+	    if (allRequestParams.get("f_idusuario") != null && !allRequestParams.get("f_idusuario").trim().equals("")) {
+	        filtro_id_usuario = allRequestParams.get("f_idusuario"); 
+	        filtros.put("filtro_id_usuario", filtro_id_usuario);
+	    }
+	    if (allRequestParams.get("f_idcategoria") != null && !allRequestParams.get("f_idcategoria").trim().equals("")) {
+	        filtro_id_categoria = allRequestParams.get("f_idcategoria");
+	        filtros.put("filtro_id_categoria", filtro_id_categoria);
+	    }
+	    if (allRequestParams.get("f_idprovincia") != null && !allRequestParams.get("f_idprovincia").trim().equals("")) {
+	        filtro_id_provincia = allRequestParams.get("f_idprovincia");
+	        filtros.put("filtro_id_provincia", filtro_id_provincia);
+	    }
+	    if (allRequestParams.get("f_cp") != null && !allRequestParams.get("f_cp").trim().equals("")) {
+	        filtro_cp = allRequestParams.get("f_cp");
+	        filtros.put("filtro_cp", filtro_cp);
+	    }
+	    if (allRequestParams.get("f_txt") != null && !allRequestParams.get("f_txt").trim().equals("")) {
+	        filtro_txt = allRequestParams.get("f_txt");
+	        filtros.put("filtro_txt", filtro_txt);
+	    }
+	    if (allRequestParams.get("f_precio_desde") != null && !allRequestParams.get("f_precio_desde").trim().equals("")) {
+	        filtro_precio_desde = allRequestParams.get("f_precio_desde");
+	        filtros.put("filtro_precio_desde", filtro_precio_desde);
+	    }
+	    if (allRequestParams.get("f_precio_hasta") != null && !allRequestParams.get("f_precio_hasta").trim().equals("")) {
+	        filtro_precio_hasta = allRequestParams.get("f_precio_hasta");
+	        filtros.put("filtro_precio_hasta", filtro_precio_hasta);
+	    }
+	    
+	    
+	    if (allRequestParams.get("listado_vista") != null && !allRequestParams.get("listado_vista").trim().equals("")) {
+	        listado_vista = allRequestParams.get("listado_vista");
+	        filtros.put("listado_vista", listado_vista);
+	    }
+	    	    
+	    
+	    if (allRequestParams.get("pagina") != null && !allRequestParams.get("pagina").trim().equals("")) {
+	        pagina = Integer.parseInt(allRequestParams.get("pagina"));        
+	    }
+	    if (allRequestParams.get("listado_num_registros_mostrar") != null && !allRequestParams.get("listado_num_registros_mostrar").trim().equals("")) {
+	        listado_num_registros_mostrar = Integer.parseInt(allRequestParams.get("listado_num_registros_mostrar"));        
+	    }
+	    if (allRequestParams.get("listado_ordenar_por") != null && !allRequestParams.get("listado_ordenar_por").trim().equals("")) {
+	        listado_ordenar_por = allRequestParams.get("listado_ordenar_por");       
+	    }
+		    
+	    
+		
+		//Obtenemos y añadimos las categorias del primer nivel (Menu --> Anuncios)
+		List<AnuncioDTO> listAllAnuncios = anuncioService.findAnunciosPaginados(filtros, pagina, listado_num_registros_mostrar, listado_ordenar_por);
+		for (AnuncioDTO anuncioDTO : listAllAnuncios) {
+			logger.info(" ---------------- >  " + anuncioDTO.toString());
+		}
+		
 		return "web/anuncios";
 		
     }
@@ -69,8 +150,7 @@ public class AnuncioController {
     @RequestMapping(value = { "/anuncio",
     		                  "/anuncio/{id:[\\d]+}",
     		                  "/anuncio/{id:[\\d]+}/{name}",
-    		                  "/anuncio/{name}"
-    		
+    		                  "/anuncio/{name}"    		
     }, method = RequestMethod.GET)
 	public String getAnuncio(Model model, HttpServletRequest request) {
 		

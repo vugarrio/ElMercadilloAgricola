@@ -336,6 +336,18 @@ public class AnuncioDTO {
 	public void setTxtDescripcionDestacado(String txtDescripcionDestacado) {
 		this.txtDescripcionDestacado = txtDescripcionDestacado;
 	}
+
+
+	@Override
+	public String toString() {
+		return "AnuncioDTO [idAnuncio=" + idAnuncio + ", cp=" + cp + ", descripcion=" + descripcion + ", email=" + email
+				+ ", empresaNombre=" + empresaNombre + ", localidad=" + localidad + ", marca=" + marca + ", modelo="
+				+ modelo + ", numEnviosEmail=" + numEnviosEmail + ", numVistos=" + numVistos + ", precio=" + precio
+				+ ", telefono=" + telefono + ", titulo=" + titulo + ", anunciosEstado=" + anunciosEstado
+				+ ", categoria=" + categoria + ", provincia=" + provincia + ", usuario=" + usuario + ", vendedoresTipo="
+				+ vendedoresTipo + ", txtFechaPublicado=" + txtFechaPublicado + ", txtDescripcionDestacado="
+				+ txtDescripcionDestacado + ", urlImagen=" + urlImagen + "]";
+	}
 	
 	
 	

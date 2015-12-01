@@ -27,4 +27,6 @@ public class CategoriaServiceImpl implements CategoriaService {
 		return categoriaRepository.findByNivel(nivel);
 	}
 	
+	
+	
 }
