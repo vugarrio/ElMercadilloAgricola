@@ -6,8 +6,7 @@
 <html class="no-js">
 <head>
 
-	<!-- Basic Page Needs
-	  ================================================== -->
+	<!-- Basic Page Needs  ================================================== -->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>El Mercadillo Verde</title>
 	<meta name="description" content="">

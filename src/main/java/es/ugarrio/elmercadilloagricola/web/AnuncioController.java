@@ -71,11 +71,12 @@ public class AnuncioController {
 	    String filtro_txt = "";
 	    String filtro_precio_desde = "";
 	    String filtro_precio_hasta = "";
+	    
 	    String listado_vista = "results-list-view";
-	    //String listado_num_registros_mostrar = "5";
 	    String listado_ordenar_por = "a.fechaPublicacion desc";
 	    int pagina = 1;
-	    int listado_num_registros_mostrar = 5;    
+	    int listado_num_registros_por_pagina = 5;    
+	    
 	    Map<String,String> filtros = new HashMap<>();
 	    
 	    //Seleccionamos los anuncios con estado a activos
@@ -124,8 +125,8 @@ public class AnuncioController {
 	    if (allRequestParams.get("pagina") != null && !allRequestParams.get("pagina").trim().equals("")) {
 	        pagina = Integer.parseInt(allRequestParams.get("pagina"));        
 	    }
-	    if (allRequestParams.get("listado_num_registros_mostrar") != null && !allRequestParams.get("listado_num_registros_mostrar").trim().equals("")) {
-	        listado_num_registros_mostrar = Integer.parseInt(allRequestParams.get("listado_num_registros_mostrar"));        
+	    if (allRequestParams.get("listado_num_registros_por_pagina") != null && !allRequestParams.get("listado_num_registros_por_pagina").trim().equals("")) {
+	        listado_num_registros_por_pagina = Integer.parseInt(allRequestParams.get("listado_num_registros_por_pagina"));        
 	    }
 	    if (allRequestParams.get("listado_ordenar_por") != null && !allRequestParams.get("listado_ordenar_por").trim().equals("")) {
 	        listado_ordenar_por = allRequestParams.get("listado_ordenar_por");       
@@ -134,10 +135,23 @@ public class AnuncioController {
 	    
 		
 		//Obtenemos y añadimos las categorias del primer nivel (Menu --> Anuncios)
-		List<AnuncioDTO> listAllAnuncios = anuncioService.findAnunciosPaginados(filtros, pagina, listado_num_registros_mostrar, listado_ordenar_por);
-		for (AnuncioDTO anuncioDTO : listAllAnuncios) {
+		List<AnuncioDTO> listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(filtros, pagina, listado_num_registros_por_pagina, listado_ordenar_por);
+		for (AnuncioDTO anuncioDTO : listAnunciosFitradoPaginado) {
 			logger.info(" ---------------- >  " + anuncioDTO.toString());
 		}
+		
+		//Insertamos en la vista el resultado de los Anuncios
+		model.addAttribute("listAnunciosFitradoPaginado", listAnunciosFitradoPaginado);
+		
+		//Insertamos las variables de paginación
+		model.addAttribute("listado_vista", listado_vista);
+		model.addAttribute("pagina", pagina);
+		model.addAttribute("listado_num_registros_por_pagina", listado_num_registros_por_pagina);
+		model.addAttribute("listado_ordenar_por", listado_ordenar_por);
+		
+		//Insertamos las variables de filtros
+		model.addAttribute("f_idanuncio", filtro_id_anuncio);
+		//TODO: falnta insertar el resto de variables
 		
 		return "web/anuncios";
 		

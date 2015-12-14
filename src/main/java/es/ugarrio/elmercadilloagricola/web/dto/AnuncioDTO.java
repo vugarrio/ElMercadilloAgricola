@@ -79,7 +79,7 @@ public class AnuncioDTO {
 	
 	private String txtDescripcionDestacado;
 	   
-	 private String urlImagen;
+	private String urlImagen;
     
 	
 	public AnuncioDTO (Anuncio anuncio) {
@@ -87,6 +87,11 @@ public class AnuncioDTO {
 		this.setTitulo(anuncio.getTitulo());
 		this.setPrecio(anuncio.getPrecio());
 		this.setCategoria(anuncio.getCategoria());
+		this.setProvincia(anuncio.getProvincia());
+		this.setMarca(anuncio.getMarca());
+		this.setModelo(anuncio.getModelo());
+		
+		//TODO: falta cargar el listado de imagenes y mensajes
 		
 		//Descripcion
 		String descripcion = anuncio.getDescripcion();
@@ -336,7 +341,8 @@ public class AnuncioDTO {
 	public void setTxtDescripcionDestacado(String txtDescripcionDestacado) {
 		this.txtDescripcionDestacado = txtDescripcionDestacado;
 	}
-
+	
+	
 
 	@Override
 	public String toString() {
