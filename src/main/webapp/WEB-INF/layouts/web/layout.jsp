@@ -2,6 +2,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE HTML>
 <html class="no-js">
 <head>

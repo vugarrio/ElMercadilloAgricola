@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
-
+<%@ taglib prefix="util" tagdir="/WEB-INF/tags/util" %>
 
 
 <!-- Start Page header -->
@@ -401,6 +401,7 @@
                             </div>
                             
                             <%-- resultados[1] --%>
+                            <util:pagination page="5" maxPages="5" path="/anuncios" query="name=1" />
                             
                         </div>
                         
