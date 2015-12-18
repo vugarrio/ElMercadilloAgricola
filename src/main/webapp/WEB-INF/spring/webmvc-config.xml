@@ -29,7 +29,7 @@
        
           
         <mvc:interceptors>
-	        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 	            <property name="paramName" value="lang"/>
 	        </bean>
 	    </mvc:interceptors>
@@ -39,8 +39,8 @@
 	        <property name="cookieName" value="localeCookieName"/>
 	        <property name="cookieMaxAge" value="3600"/>
 	    </bean>
-       
-       
+	    
+	         
        <!-- CON TEMPLATES JSP
        <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
          <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>

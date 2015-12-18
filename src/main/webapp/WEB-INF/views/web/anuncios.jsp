@@ -401,7 +401,7 @@
                             </div>
                             
                             <%-- resultados[1] --%>
-                            <util:pagination page="5" maxPages="5" path="/anuncios" query="name=1" />
+                            <util:pagination page="4" totalPages="4" query="name=1" />
                             
                         </div>
                         
