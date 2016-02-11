@@ -62,20 +62,22 @@ public class AnuncioController {
 		}
 		
 		
-		//Procesamos los parametros de entrada. 
-		String filtro_id_anuncio = ""; 
-	    String filtro_id_usuario = "";                    
-	    String filtro_id_categoria = "";
-	    String filtro_id_provincia = "";
-	    String filtro_cp = "";
-	    String filtro_txt = "";
-	    String filtro_precio_desde = "";
-	    String filtro_precio_hasta = "";
-	    
-	    String listado_vista = "results-list-view";
-	    String listado_ordenar_por = "a.fechaPublicacion desc";
+		//CREAMOS Y RECUPERAMOS VARIABLES DE PAGINACION Y ORDENACION Y FILTROS DE BUSQUEDA 
+		String filtroIdAnuncio = ""; 
+	    String filtroIdUsuario = "";                    
+	    String filtroIdCategoria = "";
+	    String filtroIdProvincia = "";
+	    String filtroCP = "";
+	    String filtroTxt = "";
+	    String filtroPrecioDesde = "";
+	    String filtroPrecioHasta = "";
+	    	    
+	    String listadoVista = "results-list-view";
+	    String listadoOrdenarPor = "a.fechaPublicacion desc";
 	    int pagina = 1;
-	    int listado_num_registros_por_pagina = 5;    
+	    int listadoNumRegistrosPorPagina = 2;  
+	    int listadoTotalPaginas = 0;  
+	    int listadoTotalRegistros = 0;
 	    
 	    Map<String,String> filtros = new HashMap<>();
 	    
@@ -83,74 +85,90 @@ public class AnuncioController {
 	    filtros.put("filtro_id_anuncio_estado", "1"); //Activo
 	    
 	    if (allRequestParams.get("f_idanuncio") != null && !allRequestParams.get("f_idanuncio").trim().equals("")) {
-	        filtro_id_anuncio = allRequestParams.get("f_idanuncio");
-	        filtros.put("filtro_id_anuncio", filtro_id_anuncio);
+	        filtroIdAnuncio = allRequestParams.get("f_idanuncio");
+	        filtros.put("filtroIdAnuncio", filtroIdAnuncio);
 	    }
 	    if (allRequestParams.get("f_idusuario") != null && !allRequestParams.get("f_idusuario").trim().equals("")) {
-	        filtro_id_usuario = allRequestParams.get("f_idusuario"); 
-	        filtros.put("filtro_id_usuario", filtro_id_usuario);
+	        filtroIdUsuario = allRequestParams.get("f_idusuario"); 
+	        filtros.put("filtroIdUsuario", filtroIdUsuario);
 	    }
 	    if (allRequestParams.get("f_idcategoria") != null && !allRequestParams.get("f_idcategoria").trim().equals("")) {
-	        filtro_id_categoria = allRequestParams.get("f_idcategoria");
-	        filtros.put("filtro_id_categoria", filtro_id_categoria);
+	        filtroIdCategoria = allRequestParams.get("f_idcategoria");
+	        filtros.put("filtroIdCategoria", filtroIdCategoria);
 	    }
 	    if (allRequestParams.get("f_idprovincia") != null && !allRequestParams.get("f_idprovincia").trim().equals("")) {
-	        filtro_id_provincia = allRequestParams.get("f_idprovincia");
-	        filtros.put("filtro_id_provincia", filtro_id_provincia);
+	        filtroIdProvincia = allRequestParams.get("f_idprovincia");
+	        filtros.put("filtroIdProvincia", filtroIdProvincia);
 	    }
 	    if (allRequestParams.get("f_cp") != null && !allRequestParams.get("f_cp").trim().equals("")) {
-	        filtro_cp = allRequestParams.get("f_cp");
-	        filtros.put("filtro_cp", filtro_cp);
+	        filtroCP = allRequestParams.get("f_cp");
+	        filtros.put("filtroCP", filtroCP);
 	    }
 	    if (allRequestParams.get("f_txt") != null && !allRequestParams.get("f_txt").trim().equals("")) {
-	        filtro_txt = allRequestParams.get("f_txt");
-	        filtros.put("filtro_txt", filtro_txt);
+	        filtroTxt = allRequestParams.get("f_txt");
+	        filtros.put("filtroTxt", filtroTxt);
 	    }
 	    if (allRequestParams.get("f_precio_desde") != null && !allRequestParams.get("f_precio_desde").trim().equals("")) {
-	        filtro_precio_desde = allRequestParams.get("f_precio_desde");
-	        filtros.put("filtro_precio_desde", filtro_precio_desde);
+	        filtroPrecioDesde = allRequestParams.get("f_precio_desde");
+	        filtros.put("filtroPrecioDesde", filtroPrecioDesde);
 	    }
 	    if (allRequestParams.get("f_precio_hasta") != null && !allRequestParams.get("f_precio_hasta").trim().equals("")) {
-	        filtro_precio_hasta = allRequestParams.get("f_precio_hasta");
-	        filtros.put("filtro_precio_hasta", filtro_precio_hasta);
+	        filtroPrecioHasta = allRequestParams.get("f_precio_hasta");
+	        filtros.put("filtroPrecioHasta", filtroPrecioHasta);
 	    }
 	    
 	    
 	    if (allRequestParams.get("listado_vista") != null && !allRequestParams.get("listado_vista").trim().equals("")) {
-	        listado_vista = allRequestParams.get("listado_vista");
-	        filtros.put("listado_vista", listado_vista);
+	        listadoVista = allRequestParams.get("listado_vista");
+	        filtros.put("listadoVista", listadoVista);
 	    }
 	    	    
 	    
-	    if (allRequestParams.get("pagina") != null && !allRequestParams.get("pagina").trim().equals("")) {
-	        pagina = Integer.parseInt(allRequestParams.get("pagina"));        
+	    if (allRequestParams.get("page") != null && !allRequestParams.get("page").trim().equals("")) {
+	        pagina = Integer.parseInt(allRequestParams.get("page"));        
 	    }
 	    if (allRequestParams.get("listado_num_registros_por_pagina") != null && !allRequestParams.get("listado_num_registros_por_pagina").trim().equals("")) {
-	        listado_num_registros_por_pagina = Integer.parseInt(allRequestParams.get("listado_num_registros_por_pagina"));        
+	    	listadoNumRegistrosPorPagina = Integer.parseInt(allRequestParams.get("listado_num_registros_por_pagina"));        
 	    }
 	    if (allRequestParams.get("listado_ordenar_por") != null && !allRequestParams.get("listado_ordenar_por").trim().equals("")) {
-	        listado_ordenar_por = allRequestParams.get("listado_ordenar_por");       
+	        listadoOrdenarPor = allRequestParams.get("listado_ordenar_por");       
 	    }
 		    
 	    
 		
 		//Obtenemos y añadimos las categorias del primer nivel (Menu --> Anuncios)
-		List<AnuncioDTO> listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(filtros, pagina, listado_num_registros_por_pagina, listado_ordenar_por);
+		List<AnuncioDTO> listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(filtros, pagina, listadoNumRegistrosPorPagina, listadoOrdenarPor);
+		listadoTotalRegistros = anuncioService.countAnunciosPaginados(filtros);
+		if (listadoTotalRegistros > 0) {
+			listadoTotalPaginas = (int) Math.ceil((double)listadoTotalRegistros / (double)listadoNumRegistrosPorPagina);
+		} 
+		
+		//LOGS PAGINACIÓN
 		for (AnuncioDTO anuncioDTO : listAnunciosFitradoPaginado) {
 			logger.info(" ---------------- >  " + anuncioDTO.toString());
 		}
+		logger.info(" ---------------- paginacion -- pagina = " + pagina);
+		logger.info(" ---------------- paginacion -- listadoNumRegistrosPorPagina = " + listadoNumRegistrosPorPagina);
+		logger.info(" ---------------- paginacion -- listadoTotalRegistros = " + listadoTotalRegistros);
+		logger.info(" ---------------- paginacion -- listadoTotalPaginas = " + listadoTotalPaginas);
+		logger.info(" ---------------- paginacion -- listadoOrdenarPor = " + listadoOrdenarPor);
+		logger.info(" ---------------- paginacion -- listadoVista = " + listadoVista);
+		logger.info(" ---------------- paginacion -- filtros = " + filtros.toString());
+		
+			
 		
 		//Insertamos en la vista el resultado de los Anuncios
 		model.addAttribute("listAnunciosFitradoPaginado", listAnunciosFitradoPaginado);
 		
 		//Insertamos las variables de paginación
-		model.addAttribute("listado_vista", listado_vista);
+		model.addAttribute("listadoVista", listadoVista);
 		model.addAttribute("pagina", pagina);
-		model.addAttribute("listado_num_registros_por_pagina", listado_num_registros_por_pagina);
-		model.addAttribute("listado_ordenar_por", listado_ordenar_por);
+		model.addAttribute("listadoNumRegistrosPorPagina", listadoNumRegistrosPorPagina);
+		model.addAttribute("listadoOrdenarPor", listadoOrdenarPor);
+		model.addAttribute("listadoTotalPaginas", listadoTotalPaginas);
 		
 		//Insertamos las variables de filtros
-		model.addAttribute("f_idanuncio", filtro_id_anuncio);
+		model.addAttribute("f_idanuncio", filtroIdAnuncio);
 		//TODO: falnta insertar el resto de variables
 		
 		return "web/anuncios";

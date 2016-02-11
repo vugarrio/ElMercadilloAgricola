@@ -25,6 +25,11 @@ public interface AnuncioService {
 	 */	
 	public List<AnuncioDTO> findAnunciosPaginados(Map<String, String> filtros, int pagina, int num_elementos, String orden);
 	
+
+	/**
+	 * @return NUMERO DE ANUNCIOS BUSCADOS
+	 */	
+	public int countAnunciosPaginados(Map<String, String> filtros);
 	
 	/**
 	 * @param num NUM DE REGISGTROS A DEVOLVER
@@ -38,6 +43,9 @@ public interface AnuncioService {
 	 * @return NUMERO DE ANUNCIOS ACTIVOS
 	 */	
 	public int countActivos();
+
+
+	
 
 
 	

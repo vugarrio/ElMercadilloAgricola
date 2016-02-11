@@ -76,6 +76,11 @@ public class AnuncioServiceImpl implements AnuncioService {
 		return listAllAnunciosDAO;		
 	}
 	
+	@Override
+	public int countAnunciosPaginados(Map<String, String> filtros) {
+		return (int)anuncioRepository.countAllWitchFiltersAndPagination(filtros);
+	}
+	
 
 	@SuppressWarnings("unchecked")
 	@Override

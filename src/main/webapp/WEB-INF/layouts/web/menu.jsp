@@ -16,8 +16,8 @@
                 <!-- Main Navigation -->
                 <nav class="main-navigation dd-menu toggle-menu" role="navigation">
                     <ul class="sf-menu">
-                       <li><a href="index.jsp">Home</a></li>
-                       <li class="megamenu"><a href="anuncios.jsp">Anuncios</a>
+                       <li><a href="${pageContext.servletContext.contextPath}/">Home</a></li>
+                       <li class="megamenu"><a href="${pageContext.servletContext.contextPath}/anuncios">Anuncios</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">

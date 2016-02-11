@@ -31,50 +31,42 @@ public class AnuncioRepositoryImpl implements AnuncioRepositoryCustom  {
 	public List<Anuncio> findAllWitchFiltersAndPagination(Map<String, String> filtros, int pagina, int num_elementos, String orden) {
 		
 		
-        
-        /* System.out.println("pagina: " + pagina);
-         System.out.println("num_elementos: " + num_elementos);
-         System.out.println("esCategoriaUltimoNivel: " + esCategoriaUltimoNivel);
-         System.out.println("listado_ordenar_por: " + filtros.get("listado_ordenar_por"));*/
-        
-       
-        
         String consulta = "from Anuncio as a where 1 = 1 ";
         
-        if (filtros.get("filtro_id_anuncio")!=null) {
+        if (filtros.get("filtroIdAnuncio")!=null) {
             consulta += " and a.idAnuncio = :idAnuncio ";
         }        
-        if (filtros.get("filtro_id_usuario")!=null) {
+        if (filtros.get("filtroIdUsuario")!=null) {
             consulta += " and a.usuario.idUsuario = :idUsuario ";
         }        
-        if (filtros.get("filtro_id_categoria")!=null) {
+        if (filtros.get("filtroIdCategoria")!=null) {
             consulta += " and a.categoria.idCategoria = :idCategoria " ;
-        } else  if (filtros.get("filtro_id_categoria_padre")!=null) {
+        } else  if (filtros.get("filtroIdCategoriaPadre")!=null) {
             consulta += " and a.categoria.categoria.idCategoria = :idCategoria " ;
         }
         
         
         
-        if (filtros.get("filtro_id_provincia")!=null) {
+        if (filtros.get("filtroIdProvincia")!=null) {
             consulta += " and a.provincia.idProvincia = :idProvincia " ;
         }
         if (filtros.get("filtro_id_anuncio_estado")!=null) {
             consulta += " and a.anunciosEstado.idAnuncioEstado = :idAnuncioEstado " ;
         }
-        if (filtros.get("filtro_cp")!=null) {
+        if (filtros.get("filtroCP")!=null) {
             consulta += " and a.cp = :cp ";
         }
-        if (filtros.get("filtro_txt")!=null) {
-            consulta += " and (upper(a.titulo) like :filtro_txt "
-                     + "  or upper(a.descripcion) like :filtro_txt"
-                     + "  or upper(a.marca) like :filtro_txt"
-                     + "  or upper(a.modelo) like :filtro_txt)  ";
+        if (filtros.get("filtroTxt")!=null) {
+            consulta += " and (upper(a.titulo) like :filtroTxt "
+                     + "  or upper(a.descripcion) like :filtroTxt"
+                     + "  or upper(a.marca) like :filtroTxt"
+                     + "  or upper(a.modelo) like :filtroTxt)  ";
         }
         
-        if (filtros.get("filtro_precio_desde")!=null) {
+        if (filtros.get("filtroPrecioDesde")!=null) {
             consulta += " and a.precio >= :precio_desde ";
         }
-        if (filtros.get("filtro_precio_hasta")!=null) {
+        if (filtros.get("filtroPrecioHasta")!=null) {
             consulta += " and a.precio <= :precio_hasta ";
         }
         
@@ -92,43 +84,132 @@ public class AnuncioRepositoryImpl implements AnuncioRepositoryCustom  {
         q.setFirstResult(((pagina-1) * num_elementos));
         q.setMaxResults(num_elementos);
         
-        if (filtros.get("filtro_id_anuncio")!=null) {
-            q.setParameter("idAnuncio", Integer.parseInt(filtros.get("filtro_id_anuncio")));
+        if (filtros.get("filtroIdAnuncio")!=null) {
+            q.setParameter("idAnuncio", Integer.parseInt(filtros.get("filtroIdAnuncio")));
         }        
-        if (filtros.get("filtro_id_usuario")!=null) {
-             q.setParameter("idUsuario", Integer.parseInt(filtros.get("filtro_id_usuario")));
+        if (filtros.get("filtroIdUsuario")!=null) {
+             q.setParameter("idUsuario", Integer.parseInt(filtros.get("filtroIdUsuario")));
         }        
-        if (filtros.get("filtro_id_categoria")!=null) {
-            q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtro_id_categoria")));
+        if (filtros.get("filtroIdCategoria")!=null) {
+            q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtroIdCategoria")));
         }
-        if (filtros.get("filtro_id_categoria")!=null) {
-        	 q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtro_id_categoria")));;
-        } else  if (filtros.get("filtro_id_categoria_padre")!=null) {
-        	 q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtro_id_categoria_padre")));
+        if (filtros.get("filtroIdCategoria")!=null) {
+        	 q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtroIdCategoria")));;
+        } else  if (filtros.get("filtroIdCategoriaPadre")!=null) {
+        	 q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtroIdCategoriaPadre")));
         }
         
-        if (filtros.get("filtro_id_provincia")!=null) {
-            q.setParameter("idProvincia", Integer.parseInt(filtros.get("filtro_id_provincia")));
+        if (filtros.get("filtroIdProvincia")!=null) {
+            q.setParameter("idProvincia", Integer.parseInt(filtros.get("filtroIdProvincia")));
         }
         if (filtros.get("filtro_id_anuncio_estado")!=null) {
              q.setParameter("idAnuncioEstado", Integer.parseInt(filtros.get("filtro_id_anuncio_estado")));
         }
-        if (filtros.get("filtro_cp")!=null) {
-            q.setParameter("cp", filtros.get("filtro_cp"));
+        if (filtros.get("filtroCP")!=null) {
+            q.setParameter("cp", filtros.get("filtroCP"));
         }
         
-        if (filtros.get("filtro_precio_desde")!=null) {
-            q.setParameter("precio_desde", new BigDecimal(filtros.get("filtro_precio_desde")));
+        if (filtros.get("filtroPrecioDesde")!=null) {
+            q.setParameter("precio_desde", new BigDecimal(filtros.get("filtroPrecioDesde")));
         }
-        if (filtros.get("filtro_precio_hasta")!=null) {
-            q.setParameter("precio_hasta", new BigDecimal(filtros.get("filtro_precio_hasta")));
+        if (filtros.get("filtroPrecioHasta")!=null) {
+            q.setParameter("precio_hasta", new BigDecimal(filtros.get("filtroPrecioHasta")));
         }
         
-        if (filtros.get("filtro_txt")!=null) {
-            q.setParameter("filtro_txt", "%"+filtros.get("filtro_txt").toUpperCase()+"%");
+        if (filtros.get("filtroTxt")!=null) {
+            q.setParameter("filtroTxt", "%"+filtros.get("filtroTxt").toUpperCase()+"%");
         }
         
 		return q.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override	
+	public int countAllWitchFiltersAndPagination(Map<String, String> filtros) {
+		
+		
+        String consulta = "select count(a.idAnuncio) from Anuncio as a where 1 = 1 ";
+        Number count = 0;
+        
+        if (filtros.get("filtroIdAnuncio")!=null) {
+            consulta += " and a.idAnuncio = :idAnuncio ";
+        }        
+        if (filtros.get("filtroIdUsuario")!=null) {
+            consulta += " and a.usuario.idUsuario = :idUsuario ";
+        }        
+        if (filtros.get("filtroIdCategoria")!=null) {
+            consulta += " and a.categoria.idCategoria = :idCategoria " ;
+        } else  if (filtros.get("filtroIdCategoriaPadre")!=null) {
+            consulta += " and a.categoria.categoria.idCategoria = :idCategoria " ;
+        }
+                
+        
+        if (filtros.get("filtroIdProvincia")!=null) {
+            consulta += " and a.provincia.idProvincia = :idProvincia " ;
+        }
+        if (filtros.get("filtro_id_anuncio_estado")!=null) {
+            consulta += " and a.anunciosEstado.idAnuncioEstado = :idAnuncioEstado " ;
+        }
+        if (filtros.get("filtroCP")!=null) {
+            consulta += " and a.cp = :cp ";
+        }
+        if (filtros.get("filtroTxt")!=null) {
+            consulta += " and (upper(a.titulo) like :filtroTxt "
+                     + "  or upper(a.descripcion) like :filtroTxt"
+                     + "  or upper(a.marca) like :filtroTxt"
+                     + "  or upper(a.modelo) like :filtroTxt)  ";
+        }
+        
+        if (filtros.get("filtroPrecioDesde")!=null) {
+            consulta += " and a.precio >= :precio_desde ";
+        }
+        if (filtros.get("filtroPrecioHasta")!=null) {
+            consulta += " and a.precio <= :precio_hasta ";
+        }
+              
+        logger.info(consulta);
+        
+        Query q = em.createQuery(consulta);
+		        
+        if (filtros.get("filtroIdAnuncio")!=null) {
+            q.setParameter("idAnuncio", Integer.parseInt(filtros.get("filtroIdAnuncio")));
+        }        
+        if (filtros.get("filtroIdUsuario")!=null) {
+             q.setParameter("idUsuario", Integer.parseInt(filtros.get("filtroIdUsuario")));
+        }        
+        if (filtros.get("filtroIdCategoria")!=null) {
+            q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtroIdCategoria")));
+        }
+        if (filtros.get("filtroIdCategoria")!=null) {
+        	 q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtroIdCategoria")));;
+        } else  if (filtros.get("filtroIdCategoriaPadre")!=null) {
+        	 q.setParameter("idCategoria", Integer.parseInt(filtros.get("filtroIdCategoriaPadre")));
+        }
+        
+        if (filtros.get("filtroIdProvincia")!=null) {
+            q.setParameter("idProvincia", Integer.parseInt(filtros.get("filtroIdProvincia")));
+        }
+        if (filtros.get("filtro_id_anuncio_estado")!=null) {
+             q.setParameter("idAnuncioEstado", Integer.parseInt(filtros.get("filtro_id_anuncio_estado")));
+        }
+        if (filtros.get("filtroCP")!=null) {
+            q.setParameter("cp", filtros.get("filtroCP"));
+        }
+        
+        if (filtros.get("filtroPrecioDesde")!=null) {
+            q.setParameter("precio_desde", new BigDecimal(filtros.get("filtroPrecioDesde")));
+        }
+        if (filtros.get("filtroPrecioHasta")!=null) {
+            q.setParameter("precio_hasta", new BigDecimal(filtros.get("filtroPrecioHasta")));
+        }
+        
+        if (filtros.get("filtroTxt")!=null) {
+            q.setParameter("filtroTxt", "%"+filtros.get("filtroTxt").toUpperCase()+"%");
+        }
+        
+        count = (Number) q.getSingleResult ();        
+        
+		return count.intValue();
 	}
 	
 	

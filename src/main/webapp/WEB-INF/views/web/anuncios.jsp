@@ -86,17 +86,17 @@
                             
                             <c:set var="txt_ordenacion" value=""/>
                             <c:choose>
-                           	   <c:when test="${listado_ordenar_por == 'a.fechaPublicacion desc'}">
+                           	   <c:when test="${listadoOrdenarPor == 'a.fechaPublicacion desc'}">
 							   		<c:set var="txt_ordenacion">
 	                            		<i class="fa fa-long-arrow-down"></i> Fecha
 	                            	</c:set>
 							   </c:when> 
-							   <c:when test="${listado_ordenar_por == 'a.precio desc'}">
+							   <c:when test="${listadoOrdenarPor == 'a.precio desc'}">
 							   		<c:set var="txt_ordenacion" scope="page">
 	                            		<i class="fa fa-long-arrow-down"></i> Precio
 	                            	</c:set>
 							   </c:when> 
-							   <c:when test="${listado_ordenar_por == 'a.precio asc'}">
+							   <c:when test="${listadoOrdenarPor == 'a.precio asc'}">
 							   		<c:set var="txt_ordenacion" scope="page">
 	                            		<i class="fa fa-long-arrow-up"></i> Precio
 	                            	</c:set>
@@ -123,9 +123,9 @@
                     <div class="toggle-view view-count-choice pull-right">
                         <label>Mostrar</label>
                         <div class="btn-group">
-                            <a href="#" class="btn btn-default result-list-num-registros ${listado_num_registros_por_pagina == 5 ? 'active' : ''}">5</a>
-                            <a href="#" class="btn btn-default result-list-num-registros ${listado_num_registros_por_pagina == 10 ? 'active' : ''}>">10</a>
-                            <a href="#" class="btn btn-default result-list-num-registros ${listado_num_registros_por_pagina == 20 ? 'active' : ''}>">20</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${listadoNumRegistrosPorPagina == 5 ? 'active' : ''}">5</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${listadoNumRegistrosPorPagina == 10 ? 'active' : ''}>">10</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${listadoNumRegistrosPorPagina == 20 ? 'active' : ''}>">20</a>
                         </div>
                     </div>
                     
@@ -135,8 +135,8 @@
                         
                         	<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
                         
-                            <a title="Listado" href="#" class="btn btn-default ${listado_vista == 'results-list-view' ? 'active' : ''}" id="results-list-view"><i class="fa fa-th-list"></i></a>
-                            <a title="Cajas" href="#" class="btn btn-default ${listado_vista == 'results-grid-view' ? 'active' : ''}" id="results-grid-view"><i class="fa fa-th"></i></a>
+                            <a title="Listado" href="#" class="btn btn-default ${listadoVista == 'results-list-view' ? 'active' : ''}" id="results-list-view"><i class="fa fa-th-list"></i></a>
+                            <a title="Cajas" href="#" class="btn btn-default ${listadoVista == 'results-grid-view' ? 'active' : ''}" id="results-grid-view"><i class="fa fa-th"></i></a>
                         </div>
                     </div>
                     <!-- Small Screens Filters Toggle Button -->
@@ -161,9 +161,9 @@
                         <input name="f_precio_desde" type="hidden" value="<%-- filtro_precio_desde --%>"/>
                         <input name="f_precio_hasta" type="hidden" value="<%-- filtro_precio_hasta --%>"/>
                         
-                        <input name="listado_vista" type="hidden" value="${listado_vista}"/><%-- results-list-view | results-grid-view --%>
-                        <input name="listado_num_registros_por_pagina" type="hidden" value="${listado_num_registros_por_pagina}"/>
-                        <input name="listado_ordenar_por" type="hidden" value="${listado_ordenar_por}"/>
+                        <input name="listado_vista" type="hidden" value="${listadoVista}"/><%-- results-list-view | results-grid-view --%>
+                        <input name="listado_num_registros_por_pagina" type="hidden" value="${listadoNumRegistrosPorPagina}"/>
+                        <input name="listado_ordenar_por" type="hidden" value="${listadoOrdenarPor}"/>
                         
                         <input name="pagina" type="hidden" value="${pagina}"/>
                     </form>
@@ -304,7 +304,7 @@
                                // String[] resultados = beanBuscadorAnuncios.getHTMLResultadoBuscadorAnuncios(filtros);
                             %>
                             
-                            <div id="results-holder" class="${listado_vista}">
+                            <div id="results-holder" class="${listadoVista}">
                                 
                                 <%--Buscando con: <%= filtros.toString()  %> <br/><br/>--%>
 								
@@ -401,7 +401,7 @@
                             </div>
                             
                             <%-- resultados[1] --%>
-                            <util:pagination page="4" totalPages="4" query="name=1" />
+                            <util:pagination page="${pagina}" totalPages="${listadoTotalPaginas}" query="name=1" />
                             
                         </div>
                         
