@@ -75,7 +75,7 @@ public class AnuncioController {
 	    String listadoVista = "results-list-view";
 	    String listadoOrdenarPor = "a.fechaPublicacion desc";
 	    int pagina = 1;
-	    int listadoNumRegistrosPorPagina = 2;  
+	    int listadoNumRegistrosPorPagina = 5;  
 	    int listadoTotalPaginas = 0;  
 	    int listadoTotalRegistros = 0;
 	    
