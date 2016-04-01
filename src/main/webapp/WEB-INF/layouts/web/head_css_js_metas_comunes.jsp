@@ -23,4 +23,3 @@
   ================================================== -->
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/modernizr.js"></script><!-- Modernizr -->
 
-

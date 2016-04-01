@@ -12,7 +12,8 @@
 		  <put-attribute name="body" value="" />
 		  <put-attribute name="footer" value="/WEB-INF/layouts/web/footer.jsp" />
 		  <put-attribute name="modals_windows" value="/WEB-INF/layouts/web/modals.jsp"/>
-		  <put-attribute name="footer_js_comunes" value="/WEB-INF/layouts/web/footer_js_comunes.jsp" />		
+		  <put-attribute name="footer_js_comunes" value="/WEB-INF/layouts/web/footer_js_comunes.jsp" />
+		  <put-list-attribute name="jsList" />
 	 </definition>
 	 
 	 
@@ -22,8 +23,11 @@
 	 </definition>
 	 
 	 <definition name="web/anuncios" extends="baseLayoutWeb">	
-	 	  <put-attribute name="title" value="Anuncios"/>
-		  <put-attribute name="body" value="/WEB-INF/views/web/anuncios.jsp" />		 
+	 	 <put-attribute name="title" value="Anuncios"/>
+		 <put-attribute name="body" value="/WEB-INF/views/web/anuncios.jsp" />
+		 <put-list-attribute name="jsList" inherit="true">
+            	<add-attribute value="/resources/web/js/anuncios.js" />
+         </put-list-attribute>	 	  		 
 	 </definition> 
 	 
 	 <definition name="web/anuncio" extends="baseLayoutWeb">	 

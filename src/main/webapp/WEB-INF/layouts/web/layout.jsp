@@ -2,6 +2,9 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<tiles:importAttribute name="jsList"/>
 
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -15,6 +18,10 @@
 	<meta name="author" content="">
 	
 	<tiles:insertAttribute name="head_css_js_metas_comunes"/>
+	
+	<c:forEach var="jsValue" items="${jsList}">
+	    <script src="<c:url value="${jsValue}"/>"></script>
+	</c:forEach>
 
 </head>
 <body>
