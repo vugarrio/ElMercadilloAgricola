@@ -179,7 +179,7 @@
 		                                            <div class="vehicle-block-content">
 		                                                <span class="label label-default vehicle-age">${anuncioLast.getTxtFechaPublicado()}</span>
 		                                                <span class="label label-success premium-listing">${anuncioLast.getCategoria().getNombreCategoria()}</span>
-		                                                <h5 class="vehicle-title"><a href="${anuncioLast.getTxtFechaPublicado()}">${anuncioLast.getTitulo()}</a></h5>
+		                                                <h5 class="vehicle-title"><a href="${pageContext.servletContext.contextPath}/anuncio/${anuncioLast.getIdAnuncio()}">${anuncioLast.getTitulo()}</a></h5>
 		                                                
 		                                                <c:if test="${not empty anuncioLast.getTxtDescripcionDestacado()}">
 		                                               	 	<span class="vehicle-meta">${anuncioLast.getTxtDescripcionDestacado()}</span>

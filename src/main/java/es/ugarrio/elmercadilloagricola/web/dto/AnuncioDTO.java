@@ -80,7 +80,10 @@ public class AnuncioDTO {
 	private String txtDescripcionDestacado;
 	   
 	private String urlImagen;
-    
+	
+	private int numAnunciosImagenes;
+	
+	private int numAnunciosMensajes;    
 	
 	public AnuncioDTO (Anuncio anuncio) {
 		this.setIdAnuncio(anuncio.getIdAnuncio());
@@ -91,7 +94,19 @@ public class AnuncioDTO {
 		this.setMarca(anuncio.getMarca());
 		this.setModelo(anuncio.getModelo());
 		
-		//TODO: falta cargar el listado de imagenes y mensajes
+		this.setNumEnviosEmail(anuncio.getNumEnviosEmal());
+		this.setNumVistos(anuncio.getNumVistos());
+		
+		this.setNumAnunciosImagenes(0);
+		this.setNumAnunciosMensajes(0);
+		
+		//Listado de imagenes
+		this.setAnunciosImagenes(anuncio.getAnunciosImagenes());
+		
+		//Listado de mensajes
+		this.setAnunciosMensajes(anuncio.getAnunciosMensajes());
+		
+	
 		
 		//Descripcion
 		String descripcion = anuncio.getDescripcion();
@@ -139,24 +154,21 @@ public class AnuncioDTO {
 		//Imagen
 		String urlImagen = "";
 		if (anuncio.getAnunciosImagenes() != null && anuncio.getAnunciosImagenes().size()>0) {
-            urlImagen = anuncio.getAnunciosImagenes().get(0).getUrlFichero();               
+            urlImagen = anuncio.getAnunciosImagenes().get(0).getUrlFichero();  
+            this.setNumAnunciosImagenes(anuncio.getAnunciosImagenes().size());
         } else {
     	   urlImagen = "images/listado_sin_imagen_600x40.png";  
         }  
 		this.setUrlImagen(urlImagen);
 		
+		//Mensajes
+		if (anuncio.getAnunciosMensajes() != null ) { 
+			//this.setNumAnunciosMensajes(anuncio.getAnunciosMensajes().size());
+		}
+		
+		
 	}
 	
-
-	public String getUrlImagen() {
-		return urlImagen;
-	}
-
-
-	public void setUrlImagen(String urlImagen) {
-		this.urlImagen = urlImagen;
-	}
-
 
 	public int getIdAnuncio() {
 		return idAnuncio;
@@ -342,7 +354,34 @@ public class AnuncioDTO {
 		this.txtDescripcionDestacado = txtDescripcionDestacado;
 	}
 	
-	
+	public int getNumAnunciosImagenes() {
+		return numAnunciosImagenes;
+	}
+
+
+	public void setNumAnunciosImagenes(int numAnunciosImagenes) {
+		this.numAnunciosImagenes = numAnunciosImagenes;
+	}
+
+
+	public int getNumAnunciosMensajes() {
+		return numAnunciosMensajes;
+	}
+
+
+	public void setNumAnunciosMensajes(int numAnunciosMensajes) {
+		this.numAnunciosMensajes = numAnunciosMensajes;
+	}
+
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
+	}
 
 	@Override
 	public String toString() {
