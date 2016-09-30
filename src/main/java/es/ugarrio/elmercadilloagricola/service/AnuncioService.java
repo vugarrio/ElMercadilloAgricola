@@ -44,6 +44,14 @@ public interface AnuncioService {
 	 */	
 	public int countActivos();
 
+	
+	/**
+	 * @param idAnuncio 
+	 * 
+	 * @return AnuncioDTO
+	 */	
+	public AnuncioDTO findOne(int idAnuncio);
+
 
 	
 

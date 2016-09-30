@@ -73,6 +73,11 @@
                         
                         <li><a href="publicar_anuncio.jsp">Publicar un anuncio</a>
                         
+                        <c:if test="${ (not empty menuDinamico)	}">
+					    	<li><a href="/">${menuDinamico}</a>
+					    </c:if>
+                       
+                        
                     </ul>
                 </nav> 
                

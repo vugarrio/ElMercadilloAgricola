@@ -108,4 +108,11 @@ public class AnuncioServiceImpl implements AnuncioService {
 		return (int)anuncioRepository.countActivos();
 	}
 	
+	@Override
+	public AnuncioDTO findOne (int idAnuncio) {
+		Anuncio anuncio = anuncioRepository.findOne(idAnuncio);
+		return new AnuncioDTO(anuncio);
+		
+	}
+	
 }

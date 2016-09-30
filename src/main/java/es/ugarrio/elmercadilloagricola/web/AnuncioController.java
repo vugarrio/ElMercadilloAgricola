@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -171,42 +172,56 @@ public class AnuncioController {
 		model.addAttribute("f_idanuncio", filtroIdAnuncio);
 		//TODO: falnta insertar el resto de variables
 		
-		return "web/anuncios";
+		model.addAttribute("menuDinamico", "Opción dinamica test");
 		
+		
+		return "web/anuncios";		
     }
     
     
-   
     
-    
+     
     @RequestMapping(value = { "/anuncio",
     		                  "/anuncio/{id:[\\d]+}",
     		                  "/anuncio/{id:[\\d]+}/{name}",
     		                  "/anuncio/{name}"    		
     }, method = RequestMethod.GET)
 	public String getAnuncio(Model model, HttpServletRequest request) {
-		
-    	 logger.info("AnuncioController --> anuncio");
+		 
+    	 logger.info("AnuncioController --> anuncio"); 
     	
     	 Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
     	 
+    	 AnuncioDTO anuncio = null;
+    	 
     	 if (pathVariables != null) {
+    		 if (pathVariables.containsKey("idanuncio")) {
+    			 logger.info("idanuncio = " +  pathVariables.get("idanuncio"));
+    			 anuncio = anuncioService.findOne(NumberUtils.parseNumber((String)pathVariables.get("idanuncio"), Integer.class));
+		      }
     		 if (pathVariables.containsKey("id")) {
     			 logger.info("id = " +  pathVariables.get("id"));
-		      } 
+    			 anuncio = anuncioService.findOne(NumberUtils.parseNumber((String)pathVariables.get("id"), Integer.class));
+    			 
+		      }
     		 if (pathVariables.containsKey("name")) {
     			 logger.info("name = " +  pathVariables.get("name"));
 		      } 
     	 } else {
     		 logger.info("Sin variables");
     	 }
+    	 
+    	 if ( anuncio != null) {
+    		 model.addAttribute("anuncio", anuncio);
+    		 
+    		 logger.info(anuncio.toString());
+    		 
+    	 }
     			
 		return "web/anuncio";
 		
     }
-    
-    
-    
+      
     
     
     

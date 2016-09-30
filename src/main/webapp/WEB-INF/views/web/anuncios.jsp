@@ -320,10 +320,10 @@
 					                            <div class="result-item-image">
 					                            	<c:choose>
 						                            	<c:when test="${not empty anuncioDTO.getUrlImagen()}">
-						                            		<a href="${pageContext.servletContext.contextPath}/anuncio?idanuncio=${anuncioDTO.getIdAnuncio()}" class="media-box"><img src="${pageContext.servletContext.contextPath}/resources/web/${anuncioDTO.getUrlImagen()}" alt=""></a>
+						                            		<a href="${pageContext.servletContext.contextPath}/anuncio/${anuncioDTO.getIdAnuncio()}" class="media-box"><img src="${pageContext.servletContext.contextPath}/resources/web/${anuncioDTO.getUrlImagen()}" alt=""></a>
 						                            	</c:when>
 						                            	<c:otherwise>
-						                            		 <a href="${pageContext.servletContext.contextPath}/anuncio?idanuncio=${anuncioDTO.getIdAnuncio()}" class="media-box"><img src="${pageContext.servletContext.contextPath}/resources/web/images/listado_sin_imagen_600x40.png" alt=""></a>
+						                            		 <a href="${pageContext.servletContext.contextPath}/anuncio/${anuncioDTO.getIdAnuncio()}" class="media-box"><img src="${pageContext.servletContext.contextPath}/resources/web/images/listado_sin_imagen_600x40.png" alt=""></a>
 						                            	</c:otherwise>
 						                            </c:choose>
 						                            
@@ -333,13 +333,13 @@
 						                            
 													<div class="result-item-view-buttons">
 									                	<a href="javascript:alert('pendiente');"><i class="fa fa-star-o"></i> Guardar</a>
-									                	<a href="anuncio?idanuncio=${anuncioDTO.getIdAnuncio()}"><i class="fa fa-plus"></i> Ver detalle</a>
+									                	<a href="anuncio/${anuncioDTO.getIdAnuncio()}"><i class="fa fa-plus"></i> Ver detalle</a>
 									                </div>
 					                            </div>
 					                            
 					                            <div class="result-item-in">
 						                           
-						                           <h4 class="result-item-title"><a href="${pageContext.servletContext.contextPath}/anuncio?idanuncio=${anuncioDTO.getIdAnuncio()}">${anuncioDTO.getTitulo()}</a></h4>
+						                           <h4 class="result-item-title"><a href="${pageContext.servletContext.contextPath}/anuncio/${anuncioDTO.getIdAnuncio()}">${anuncioDTO.getTitulo()}</a></h4>
 			                                       
 			                                       <div class="result-item-cont">
 			                                       	   <div class="result-item-block col1"> 
@@ -356,7 +356,7 @@
 								 							 </div>
 								 							 <div class="result-item-action-buttons">
 								 								 <a href="javascript:alert('Pendiente')" class="btn btn-default btn-sm" title="Guardar a favoritos"><i class="fa fa-star-o"></i> Guardar</a>
-																 <a href="${pageContext.servletContext.contextPath}/anuncio?idanuncio=${anuncioDTO.getIdAnuncio()}" class="btn btn-default btn-sm" title="Pedir más información">+ Info</a><br>
+																 <a href="${pageContext.servletContext.contextPath}/anuncio/${anuncioDTO.getIdAnuncio()}" class="btn btn-default btn-sm" title="Pedir más información">+ Info</a><br>
 								 							 </div>
 								 							 <div class="result-item-provincia">
 								 								 <span class="label label-success">${anuncioDTO.getProvincia().getNombreProvincia()}</span>
