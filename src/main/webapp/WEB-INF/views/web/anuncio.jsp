@@ -28,7 +28,7 @@
      	</div>
    </div>
    
-<<<<<<< HEAD
+
   
     <!-- Start Body Content -->
   	<div class="main" role="main">
@@ -183,8 +183,4 @@
     	</div><!-- div id="content" class="content full" -->	
     </div> 
     <!-- End Body Content -->	
-=======
-    <c:if test="${ (not empty anuncio)	}">
-    	<p>${anuncio.getTitulo()}</p>    
-    </c:if>
->>>>>>> branch 'master' of https://github.com/vugarrio/ElMercadilloAgricola.git
+

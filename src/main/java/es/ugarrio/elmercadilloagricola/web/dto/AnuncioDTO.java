@@ -163,7 +163,7 @@ public class AnuncioDTO {
 		
 		//Mensajes
 		if (anuncio.getAnunciosMensajes() != null ) { 
-			//this.setNumAnunciosMensajes(anuncio.getAnunciosMensajes().size());
+			//this.setNumAnunciosMensajes(anuncio.getAnunciosMensajes().size());  
 		}
 		
 		
