@@ -53,7 +53,7 @@ public class AnuncioMensaje implements Serializable {
 	private Date updatedAt;
 
 	@Column(name="usuario_id_from")
-	private int usuarioIdFrom;
+	private Integer usuarioIdFrom;
 
 	//bi-directional many-to-one association to Anuncio
 	@ManyToOne

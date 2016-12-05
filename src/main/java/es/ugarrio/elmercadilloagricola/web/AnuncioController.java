@@ -217,6 +217,14 @@ public class AnuncioController {
     		 
     		 logger.info(anuncio.toString());
     		 
+    		//Mensajes
+			/*if (anuncio.getAnunciosMensajes() != null ) { 
+				for (AnuncioMensaje anuncioMensaje : anuncio.getAnunciosMensajes()) {					 
+					 logger.info(" --> Mensaje: " + anuncioMensaje.getMensaje() );
+				}
+				logger.info(" --> Size: " + anuncio.getAnunciosMensajes().size() );  
+			}*/
+    		 
     	 }
     			
 		return "web/anuncio";

@@ -78,12 +78,14 @@ public class AnuncioDTO {
 	private String txtFechaPublicado;
 	
 	private String txtDescripcionDestacado;
-	   
+	
 	private String urlImagen;
 	
 	private int numAnunciosImagenes;
 	
-	private int numAnunciosMensajes;    
+	private int numAnunciosMensajes;
+	
+	private String descripcionCorta;
 	
 	public AnuncioDTO (Anuncio anuncio) {
 		this.setIdAnuncio(anuncio.getIdAnuncio());
@@ -109,11 +111,12 @@ public class AnuncioDTO {
 	
 		
 		//Descripcion
-		String descripcion = anuncio.getDescripcion();
-		if (descripcion.length() > 220) {
-            descripcion = descripcion.substring(0, 217) + "...";
+		String descripcionCorta = anuncio.getDescripcion();
+		if (descripcionCorta.length() > 220) {
+			descripcionCorta = descripcionCorta.substring(0, 217) + "...";
         } 
-		this.setDescripcion(descripcion);
+		this.setDescripcion(anuncio.getDescripcion());
+		this.setDescripcionCorta(descripcionCorta);
 		
 		
 		//Calculamos el tiempo transcurrido desde que se publico el anuncio
@@ -163,7 +166,7 @@ public class AnuncioDTO {
 		
 		//Mensajes
 		if (anuncio.getAnunciosMensajes() != null ) { 
-			//this.setNumAnunciosMensajes(anuncio.getAnunciosMensajes().size());  
+			this.setNumAnunciosMensajes(anuncio.getAnunciosMensajes().size());  
 		}
 		
 		
@@ -192,6 +195,14 @@ public class AnuncioDTO {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public String getDescripcionCorta() {
+		return descripcionCorta;
+	}
+
+	public void setDescripcionCorta(String descripcionCorta) {
+		this.descripcionCorta = descripcionCorta;
 	}
 
 	public String getEmail() {
@@ -382,6 +393,8 @@ public class AnuncioDTO {
 	public void setUrlImagen(String urlImagen) {
 		this.urlImagen = urlImagen;
 	}
+	
+	
 
 	@Override
 	public String toString() {
@@ -393,9 +406,8 @@ public class AnuncioDTO {
 				+ vendedoresTipo + ", txtFechaPublicado=" + txtFechaPublicado + ", txtDescripcionDestacado="
 				+ txtDescripcionDestacado + ", urlImagen=" + urlImagen + "]";
 	}
-	
-	
-	
+
+
 	
 	
 }

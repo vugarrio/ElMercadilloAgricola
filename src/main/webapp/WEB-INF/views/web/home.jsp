@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ taglib prefix="util" tagdir="/WEB-INF/tags/util" %>
 
 
 
@@ -100,16 +100,7 @@
                 </div>
             	<div class="col-md-8 col-sm-6 col-xs-4">
             		
-            		<!-- Start Iconos redes sociales -->
-                    <ul class="utility-icons social-icons social-icons-colored">
-					  	<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-					  	<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-					  	<li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					  	<li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					  	<li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-					  	<li class="delicious"><a href="#"><i class="fa fa-delicious"></i></a></li>
-					  </ul>
-                    <!-- End Iconos redes sociales -->
+            		<util:iconosRedesSociales /> 
                     
                 </div>
           	</div>

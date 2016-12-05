@@ -1,0 +1,22 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" 
+          xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+          xmlns:spring="http://www.springframework.org/tags" 
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+          xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+		
+	<jsp:output omit-xml-declaration="yes" />
+	
+	<jsp:directive.tag language="java" pageEncoding="utf-8"/>
+	
+	<!-- Start Iconos redes sociales -->
+	<ul class="utility-icons social-icons social-icons-colored">
+      	<li class="facebook"><a href="#"><span class="fa fa-facebook"></span></a></li>
+      	<li class="twitter"><a href="#"><span class="fa fa-twitter"></span></a></li>
+      	<li class="googleplus"><a href="#"><span class="fa fa-google-plus"></span></a></li>
+      	<li class="linkedin"><a href="#"><span class="fa fa-linkedin"></span></a></li>
+      	<li class="pinterest"><a href="#"><span class="fa fa-pinterest"></span></a></li>
+      	<li class="delicious"><a href="#"><span class="fa fa-delicious"></span></a></li>
+     </ul>
+     <!-- End Iconos redes sociales -->
+	
+</jsp:root>	

@@ -53,6 +53,10 @@
 	<tiles:insertAttribute name="modals_windows"/> 
 	
 	<tiles:insertAttribute name="footer_js_comunes"/> 
+	
+	<c:forEach var="jsValue" items="${jsList}">
+	    <script src="<c:url value="${jsValue}"/>"></script>
+	</c:forEach>
 
 </body>
 </html>

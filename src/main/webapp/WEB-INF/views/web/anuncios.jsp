@@ -22,8 +22,14 @@
        	<div class="row">
            	<div class="col-md-8 col-sm-6 col-xs-8">
                    <%-- beanBuscadorAnuncios.getHTMLMigaPan(filtros) --%>
+                   
+                   <util:breadcrumb id="miga" active="Venden">
+                   		<util:breaditem url="/" label="Home" />
+                   </util:breadcrumb>               
+                
            	</div>
                <div class="col-md-4 col-sm-6 col-xs-4">
+               		<util:iconosRedesSociales />
                </div>
            </div>
      	</div>
@@ -343,7 +349,7 @@
 			                                       
 			                                       <div class="result-item-cont">
 			                                       	   <div class="result-item-block col1"> 
-										               		<p>${anuncioDTO.getDescripcion()}</p>
+										               		<p>${anuncioDTO.getDescripcionCorta()}</p>
 										               </div>
 			                                       	   <div class="result-item-block col2">
 			                                       	   		<div class="result-item-categoria">
