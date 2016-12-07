@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
-import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
+import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
 
 
 public interface AnuncioRepositoryCustom {

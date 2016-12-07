@@ -1,4 +1,4 @@
-package es.ugarrio.elmercadilloagricola.web;
+package es.ugarrio.elmercadilloagricola.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

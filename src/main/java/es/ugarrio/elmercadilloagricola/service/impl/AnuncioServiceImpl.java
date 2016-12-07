@@ -22,12 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
+import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
 import es.ugarrio.elmercadilloagricola.repository.AnuncioRepository;
 import es.ugarrio.elmercadilloagricola.repository.CategoriaRepository;
 import es.ugarrio.elmercadilloagricola.repository.custom.AnuncioRepositoryCustom;
 import es.ugarrio.elmercadilloagricola.repository.impl.AnuncioRepositoryImpl;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
-import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 /**
  * @author Vicente Ugarrio

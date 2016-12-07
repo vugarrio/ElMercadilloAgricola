@@ -1,4 +1,4 @@
-package es.ugarrio.elmercadilloagricola.web;
+package es.ugarrio.elmercadilloagricola.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
 import es.ugarrio.elmercadilloagricola.domain.Provincia;
+import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
 import es.ugarrio.elmercadilloagricola.exception.EMCAException;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
 import es.ugarrio.elmercadilloagricola.service.CategoriaService;
 import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
-import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 @Controller
 public class NavigationController {

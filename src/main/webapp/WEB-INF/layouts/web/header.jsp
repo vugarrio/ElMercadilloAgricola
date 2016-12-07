@@ -10,7 +10,7 @@
         <header class="site-header">
             <div class="container sp-cont">
                 <div class="site-logo">
-                    <h1><a href="index.jsp"><img src="${pageContext.servletContext.contextPath}/resources/web/images/logo.png" alt="Logo"></a></h1>
+                    <h1><a href="${pageContext.servletContext.contextPath}/"><img src="${pageContext.servletContext.contextPath}/resources/web/images/logo.png" alt="Logo"></a></h1>
                     <span class="site-tagline">Comprar y vender,<br>nunca fue tan facil!</span>
                 </div>
                 <div class="header-right">

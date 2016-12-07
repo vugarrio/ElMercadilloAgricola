@@ -8,10 +8,10 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
+import es.ugarrio.elmercadilloagricola.controller.InventoryController;
 import es.ugarrio.elmercadilloagricola.domain.Product;
 import es.ugarrio.elmercadilloagricola.repository.InMemoryProductDao;
 import es.ugarrio.elmercadilloagricola.service.SimpleProductManager;
-import es.ugarrio.elmercadilloagricola.web.InventoryController;
 
 public class InventoryControllerTests {
 

@@ -1,4 +1,4 @@
-package es.ugarrio.elmercadilloagricola.web;
+package es.ugarrio.elmercadilloagricola.controller;
 
 import java.io.IOException;
 import java.util.Date;

@@ -159,8 +159,11 @@
         	<div class="container">
             	<div class="row">
                     
-                    <form action="anuncios.jsp" method="get" name="formBuscarAnuncios" id="formBuscarAnuncios"> 
-                        <input name="f_idcategoria" type="hidden" value="<%-- filtro_id_categoria --%>"/>
+                    <form:form action="${pageContext.request.contextPath}/anuncios/search"
+							   method="get" modelAttribute="anuncioSearchForm"
+							   name="formBuscarAnuncios" id="formBuscarAnuncios" >
+						
+						<input name="f_idcategoria" type="hidden" value="<%-- filtro_id_categoria --%>"/>
                         <input name="f_idprovincia" type="hidden" value="<%-- filtro_id_provincia --%>"/>
                         <input name="f_txt" type="hidden" value="<%-- filtro_txt --%>"/>
                         <input name="f_cp" type="hidden" value="<%-- filtro_cp --%>"/>
@@ -172,7 +175,8 @@
                         <input name="listado_ordenar_por" type="hidden" value="${listadoOrdenarPor}"/>
                         
                         <input name="pagina" type="hidden" value="${pagina}"/>
-                    </form>
+						
+					</form:form>
                     
                     
                     
@@ -369,25 +373,23 @@
 								 							 </div>   
 			                                       	   </div> 
 			                                       	   
-			                                       	  			                                       	   
-			                                       	   <c:if test="${ (not empty anuncioDTO.marca)	|| (not empty anuncioDTO.modelo )	}">
-			                                       	   				<div class="result-item-features">
-			                                       	   					<ul class="inline">
-			                                       	   						<c:if test="${not empty anuncioDTO.getMarca() }">
-					                                       	   				 	 <li>${anuncioDTO.getMarca()}</li>
-					                                       	   				</c:if>
-					                                       	   				<c:if test="${not empty anuncioDTO.getModelo() }">
-					                                       	   				 	 <li>${anuncioDTO.getModelo()}</li>
-					                                       	   				</c:if>
-			                                       	   					</ul>
-			                                       	   				</div>
+			                                      </div><%-- <div class="result-item-cont"> --%>   	  			                                       	   
 			                                       	   
-			                                       	   </c:if>
-			                                       	   	
-			                                       </div><%-- <div class="result-item-cont"> --%>
+		                                       	   <c:if test="${ (not empty anuncioDTO.marca)	|| (not empty anuncioDTO.modelo )	}">
+		                                       	   				<div class="result-item-features">
+		                                       	   					<ul class="inline">
+		                                       	   						<c:if test="${not empty anuncioDTO.getMarca() }">
+				                                       	   				 	 <li>${anuncioDTO.getMarca()}</li>
+				                                       	   				</c:if>
+				                                       	   				<c:if test="${not empty anuncioDTO.getModelo() }">
+				                                       	   				 	 <li>${anuncioDTO.getModelo()}</li>
+				                                       	   				</c:if>
+		                                       	   					</ul>
+		                                       	   				</div>
+		                                       	   
+		                                       	   </c:if>			                                       	   	
 			                                        
-					                            </div>
-					                            
+					                            </div><%--  <div class="result-item-in">  --%> 					                            
 						                    </div><%-- <div class="result-item format-standard"> --%>
 						                    
 									    </c:forEach>

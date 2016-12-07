@@ -19,6 +19,7 @@ $(function() {
      
      $(".result-list-num-registros").on("click",  function(e) {
         e.preventDefault();  
+        alert('ok');
         var num_registros = $(this).html();
         $("#formBuscarAnuncios input[name='listado_num_registros_mostrar']").val(num_registros);
         lanzarBusquedaFiltrada();

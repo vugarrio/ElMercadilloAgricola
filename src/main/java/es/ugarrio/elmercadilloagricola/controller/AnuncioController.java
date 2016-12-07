@@ -1,4 +1,4 @@
-package es.ugarrio.elmercadilloagricola.web;
+package es.ugarrio.elmercadilloagricola.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +24,11 @@ import org.springframework.web.servlet.HandlerMapping;
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.domain.AnuncioImagen;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
+import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
+import es.ugarrio.elmercadilloagricola.form.AnuncioSearchForm;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
 import es.ugarrio.elmercadilloagricola.service.CategoriaService;
 import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
-import es.ugarrio.elmercadilloagricola.web.dto.AnuncioDTO;
 
 
 @Controller
@@ -177,6 +178,22 @@ public class AnuncioController {
 		
 		
 		return "web/anuncios";		
+    }
+    
+    
+    
+    
+    @RequestMapping("search")
+    public String search(AnuncioSearchForm form, Model model) {
+       
+        //String name = form.getName();
+        //String query = (StringUtils.hasText(name) ? name : "") + "%";
+        //Page<User> page = userService.findByNameLike(query, pageable);
+        //model.addAttribute("page", page);
+    	
+    	model.addAttribute("menuDinamico", "Opción xxxxx");
+    	
+        return "web/anuncios";
     }
     
     
