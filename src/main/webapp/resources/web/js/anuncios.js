@@ -21,7 +21,8 @@ $(function() {
         e.preventDefault();  
         alert('ok');
         var num_registros = $(this).html();
-        $("#formBuscarAnuncios input[name='listado_num_registros_mostrar']").val(num_registros);
+        $("#formBuscarAnuncios input[name='listadoSize']").val(num_registros);
+        $("#formBuscarAnuncios input[name='page.size']").val(num_registros);        
         lanzarBusquedaFiltrada();
      });
      
@@ -39,6 +40,18 @@ $(function() {
         resetBusquedaFiltrada();
         lanzarBusquedaFiltrada();
      });
+     
+     //La paginacion se hace a traves del formulario
+     $(".pagination a").on("click",  function(e) {
+         e.preventDefault();  
+         //alert($(this).attr('href'));
+         if ($.urlParam($(this).attr('href'), 'page.page') != null) {
+        	 $("#formBuscarAnuncios input[name='page.page']").val($.urlParam($(this).attr('href'), 'page.page'));
+         }
+         $("#formBuscarAnuncios").submit();
+      });
+     
+     
      
 });
 
@@ -59,7 +72,7 @@ function filtro_buscador(txt_var) {
 };
 
 function lanzarBusquedaFiltrada () {
-    $("#formBuscarAnuncios input[name='pagina']").val('');
+    $("#formBuscarAnuncios input[name='page.page']").val('1');
     $("#formBuscarAnuncios").submit();
 }
 

@@ -3,6 +3,17 @@ jQuery(function($){
 
 var MERCADILLO = window.AUTOSTARS || {};
 
+
+$.urlParam = function(url, nameParam){
+    var results = new RegExp('[\?&]' + nameParam + '=([^&#]*)').exec(url);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
 /* ==================================================
 	Contact Form Validations
 ================================================== */

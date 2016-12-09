@@ -9,6 +9,7 @@
 <%@ taglib prefix="util" tagdir="/WEB-INF/tags/util" %>
 
 
+
 <!-- Start Page header -->
    <div class="page-header parallax" style="background-image:url(${pageContext.servletContext.contextPath}/resources/web/images/slides/hay-bales_1200_300.png);">
    	<div class="container">
@@ -129,9 +130,9 @@
                     <div class="toggle-view view-count-choice pull-right">
                         <label>Mostrar</label>
                         <div class="btn-group">
-                            <a href="#" class="btn btn-default result-list-num-registros ${listadoNumRegistrosPorPagina == 5 ? 'active' : ''}">5</a>
-                            <a href="#" class="btn btn-default result-list-num-registros ${listadoNumRegistrosPorPagina == 10 ? 'active' : ''}>">10</a>
-                            <a href="#" class="btn btn-default result-list-num-registros ${listadoNumRegistrosPorPagina == 20 ? 'active' : ''}>">20</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 1 ? 'active' : ''}">1</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 2 ? 'active' : ''}">2</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 5 ? 'active' : ''}">5</a>
                         </div>
                     </div>
                     
@@ -141,8 +142,8 @@
                         
                         	<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
                         
-                            <a title="Listado" href="#" class="btn btn-default ${listadoVista == 'results-list-view' ? 'active' : ''}" id="results-list-view"><i class="fa fa-th-list"></i></a>
-                            <a title="Cajas" href="#" class="btn btn-default ${listadoVista == 'results-grid-view' ? 'active' : ''}" id="results-grid-view"><i class="fa fa-th"></i></a>
+                            <a title="Listado" href="#" class="btn btn-default ${anuncioSearchForm.getListadoVista() == 'results-list-view' ? 'active' : ''}" id="results-list-view"><i class="fa fa-th-list"></i></a>
+                            <a title="Cajas" href="#" class="btn btn-default ${anuncioSearchForm.getListadoVista() == 'results-grid-view' ? 'active' : ''}" id="results-grid-view"><i class="fa fa-th"></i></a>
                         </div>
                     </div>
                     <!-- Small Screens Filters Toggle Button -->
@@ -158,27 +159,34 @@
     	<div id="content" class="content full">
         	<div class="container">
             	<div class="row">
+            		
+            		<%--TODO: pendiente de validar --%>
+            		<c:if test="${not empty errorMessage}">
+						<div class="alert alert-error">${errorMessage}</div>
+					</c:if>
                     
-                    <form:form action="${pageContext.request.contextPath}/anuncios/search"
+                    <form:form action="${pageContext.request.contextPath}/anuncios"
 							   method="get" modelAttribute="anuncioSearchForm"
 							   name="formBuscarAnuncios" id="formBuscarAnuncios" >
 						
-						<input name="f_idcategoria" type="hidden" value="<%-- filtro_id_categoria --%>"/>
-                        <input name="f_idprovincia" type="hidden" value="<%-- filtro_id_provincia --%>"/>
-                        <input name="f_txt" type="hidden" value="<%-- filtro_txt --%>"/>
-                        <input name="f_cp" type="hidden" value="<%-- filtro_cp --%>"/>
-                        <input name="f_precio_desde" type="hidden" value="<%-- filtro_precio_desde --%>"/>
-                        <input name="f_precio_hasta" type="hidden" value="<%-- filtro_precio_hasta --%>"/>
+						<input name="filtroIdCategoria" type="text" value="${param.filtroIdCategoria}"/>
+                        <input name="filtroIdProvincia" type="text" value="${param.filtroIdProvincia}"/>
+                        <input name="filtroTxt" type="text" value="${param.filtroTxt}"/>
+                        <input name="filtroCP" type="text" value="${param.filtroCP}"/>
+                        <input name="filtroPrecioDesde" type="text" value="${param.filtroPrecioDesde}"/>
+                        <input name="filtroPrecioHasta" type="text" value="${param.filtroPrecioHasta}"/>
                         
-                        <input name="listado_vista" type="hidden" value="${listadoVista}"/><%-- results-list-view | results-grid-view --%>
-                        <input name="listado_num_registros_por_pagina" type="hidden" value="${listadoNumRegistrosPorPagina}"/>
-                        <input name="listado_ordenar_por" type="hidden" value="${listadoOrdenarPor}"/>
+                        <input name="listadoVista" type="text" value="${anuncioSearchForm.getListadoVista()}"/><%-- results-list-view | results-grid-view --%>
+                        <input name="listadoOrdenarPor" type="text" value="${anuncioSearchForm.getListadoOrdenarPor()}"/>
+                        <input name="listadoSize" type="text" value="${anuncioSearchForm.getListadoSize()}"/>
                         
-                        <input name="pagina" type="hidden" value="${pagina}"/>
+                        
+                                                                        
+                        <input name="page.page" type="text" value="${page.number + 1}"/>
+                        <input name="page.size" type="text" value="5"/>
 						
 					</form:form>
-                    
-                    
+					
                     
                     <!-- Start Search Filters -->
                     <div class="col-md-3 search-filters" id="Search-Filters">
@@ -314,15 +322,15 @@
                                // String[] resultados = beanBuscadorAnuncios.getHTMLResultadoBuscadorAnuncios(filtros);
                             %>
                             
-                            <div id="results-holder" class="${listadoVista}">
+                            <div id="results-holder" class="${anuncioSearchForm.getListadoVista()}">
                                 
                                 <%--Buscando con: <%= filtros.toString()  %> <br/><br/>--%>
 								
 								<c:choose>
 									<%-- if --%>
-									<c:when test="${not empty listAnunciosFitradoPaginado && listAnunciosFitradoPaginado.size() > 0}">
+									<c:when test="${not empty page.content && page.content.size() > 0}">
 									    
-									    <c:forEach var="anuncioDTO" items="${listAnunciosFitradoPaginado}">
+									    <c:forEach var="anuncioDTO" items="${page.content}">
 										    
 										    <!-- Result Item --> 
 						                    <div class="result-item format-standard"> 
@@ -407,9 +415,9 @@
 							
                                
                             </div>
-                            
-                            <%-- resultados[1] --%>
-                            <util:pagination page="${pagina}" totalPages="${listadoTotalPaginas}" query="name=1" />
+                           
+						      
+                            <util:pagination page="${page}" query="" />
                             
                         </div>
                         

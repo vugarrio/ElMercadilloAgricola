@@ -30,6 +30,8 @@
          </put-list-attribute>	 	  		 
 	 </definition> 
 	 
+	 
+	 	 
 	 <definition name="web/anuncio" extends="baseLayoutWeb">	 
 		  <put-attribute name="title" value="Anuncios"/>		  		  
 		  <put-attribute name="body" value="/WEB-INF/views/web/anuncio.jsp" />		  

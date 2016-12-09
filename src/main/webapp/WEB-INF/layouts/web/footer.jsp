@@ -17,19 +17,19 @@
                 	<div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
                     	<h4 class="widgettitle">Categorias</h4>
                         <ul>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idcategoria=1">Tractores</a></li>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idcategoria=2">Cosechadoras</a></li>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idcategoria=3">Sembradoras</a></li>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idcategoria=5">Aperos</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=1">Tractores</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=2">Cosechadoras</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=3">Sembradoras</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=5">Aperos</a></li>
                         </ul>
                     </div>
                 	<div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
                     	<h4 class="widgettitle">Provincias</h4>
                         <ul>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=45">Toledo</a></li>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=28">Madrid</a></li>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=50">Zaragoza</a></li>
-                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?f_idprovincia=2">Albacete</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdProvincia=45">Toledo</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdProvincia=28">Madrid</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdProvincia=50">Zaragoza</a></li>
+                        	<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdProvincia=2">Albacete</a></li>
                         </ul>
                     </div>
                 	<div class="col-md-5 col-sm-6 footer_widget widget text_widget">

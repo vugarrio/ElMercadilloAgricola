@@ -7,14 +7,21 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.NumberUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,7 +54,91 @@ public class AnuncioController {
     protected final Log logger = LogFactory.getLog(getClass());
     
     
-    @RequestMapping(value = { "/anuncios", "/anuncios/" }, method = RequestMethod.GET)
+    protected static final int DEFAULT_PAGE_NUM = 0;
+    protected static final int DEFAULT_PAGE_SIZE = 5;
+    protected static final String DEFAULT_RESULTS_LIST_VIEW = "results-list-view";
+    protected static final String DEFAULT_RESULTS_ORDER= "a.fechaPublicacion desc";
+    
+        
+    
+    @RequestMapping(value = { "/anuncios/", "/anuncios" })
+    public String search(@Valid @ModelAttribute("anuncioSearchForm")AnuncioSearchForm form,  BindingResult result, @PageableDefaults(value = DEFAULT_PAGE_SIZE) Pageable pageable, ModelMap model) {
+       
+        //String name = form.getName();
+        //String query = (StringUtils.hasText(name) ? name : "") + "%";
+        //Page<User> page = userService.findByNameLike(query, pageable);
+        //model.addAttribute("page", page);
+    	
+    	
+    	if (form.getListadoVista() == null) {
+    		form.setListadoVista(DEFAULT_RESULTS_LIST_VIEW);
+    	}
+    	
+    	if (form.getListadoOrdenarPor() == null) {
+    		form.setListadoOrdenarPor(DEFAULT_RESULTS_ORDER);
+    	}
+    	
+    	if (form.getListadoSize() == null) {
+    		form.setListadoSize(String.valueOf(DEFAULT_PAGE_SIZE));
+    	}
+    	
+    	
+    	//Solo anuncios con estado a 1:Activo
+    	form.setFiltroIdAnuncioEstado("1");
+    	
+    	if (result.hasErrors()) {
+    		logger.info(" --> Estoy en search: errrrorrrr --> " + result.toString());
+            return "web/anuncios";
+        }
+
+        String f_idCategoria = form.getFiltroIdCategoria();    	
+    	
+    	
+    	//Page<User> page = userService.findByNameLike(query, pageable);
+    	
+    	
+    	Map<String,String> filtros = new HashMap<String,String>();
+    	 
+    	int pagina = pageable.getPageNumber() + 1;
+    	int listadoNumRegistrosPorPagina = pageable.getPageSize();
+    	int offset = pageable.getOffset();
+    	String listadoOrdenarPor = "a.fechaPublicacion desc";
+    	int listadoTotalRegistros = 0;
+    	
+    	//String listadoOrdenarPor =  pageable.getSort().toString();
+    	
+		
+    	
+    	List<AnuncioDTO> listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(form, pagina, listadoNumRegistrosPorPagina, listadoOrdenarPor);
+    	listadoTotalRegistros = anuncioService.countAnunciosPaginados(form);
+    	
+    	logger.info(" --> Estoy en search: " + f_idCategoria);
+    	
+    	logger.info(" --> AnuncioSearchForm: " + form.toString());
+    	
+    	logger.info(" ---------------- paginacion -- pageable.getPageNumber() = " + pageable.getPageNumber());
+    	logger.info(" ---------------- paginacion -- offset = " + pageable.getOffset());
+    	logger.info(" ---------------- paginacion -- pageable.getPageSize() = " + pageable.getPageSize());
+		
+    	
+    	logger.info(" ---------------- listAnunciosFitradoPaginado.size() = " + listAnunciosFitradoPaginado.size());
+    	logger.info(" ---------------- listadoTotalRegistros = " + listadoTotalRegistros);
+    	
+    			
+		Page<AnuncioDTO> page = new PageImpl<AnuncioDTO>(listAnunciosFitradoPaginado, pageable, listadoTotalRegistros);
+    	
+    	
+    	model.addAttribute("page", page);
+    	model.addAttribute("anuncioSearchForm", form);
+    	
+    	
+    	model.addAttribute("menuDinamico", "Opción xxxxx");
+    	
+        return "web/anuncios"; 
+    }
+    
+    
+    /*@RequestMapping(value = { "/anuncios____", "/anuncios_____/" }, method = RequestMethod.GET)
 	public String getAnuncios(@RequestParam Map<String,String> allRequestParams, ModelMap model) {
 		
 		logger.info("AnuncioController --> anuncios (con parametros dinamicos)");
@@ -181,20 +272,8 @@ public class AnuncioController {
     }
     
     
+    */
     
-    
-    @RequestMapping("search")
-    public String search(AnuncioSearchForm form, Model model) {
-       
-        //String name = form.getName();
-        //String query = (StringUtils.hasText(name) ? name : "") + "%";
-        //Page<User> page = userService.findByNameLike(query, pageable);
-        //model.addAttribute("page", page);
-    	
-    	model.addAttribute("menuDinamico", "Opción xxxxx");
-    	
-        return "web/anuncios";
-    }
     
     
     

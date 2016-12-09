@@ -9,9 +9,16 @@
 		
 		
 		
-   	
+   	   <!-- Para inicializar Pageable -->
+	   <mvc:annotation-driven enableMatrixVariables="false">
+	        <mvc:argument-resolvers>
+	            <bean
+	                class="org.springframework.data.web.PageableArgumentResolver">
+	            </bean>
+	        </mvc:argument-resolvers>
+	    </mvc:annotation-driven> 
 		
-		
+			
 	   <!-- Apunta al directorio que contiene los controladores -->
 	   <!-- Scans the classpath of this application for @Components to deploy as beans -->
        <context:component-scan base-package="es.ugarrio.elmercadilloagricola.controller" />

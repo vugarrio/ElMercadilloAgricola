@@ -17,7 +17,7 @@
                 <div class="search-form-inner">
                     <form action="${pageContext.servletContext.contextPath}/anuncios" method="get">
                     	<div class="input-group input-group-lg">
-      				<input type="text" class="form-control" name="f_txt" id="f_txt" placeholder="Título, Marca, Modelo...">
+      				<input type="text" class="form-control" name="filtroTxt" id="filtroTxt" placeholder="Título, Marca, Modelo...">
                         	<span class="input-group-btn">
         			<button class="btn btn-primary" type="submit">Buscar</button>
       				</span>
@@ -32,8 +32,8 @@
                             
                             <div class="col-md-3">
                                 <label>Provincias</label>
-                                <%-- beanBuscadorAnuncios.pintaComboBuscadorProvincias("f_idprovincia", "", "", "", filtros) --%>
-                                <select name="f_idprovincia" class="form-control selectpicker ">
+                                <%-- beanBuscadorAnuncios.pintaComboBuscadorProvincias("filtroIdProvincia", "", "", "", filtros) --%>
+                                <select name="filtroIdProvincia" class="form-control selectpicker ">
                                 	 <option value=""></option>
                                 	 <c:forEach var="rowProv" items="${listProvincias}">                                	 	                              	 	
 	                                	<option value="${rowProv.getIdProvincia()}"> ${rowProv.getNombreProvincia()}</option>
@@ -48,7 +48,7 @@
                             
                             <div class="col-md-3">
                                 <label>Precio Mínimo</label>
-                                <select name="f_precio_desde" id="f_precio_desde" class="form-control selectpicker">
+                                <select name="filtroPrecioDesde" id="filtroPrecioDesde" class="form-control selectpicker">
                                     <option value=""></option>
                                     <c:forEach var="num" items="${anArray}">
                                     	<option value="${num.replace(".", "")}">${num}</option>
@@ -58,7 +58,7 @@
                                 
                             <div class="col-md-3">
                                 <label>Precio Máximo</label>
-                                <select name="f_precio_hasta" id="f_precio_hasta" class="form-control selectpicker">
+                                <select name="filtroPrecioHasta" id="filtroPrecioHasta" class="form-control selectpicker">
                                     <option value=""></option>
                                     <c:forEach var="num" items="${anArray}">
                                     	<option value="${num.replace(".", "")}">${num}</option>
@@ -68,7 +68,7 @@
                                 
                             <div class="col-md-3">
                                 <label>C. P. </label>
-                                <input type="text" name="f_cp" id="f_cp" class="form-control  input-120" value="" />      
+                                <input type="text" name="filtroCP" id="filtroCP" class="form-control  input-120" value="" />      
                             </div>    
                            
                         </div>
@@ -112,7 +112,7 @@
                             <%-- TODO PENDIENTE ${beanCategorias.getHTMLListLICategoriasN1("item")} --%> 
                             <c:forEach var="rowCat" items="${listCategoriasN1}">   
                             	<li class="item">
-                            		<a href="anuncios.jsp?f_idcategoria=${rowCat.getIdCategoria()}">
+                            		<a href="anuncios?filtroIdCategoria=${rowCat.getIdCategoria()}">
                             			<c:if test="${not empty rowCat.getUrlImagen()}">
                             				<img src="${pageContext.servletContext.contextPath}/resources/web/${rowCat.getUrlImagen()}" alt="${rowCat.getNombreCategoria()}"/>
                             			</c:if>
