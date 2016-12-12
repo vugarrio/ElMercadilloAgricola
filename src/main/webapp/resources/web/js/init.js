@@ -591,7 +591,7 @@ $(document).ready(function(){
 		$(".waiting").fadeIn();
 		GridViewFunction();
 		GridViewStopFunction();
-                $("#formBuscarAnuncios input[name='listado_vista']").val("results-grid-view");
+        $("#formBuscarAnuncios input[name='listadoVista']").val("results-grid-view");
 		return false;
 	});
 	
@@ -599,7 +599,7 @@ $(document).ready(function(){
 		$(".waiting").fadeIn();
 		ListViewFunction();
 		ListViewStopFunction();
-                $("#formBuscarAnuncios input[name='listado_vista']").val("results-list-view");
+        $("#formBuscarAnuncios input[name='listadoVista']").val("results-list-view");
 		return false;
 	});
 	

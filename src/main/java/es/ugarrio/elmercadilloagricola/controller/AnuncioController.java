@@ -102,14 +102,13 @@ public class AnuncioController {
     	int pagina = pageable.getPageNumber() + 1;
     	int listadoNumRegistrosPorPagina = pageable.getPageSize();
     	int offset = pageable.getOffset();
-    	String listadoOrdenarPor = "a.fechaPublicacion desc";
     	int listadoTotalRegistros = 0;
     	
     	//String listadoOrdenarPor =  pageable.getSort().toString();
     	
 		
     	
-    	List<AnuncioDTO> listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(form, pagina, listadoNumRegistrosPorPagina, listadoOrdenarPor);
+    	List<AnuncioDTO> listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(form, pagina, listadoNumRegistrosPorPagina, form.getListadoOrdenarPor());
     	listadoTotalRegistros = anuncioService.countAnunciosPaginados(form);
     	
     	logger.info(" --> Estoy en search: " + f_idCategoria);

@@ -19,7 +19,7 @@ $(function() {
      
      $(".result-list-num-registros").on("click",  function(e) {
         e.preventDefault();  
-        alert('ok');
+        //alert('ok');
         var num_registros = $(this).html();
         $("#formBuscarAnuncios input[name='listadoSize']").val(num_registros);
         $("#formBuscarAnuncios input[name='page.size']").val(num_registros);        
@@ -30,8 +30,8 @@ $(function() {
         e.preventDefault();  
         var campo = $(this).attr('campo');
         var texto = $(this).html();
-        $("#formBuscarAnuncios input[name='listado_ordenar_por']").val(campo);
-        $("#dLabel987").html(texto);
+        $("#formBuscarAnuncios input[name='listadoOrdenarPor']").val(campo);
+        $("#  ").html(texto);
         lanzarBusquedaFiltrada();
      });
      
@@ -40,6 +40,7 @@ $(function() {
         resetBusquedaFiltrada();
         lanzarBusquedaFiltrada();
      });
+     
      
      //La paginacion se hace a traves del formulario
      $(".pagination a").on("click",  function(e) {
@@ -57,12 +58,12 @@ $(function() {
 
 
 function filtro_buscador(txt_var) {
-    if (txt_var == "f_precio") {
+    if (txt_var == "filtroPrecio") {
         
-        var filtro_valor_desde = $('#f_precio_desde').val();
-        var filtro_valor_hasta = $('#f_precio_hasta').val();
-        $("#formBuscarAnuncios input[name='f_precio_desde']").val(filtro_valor_desde);
-        $("#formBuscarAnuncios input[name='f_precio_hasta']").val(filtro_valor_hasta);
+        var filtro_valor_desde = $('#filtroPrecioDesde').val();
+        var filtro_valor_hasta = $('#filtroPrecioHasta').val();
+        $("#formBuscarAnuncios input[name='filtroPrecioDesde']").val(filtro_valor_desde);
+        $("#formBuscarAnuncios input[name='filtroPrecioHasta']").val(filtro_valor_hasta);
         
     } else {
         var filtro_valor = $('#'+txt_var).val();  
@@ -77,16 +78,16 @@ function lanzarBusquedaFiltrada () {
 }
 
 function resetBusquedaFiltrada () {
-    $("#formBuscarAnuncios input[name='f_idcategoria']").val('');
-    $("#formBuscarAnuncios input[name='f_idprovincia']").val('');
-    $("#formBuscarAnuncios input[name='f_txt']").val('');
-    $("#formBuscarAnuncios input[name='f_cp']").val('');
-    $("#formBuscarAnuncios input[name='f_precio_desde']").val('');
-    $("#formBuscarAnuncios input[name='f_precio_hasta']").val('');
+    $("#formBuscarAnuncios input[name='filtroIdCategoria']").val('');
+    $("#formBuscarAnuncios input[name='filtroIdProvincia']").val('');
+    $("#formBuscarAnuncios input[name='filtroTxt']").val('');
+    $("#formBuscarAnuncios input[name='filtroCP']").val('');
+    $("#formBuscarAnuncios input[name='filtroPrecioDesde']").val('');
+    $("#formBuscarAnuncios input[name='filtroPrecioHasta']").val('');
     lanzarBusquedaFiltrada();
 }
 
 function irAPaginaBusquedaFiltrada (pagina) {
-    $("#formBuscarAnuncios input[name='pagina']").val(pagina);
+    $("#formBuscarAnuncios input[name='page.page']").val(pagina);
     $("#formBuscarAnuncios").submit();
 }

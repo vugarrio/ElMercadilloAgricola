@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
+import es.ugarrio.elmercadilloagricola.dto.CategoriaAnunciosDTO;
 import es.ugarrio.elmercadilloagricola.exception.EMCAException;
+import es.ugarrio.elmercadilloagricola.form.AnuncioSearchForm;
 import es.ugarrio.elmercadilloagricola.repository.CategoriaRepository;
 import es.ugarrio.elmercadilloagricola.service.CategoriaService;
 
@@ -26,6 +28,14 @@ public class CategoriaServiceImpl implements CategoriaService {
 	public List<Categoria> findByNivel(int nivel) throws EMCAException {
 		return categoriaRepository.findByNivel(nivel);
 	}
+
+	@Override
+	public List<CategoriaAnunciosDTO> findCategoriasAnuncios(AnuncioSearchForm anuncioSearchForm) throws EMCAException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 	
 	
