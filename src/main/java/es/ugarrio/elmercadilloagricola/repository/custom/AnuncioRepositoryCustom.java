@@ -12,9 +12,9 @@ public interface AnuncioRepositoryCustom {
 	
 	public List<Anuncio> findLast(int num);
 	
-	public List<Anuncio> findAllWitchFiltersAndPagination(AnuncioSearchForm anuncioSearchFrom, int pagina, int num_elementos, String orden);
+	public List<Anuncio> findAllWitchFiltersAndPagination(AnuncioSearchForm anuncioSearchForm, int pagina, int num_elementos, String orden);
 
-	int countAllWitchFiltersAndPagination(AnuncioSearchForm anuncioSearchFrom);
+	int countAllWitchFiltersAndPagination(AnuncioSearchForm anuncioSearchForm);
 	
 }
 

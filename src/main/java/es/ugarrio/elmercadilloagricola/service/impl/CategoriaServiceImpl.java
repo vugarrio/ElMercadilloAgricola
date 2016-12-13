@@ -31,8 +31,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 	@Override
 	public List<CategoriaAnunciosDTO> findCategoriasAnuncios(AnuncioSearchForm anuncioSearchForm) throws EMCAException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return categoriaRepository.findCategoriasAnuncios(anuncioSearchForm);
 	}
 	
 	

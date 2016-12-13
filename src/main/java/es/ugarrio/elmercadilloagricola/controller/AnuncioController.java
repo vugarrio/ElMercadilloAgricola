@@ -32,6 +32,8 @@ import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.domain.AnuncioImagen;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
 import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
+import es.ugarrio.elmercadilloagricola.dto.CategoriaAnunciosDTO;
+import es.ugarrio.elmercadilloagricola.exception.EMCAException;
 import es.ugarrio.elmercadilloagricola.form.AnuncioSearchForm;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
 import es.ugarrio.elmercadilloagricola.service.CategoriaService;
@@ -68,6 +70,10 @@ public class AnuncioController {
         //String query = (StringUtils.hasText(name) ? name : "") + "%";
         //Page<User> page = userService.findByNameLike(query, pageable);
         //model.addAttribute("page", page);
+    	
+    	List<AnuncioDTO> listAnunciosFitradoPaginado = new ArrayList<AnuncioDTO>();
+    	List<CategoriaAnunciosDTO> listCategoriaAnuncios = new ArrayList<CategoriaAnunciosDTO>();
+    	
     	
     	
     	if (form.getListadoVista() == null) {
@@ -107,8 +113,8 @@ public class AnuncioController {
     	//String listadoOrdenarPor =  pageable.getSort().toString();
     	
 		
-    	
-    	List<AnuncioDTO> listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(form, pagina, listadoNumRegistrosPorPagina, form.getListadoOrdenarPor());
+    	//Obtenemos el listado de anuncios filtrado y paginado.
+    	listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(form, pagina, listadoNumRegistrosPorPagina, form.getListadoOrdenarPor());
     	listadoTotalRegistros = anuncioService.countAnunciosPaginados(form);
     	
     	logger.info(" --> Estoy en search: " + f_idCategoria);
@@ -123,13 +129,29 @@ public class AnuncioController {
     	logger.info(" ---------------- listAnunciosFitradoPaginado.size() = " + listAnunciosFitradoPaginado.size());
     	logger.info(" ---------------- listadoTotalRegistros = " + listadoTotalRegistros);
     	
-    			
+    	//Creamos el objeto de paginación		
 		Page<AnuncioDTO> page = new PageImpl<AnuncioDTO>(listAnunciosFitradoPaginado, pageable, listadoTotalRegistros);
+		
+		
+		//Obtenemos el listgado de categorias que existen según el filtro
+		/*try {
+			listCategoriaAnuncios = categoriaService.findCategoriasAnuncios(form);
+			
+			for (CategoriaAnunciosDTO cat : listCategoriaAnuncios) {
+				 logger.info(" ---> " + cat.toString());
+			}
+			
+			
+		} catch (EMCAException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}*/
     	
     	
     	model.addAttribute("page", page);
     	model.addAttribute("anuncioSearchForm", form);
-    	
+    	model.addAttribute("listCategoriaAnuncios", listCategoriaAnuncios);
     	
     	model.addAttribute("menuDinamico", "Opción xxxxx");
     	

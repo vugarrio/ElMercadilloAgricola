@@ -11,6 +11,13 @@ public class CategoriaAnunciosDTO implements Serializable {
 	private int countAnuncios;
 	
 	
+	
+	public CategoriaAnunciosDTO(int idCategoria, String nombreCategoria, int countAnuncios) {
+		super();
+		this.idCategoria = idCategoria;
+		this.nombreCategoria = nombreCategoria;
+		this.countAnuncios = countAnuncios;
+	}
 	public int getIdCategoria() {
 		return idCategoria;
 	}

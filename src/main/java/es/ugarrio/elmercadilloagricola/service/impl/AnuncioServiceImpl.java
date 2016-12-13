@@ -50,26 +50,26 @@ public class AnuncioServiceImpl implements AnuncioService {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AnuncioDTO> findAnunciosPaginados(AnuncioSearchForm anuncioSearchFrom, int pagina, int num_elementos, String orden) {
+	public List<AnuncioDTO> findAnunciosPaginados(AnuncioSearchForm anuncioSearchForm, int pagina, int num_elementos, String orden) {
 		
 		//En el caso de pasar como filtro una categoria, comprobamos si es del ultimo nivel, para pasarla como id_categoria o id_categoria_padre.
 		boolean esCategoriaUltimoNivel = false;        
-        if (!StringUtils.isEmpty(anuncioSearchFrom.getFiltroIdCategoria())) {            
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdCategoria())) {            
             //Obtener si una categoria de ultimo nivel 
-            Categoria cat = categoriaRepository.findOne(Integer.parseInt(anuncioSearchFrom.getFiltroIdCategoria()));
+            Categoria cat = categoriaRepository.findOne(Integer.parseInt(anuncioSearchForm.getFiltroIdCategoria()));
             
             if (cat != null) {
             	esCategoriaUltimoNivel  = (cat.getEsUltimoNivel()!=0);
             }
             
             if (!esCategoriaUltimoNivel) {
-            	anuncioSearchFrom.setFiltroIdCategoriaPadre(anuncioSearchFrom.getFiltroIdCategoria());
-            	anuncioSearchFrom.setFiltroIdCategoria(null);
+            	anuncioSearchForm.setFiltroIdCategoriaPadre(anuncioSearchForm.getFiltroIdCategoria());
+            	anuncioSearchForm.setFiltroIdCategoria(null);
             }
         }    
 		
 		
-		List<Anuncio> listAllAnuncios =  anuncioRepository.findAllWitchFiltersAndPagination(anuncioSearchFrom, pagina, num_elementos, orden);
+		List<Anuncio> listAllAnuncios =  anuncioRepository.findAllWitchFiltersAndPagination(anuncioSearchForm, pagina, num_elementos, orden);
 		List<AnuncioDTO> listAllAnunciosDAO = new ArrayList<AnuncioDTO>();
 		for (Anuncio anuncio : listAllAnuncios) {
 			listAllAnunciosDAO.add(new AnuncioDTO(anuncio));
@@ -79,8 +79,8 @@ public class AnuncioServiceImpl implements AnuncioService {
 	}
 	
 	@Override
-	public int countAnunciosPaginados(AnuncioSearchForm anuncioSearchFrom) {
-		return (int)anuncioRepository.countAllWitchFiltersAndPagination(anuncioSearchFrom);
+	public int countAnunciosPaginados(AnuncioSearchForm anuncioSearchForm) {
+		return (int)anuncioRepository.countAllWitchFiltersAndPagination(anuncioSearchForm);
 	}
 	
 

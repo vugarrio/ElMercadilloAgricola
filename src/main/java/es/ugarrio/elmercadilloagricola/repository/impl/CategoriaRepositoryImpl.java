@@ -1,5 +1,7 @@
 package es.ugarrio.elmercadilloagricola.repository.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -15,7 +17,9 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.util.StringUtils;
 
+import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
+import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
 import es.ugarrio.elmercadilloagricola.dto.CategoriaAnunciosDTO;
 import es.ugarrio.elmercadilloagricola.form.AnuncioSearchForm;
 import es.ugarrio.elmercadilloagricola.repository.custom.CategoriaRepositoryCustom;
@@ -30,6 +34,7 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 	private EntityManager em;
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CategoriaAnunciosDTO> findCategoriasAnuncios(AnuncioSearchForm anuncioSearchForm) {
 		
@@ -63,7 +68,7 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 //                    where C2.ID_CATEGORIA = 2
 //                    group BY C2.ID_CATEGORIA, C2.NOMBRE_CATEGORIA    ; 
                
-                consulta = "select count(a.idAnuncio), a.categorias.idCategoria, a.categorias.nombreCategoria from Anuncios as a where  a.categorias.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
+                consulta = "select a.categorias.idCategoria, a.categorias.nombreCategoria, count(a.idAnuncio) from Anuncios as a where  a.categorias.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
             } else {
 //                 Equivale:
 //                    select COUNT(ANUNCIOS.ID_ANUNCIO) as num_anuncio, C2.ID_CATEGORIA, C2.NOMBRE_CATEGORIA 
@@ -73,7 +78,7 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 //                    where C1.ID_CATEGORIA = 1
 //                    group BY C2.ID_CATEGORIA, C2.NOMBRE_CATEGORIA    ; 
                
-               consulta = "select count(a.idAnuncio), a.categorias.idCategoria, a.categorias.nombreCategoria from Anuncios as a where  a.categorias.categorias.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
+               consulta = "select a.categorias.idCategoria, a.categorias.nombreCategoria, count(a.idAnuncio) from Anuncios as a where  a.categorias.categorias.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
             }
             
         } else {
@@ -85,81 +90,89 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 //                 where C1.ID_CATEGORIA_PADRE is null
 //                 group BY C1.ID_CATEGORIA, C1.NOMBRE_CATEGORIA    ;
 //                        
-            consulta = "select count(a.idAnuncio), a.categorias.categorias.idCategoria, a.categorias.categorias.nombreCategoria from Anuncios as a where 1 = 1 ";
+            consulta = "select a.categorias.categorias.idCategoria, a.categorias.categorias.nombreCategoria, count(a.idAnuncio)  from Anuncios as a where 1 = 1 ";
         }
         
         
-        /* **************
-        if (filtros.get("filtro_id_anuncio")!=null) {
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdAnuncio())) {
             consulta += " and a.idAnuncio = :idAnuncio ";
         }        
-        if (filtros.get("filtro_id_usuario")!=null) {
-            consulta += " and a.usuarios.idUsuario = :idUsuario ";
-        }        
-       
-        if (filtros.get("filtro_id_provincia")!=null) {
-            consulta += " and a.provincias.idProvincia = :idProvincia " ;
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdUsuario())) {
+            consulta += " and a.usuario.idUsuario = :idUsuario ";
+        }  
+                
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdProvincia())) {
+            consulta += " and a.provincia.idProvincia = :idProvincia " ;
         }
-        if (filtros.get("filtro_id_anuncio_estado")!=null) {
-            consulta += " and a.anunciosEstados.idAnuncioEstado = :idAnuncioEstado " ;
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdAnuncioEstado())) {
+            consulta += " and a.anunciosEstado.idAnuncioEstado = :idAnuncioEstado " ;
         }
-        if (filtros.get("filtro_cp")!=null) {
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroCP())) {
             consulta += " and a.cp = :cp ";
         }
-        if (filtros.get("filtro_txt")!=null) {
-              consulta += " and (upper(a.titulo) like :filtro_txt "
-                     + "  or upper(a.descripcion) like :filtro_txt"
-                     + "  or upper(a.marca) like :filtro_txt"
-                     + "  or upper(a.modelo) like :filtro_txt)  ";
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroTxt())) {
+            consulta += " and (upper(a.titulo) like :filtroTxt "
+                     + "  or upper(a.descripcion) like :filtroTxt"
+                     + "  or upper(a.marca) like :filtroTxt"
+                     + "  or upper(a.modelo) like :filtroTxt)  ";
         }
         
-        if (filtros.get("filtro_precio_desde")!=null) {
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroPrecioDesde())) {
             consulta += " and a.precio >= :precio_desde ";
         }
-        if (filtros.get("filtro_precio_hasta")!=null) {
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroPrecioHasta())) {
             consulta += " and a.precio <= :precio_hasta ";
         }
         
-         if (anuncioSearchForm.getFiltroIdCategoria()!=null) {
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdCategoria())) {        
              consulta += " group by a.categorias.idCategoria, a.categorias.nombreCategoria  ";        
              consulta += " order by a.categorias.nombreCategoria ";
          } else {
              consulta += " group by a.categorias.categorias.idCategoria, a.categorias.categorias.nombreCategoria  ";        
              consulta += " order by a.categorias.categorias.nombreCategoria ";
-         }
+         }  
         
+        logger.info(consulta);
         
-        Query q = this.sesion.createQuery(consulta);
+        Query q = em.createQuery(consulta);
         
-        if (filtros.get("filtro_id_anuncio")!=null) {
-            q.setParameter("idAnuncio", Integer.parseInt(filtros.get("filtro_id_anuncio")));
+        /*if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdAnuncio())) {
+            q.setParameter("idAnuncio", Integer.parseInt(anuncioSearchForm.getFiltroIdAnuncio()));
         }        
-        if (filtros.get("filtro_id_usuario")!=null) {
-             q.setParameter("idUsuario", Integer.parseInt(filtros.get("filtro_id_usuario")));
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdUsuario())) {
+             q.setParameter("idUsuario", Integer.parseInt(anuncioSearchForm.getFiltroIdUsuario()));
         }        
       
-        if (filtros.get("filtro_id_provincia")!=null) {
-            q.setParameter("idProvincia", Integer.parseInt(filtros.get("filtro_id_provincia")));
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdProvincia())) {
+            q.setParameter("idProvincia", Integer.parseInt(anuncioSearchForm.getFiltroIdProvincia()));
         }
-        if (filtros.get("filtro_id_anuncio_estado")!=null) {
-             q.setParameter("idAnuncioEstado", Integer.parseInt(filtros.get("filtro_id_anuncio_estado")));
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdAnuncioEstado())) {
+             q.setParameter("idAnuncioEstado", Integer.parseInt(anuncioSearchForm.getFiltroIdAnuncioEstado()));
         }
-        if (filtros.get("filtro_cp")!=null) {
-            q.setParameter("cp", filtros.get("filtro_cp"));
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroCP())) {
+            q.setParameter("cp", anuncioSearchForm.getFiltroCP());
         }
-        if (filtros.get("filtro_txt")!=null) {
-            q.setParameter("filtro_txt", "%"+filtros.get("filtro_txt").toUpperCase()+"%");
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroTxt())) {
+            q.setParameter("filtro_txt", "%"+anuncioSearchForm.getFiltroTxt().toUpperCase()+"%");
         }
         
-        if (filtros.get("filtro_precio_desde")!=null) {
-            q.setParameter("precio_desde", new BigDecimal(filtros.get("filtro_precio_desde")));
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroPrecioDesde())) {
+            q.setParameter("precio_desde", new BigDecimal(anuncioSearchForm.getFiltroPrecioDesde()));
         }
-        if (filtros.get("filtro_precio_hasta")!=null) {
-            q.setParameter("precio_hasta", new BigDecimal(filtros.get("filtro_precio_hasta")));
-        }
-		
-		**************** */
-		return null;
-	}
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroPrecioHasta())) {
+            q.setParameter("precio_hasta", new BigDecimal(anuncioSearchForm.getFiltroPrecioHasta()));
+        }  */
+        
+        List<CategoriaAnunciosDTO> resultCategoriaAnunciosDTO = new ArrayList<CategoriaAnunciosDTO>();
+        
+        /*for (Object obj: q.getResultList()) {
+        	//Object[] registro = (Object[])obj;
+        	//resultCategoriaAnunciosDTO.add(new CategoriaAnunciosDTO(Integer.parseInt(registro[0].toString()), registro[1].toString(), Integer.parseInt(registro[2].toString())));
+        }-*/
+        
+        //[] CategoriaAnunciosDTO = (Object[]) q.getSingleResult();
+        	
+		return resultCategoriaAnunciosDTO;
+	} 
 	
 }
