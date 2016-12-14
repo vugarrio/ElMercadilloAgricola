@@ -134,7 +134,7 @@ public class AnuncioController {
 		
 		
 		//Obtenemos el listgado de categorias que existen según el filtro
-		/*try {
+		try {
 			listCategoriaAnuncios = categoriaService.findCategoriasAnuncios(form);
 			
 			for (CategoriaAnunciosDTO cat : listCategoriaAnuncios) {
@@ -146,7 +146,7 @@ public class AnuncioController {
 			// TODO Auto-generated catch block
 			
 			e.printStackTrace();
-		}*/
+		}
     	
     	
     	model.addAttribute("page", page);

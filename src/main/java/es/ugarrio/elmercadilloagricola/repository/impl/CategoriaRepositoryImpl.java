@@ -47,7 +47,7 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
             int esUltimoNivel = 0;
             
             //Obtener si una categoria de ultimo nivel
-            consulta_ini= "from Categorias c where c.idCategoria = :idCategoria ";
+            consulta_ini= "from Categoria c where c.idCategoria = :idCategoria ";
            
             Query q_c = em.createQuery(consulta_ini);
             q_c.setParameter("idCategoria", Integer.parseInt(anuncioSearchForm.getFiltroIdCategoria()));
@@ -68,7 +68,7 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 //                    where C2.ID_CATEGORIA = 2
 //                    group BY C2.ID_CATEGORIA, C2.NOMBRE_CATEGORIA    ; 
                
-                consulta = "select a.categorias.idCategoria, a.categorias.nombreCategoria, count(a.idAnuncio) from Anuncios as a where  a.categorias.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
+                consulta = "select a.categoria.idCategoria, a.categoria.nombreCategoria, count(a.idAnuncio) from Anuncio as a where  a.categoria.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
             } else {
 //                 Equivale:
 //                    select COUNT(ANUNCIOS.ID_ANUNCIO) as num_anuncio, C2.ID_CATEGORIA, C2.NOMBRE_CATEGORIA 
@@ -78,7 +78,7 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 //                    where C1.ID_CATEGORIA = 1
 //                    group BY C2.ID_CATEGORIA, C2.NOMBRE_CATEGORIA    ; 
                
-               consulta = "select a.categorias.idCategoria, a.categorias.nombreCategoria, count(a.idAnuncio) from Anuncios as a where  a.categorias.categorias.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
+               consulta = "select a.categoria.idCategoria, a.categoria.nombreCategoria, count(a.idAnuncio) from Anuncio as a where  a.categoria.categoria.idCategoria = " + anuncioSearchForm.getFiltroIdCategoria() + " ";
             }
             
         } else {
@@ -90,7 +90,8 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 //                 where C1.ID_CATEGORIA_PADRE is null
 //                 group BY C1.ID_CATEGORIA, C1.NOMBRE_CATEGORIA    ;
 //                        
-            consulta = "select a.categorias.categorias.idCategoria, a.categorias.categorias.nombreCategoria, count(a.idAnuncio)  from Anuncios as a where 1 = 1 ";
+            //consulta = "select a.categorias.categorias.idCategoria, a.categorias.categorias.nombreCategoria, count(a.idAnuncio)  from Anuncio as a where 1 = 1 ";
+        	consulta = "select  a.categoria.categoria.idCategoria, a.categoria.categoria.nombreCategoria, count(a.idAnuncio)  from Anuncio as a where 1 = 1 ";
         }
         
         
@@ -125,18 +126,18 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
         }
         
         if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdCategoria())) {        
-             consulta += " group by a.categorias.idCategoria, a.categorias.nombreCategoria  ";        
-             consulta += " order by a.categorias.nombreCategoria ";
+             consulta += " group by a.categoria.idCategoria, a.categoria.nombreCategoria  ";        
+             consulta += " order by a.categoria.nombreCategoria ";
          } else {
-             consulta += " group by a.categorias.categorias.idCategoria, a.categorias.categorias.nombreCategoria  ";        
-             consulta += " order by a.categorias.categorias.nombreCategoria ";
+             consulta += " group by a.categoria.categoria.idCategoria, a.categoria.categoria.nombreCategoria  ";        
+             consulta += " order by a.categoria.categoria.nombreCategoria ";
          }  
         
-        logger.info(consulta);
+        logger.info(consulta); 
         
         Query q = em.createQuery(consulta);
         
-        /*if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdAnuncio())) {
+        if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdAnuncio())) {
             q.setParameter("idAnuncio", Integer.parseInt(anuncioSearchForm.getFiltroIdAnuncio()));
         }        
         if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdUsuario())) {
@@ -161,18 +162,15 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
         }
         if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroPrecioHasta())) {
             q.setParameter("precio_hasta", new BigDecimal(anuncioSearchForm.getFiltroPrecioHasta()));
-        }  */
+        }  
         
         List<CategoriaAnunciosDTO> resultCategoriaAnunciosDTO = new ArrayList<CategoriaAnunciosDTO>();
         
-        /*for (Object obj: q.getResultList()) {
-        	//Object[] registro = (Object[])obj;
-        	//resultCategoriaAnunciosDTO.add(new CategoriaAnunciosDTO(Integer.parseInt(registro[0].toString()), registro[1].toString(), Integer.parseInt(registro[2].toString())));
-        }-*/
+        for (Object[] registro: (List<Object[]>)q.getResultList()) {
+        	resultCategoriaAnunciosDTO.add(new CategoriaAnunciosDTO(Integer.parseInt(registro[0].toString()), registro[1].toString(), Integer.parseInt(registro[2].toString())));
+        }
         
-        //[] CategoriaAnunciosDTO = (Object[]) q.getSingleResult();
-        	
-		return resultCategoriaAnunciosDTO;
+       return resultCategoriaAnunciosDTO;
 	} 
 	
 }
