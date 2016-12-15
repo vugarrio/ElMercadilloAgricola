@@ -38,13 +38,11 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 	@Override
 	public List<CategoriaAnunciosDTO> findCategoriasAnuncios(AnuncioSearchForm anuncioSearchForm) {
 		
-		
 		String consulta;
         String consulta_ini;
                  
         if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroIdCategoria())) {
-            
-            int esUltimoNivel = 0;
+        	int esUltimoNivel = 0;
             
             //Obtener si una categoria de ultimo nivel
             consulta_ini= "from Categoria c where c.idCategoria = :idCategoria ";
@@ -90,8 +88,7 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
 //                 where C1.ID_CATEGORIA_PADRE is null
 //                 group BY C1.ID_CATEGORIA, C1.NOMBRE_CATEGORIA    ;
 //                        
-            //consulta = "select a.categorias.categorias.idCategoria, a.categorias.categorias.nombreCategoria, count(a.idAnuncio)  from Anuncio as a where 1 = 1 ";
-        	consulta = "select  a.categoria.categoria.idCategoria, a.categoria.categoria.nombreCategoria, count(a.idAnuncio)  from Anuncio as a where 1 = 1 ";
+            consulta = "select  a.categoria.categoria.idCategoria, a.categoria.categoria.nombreCategoria, count(a.idAnuncio)  from Anuncio as a where 1 = 1 ";
         }
         
         

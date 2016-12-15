@@ -66,11 +66,6 @@ public class AnuncioController {
     @RequestMapping(value = { "/anuncios/", "/anuncios" })
     public String search(@Valid @ModelAttribute("anuncioSearchForm")AnuncioSearchForm form,  BindingResult result, @PageableDefaults(value = DEFAULT_PAGE_SIZE) Pageable pageable, ModelMap model) {
        
-        //String name = form.getName();
-        //String query = (StringUtils.hasText(name) ? name : "") + "%";
-        //Page<User> page = userService.findByNameLike(query, pageable);
-        //model.addAttribute("page", page);
-    	
     	List<AnuncioDTO> listAnunciosFitradoPaginado = new ArrayList<AnuncioDTO>();
     	List<CategoriaAnunciosDTO> listCategoriaAnuncios = new ArrayList<CategoriaAnunciosDTO>();
     	
@@ -97,13 +92,13 @@ public class AnuncioController {
             return "web/anuncios";
         }
 
-        String f_idCategoria = form.getFiltroIdCategoria();    	
+        //String f_idCategoria = form.getFiltroIdCategoria();    	
     	
     	
     	//Page<User> page = userService.findByNameLike(query, pageable);
     	
     	
-    	Map<String,String> filtros = new HashMap<String,String>();
+    	//Map<String,String> filtros = new HashMap<String,String>();
     	 
     	int pagina = pageable.getPageNumber() + 1;
     	int listadoNumRegistrosPorPagina = pageable.getPageSize();
@@ -112,12 +107,27 @@ public class AnuncioController {
     	
     	//String listadoOrdenarPor =  pageable.getSort().toString();
     	
+    	//Obtenemos el listgado de categorias que existen según el filtro
+		try {
+			listCategoriaAnuncios = categoriaService.findCategoriasAnuncios(form);
+			
+			/*for (CategoriaAnunciosDTO cat : listCategoriaAnuncios) {
+				 logger.info(" ---> " + cat.toString());
+			}*/
+			
+		} catch (EMCAException e) {
+			// TODO Auto-generated catch block			
+			e.printStackTrace();
+		}
+    	
+    	
+		logger.info(" --> AnuncioSearchForm: " + form.toString());
 		
     	//Obtenemos el listado de anuncios filtrado y paginado.
     	listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(form, pagina, listadoNumRegistrosPorPagina, form.getListadoOrdenarPor());
     	listadoTotalRegistros = anuncioService.countAnunciosPaginados(form);
     	
-    	logger.info(" --> Estoy en search: " + f_idCategoria);
+    	//logger.info(" --> Estoy en search: " + f_idCategoria);
     	
     	logger.info(" --> AnuncioSearchForm: " + form.toString());
     	
@@ -133,25 +143,10 @@ public class AnuncioController {
 		Page<AnuncioDTO> page = new PageImpl<AnuncioDTO>(listAnunciosFitradoPaginado, pageable, listadoTotalRegistros);
 		
 		
-		//Obtenemos el listgado de categorias que existen según el filtro
-		try {
-			listCategoriaAnuncios = categoriaService.findCategoriasAnuncios(form);
-			
-			for (CategoriaAnunciosDTO cat : listCategoriaAnuncios) {
-				 logger.info(" ---> " + cat.toString());
-			}
-			
-			
-		} catch (EMCAException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
-		}
-    	
-    	
+		
     	model.addAttribute("page", page);
     	model.addAttribute("anuncioSearchForm", form);
-    	model.addAttribute("listCategoriaAnuncios", listCategoriaAnuncios);
+    	model.addAttribute("filtrosListCategoriaAnuncios", listCategoriaAnuncios);
     	
     	model.addAttribute("menuDinamico", "Opción xxxxx");
     	

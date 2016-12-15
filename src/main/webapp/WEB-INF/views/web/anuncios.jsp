@@ -205,10 +205,28 @@
                                     <div class="accordion-heading togglize active"> <a class="accordion-toggle active" data-toggle="collapse" data-parent="#" href="#collapseCatN1">Categorias<i class="fa fa-angle-down"></i> </a> </div>
                                     <div id="collapseCatN1" class="accordion-body collapse in" aria-expanded="true">
                                         <div class="accordion-inner">
-                                            <%-- beanBuscadorAnuncios.pintaResultadoBuscadorCategorias(filtros)--%>
+                                           
+                                           <c:choose>
+										   		<c:when test="${not empty filtrosListCategoriaAnuncios }">
+											  		 <ul class="filter-options-list list-group">
+											  		 	<c:forEach var="row" items="${filtrosListCategoriaAnuncios}">
+											  		 		<li class="list-group-item">
+											  		 			<span class="badge">${row.getCountAnuncios()}</span>
+											  		 			<a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=${row.getIdCategoria()}" class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="${row.getIdCategoria()}">${row.getNombreCategoria()}</a>
+											  		 		</li>
+											  		 	</c:forEach>
+											  		 </ul>
+											  	</c:when>
+												<c:otherwise>
+												       <span  class="filter-options-list-sin-resultado">Sin categorias</span>
+												</c:otherwise>
+											</c:choose>
+                                           
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
                                 
                                 <%--
                                 
