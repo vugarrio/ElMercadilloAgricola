@@ -222,5 +222,16 @@ public class AnuncioRepositoryImpl implements AnuncioRepositoryCustom  {
 	    return query.getResultList();
 	
 	}
+	
+	
+	/* Otro ejemplo */
+//	public void addRoleToAllUsers(String roleName) {
+//	    Role role = roleRepository.findByName(roleName);
+//	
+//	    for (User user : userRepository.findAll()) {
+//	      user.addRole(role);
+//	      userRepository.save(user);
+//	    }
+//	}    
 
 }

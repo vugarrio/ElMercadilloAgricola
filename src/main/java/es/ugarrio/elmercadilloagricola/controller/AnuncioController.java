@@ -69,8 +69,12 @@ public class AnuncioController {
     	List<AnuncioDTO> listAnunciosFitradoPaginado = new ArrayList<AnuncioDTO>();
     	List<CategoriaAnunciosDTO> listCategoriaAnuncios = new ArrayList<CategoriaAnunciosDTO>();
     	
+    	int pagina = pageable.getPageNumber() + 1;
+    	int listadoNumRegistrosPorPagina = pageable.getPageSize();
+    	int listadoTotalRegistros = 0;
     	
     	
+    	//Inicializamos datos de la paginación si estan en blanco.
     	if (form.getListadoVista() == null) {
     		form.setListadoVista(DEFAULT_RESULTS_LIST_VIEW);
     	}
@@ -81,60 +85,41 @@ public class AnuncioController {
     	
     	if (form.getListadoSize() == null) {
     		form.setListadoSize(String.valueOf(DEFAULT_PAGE_SIZE));
-    	}
-    	
+    	}    	
     	
     	//Solo anuncios con estado a 1:Activo
     	form.setFiltroIdAnuncioEstado("1");
     	
+    	
+    	//Validamos el formulario de filtros y si existe error.
     	if (result.hasErrors()) {
-    		logger.info(" --> Estoy en search: errrrorrrr --> " + result.toString());
+    		logger.info(" --> Estoy en search: error en la validación:  " + result.toString());
             return "web/anuncios";
         }
 
-        //String f_idCategoria = form.getFiltroIdCategoria();    	
-    	
-    	
-    	//Page<User> page = userService.findByNameLike(query, pageable);
-    	
-    	
-    	//Map<String,String> filtros = new HashMap<String,String>();
-    	 
-    	int pagina = pageable.getPageNumber() + 1;
-    	int listadoNumRegistrosPorPagina = pageable.getPageSize();
-    	int offset = pageable.getOffset();
-    	int listadoTotalRegistros = 0;
-    	
-    	//String listadoOrdenarPor =  pageable.getSort().toString();
-    	
+           	
     	//Obtenemos el listgado de categorias que existen según el filtro
 		try {
-			listCategoriaAnuncios = categoriaService.findCategoriasAnuncios(form);
-			
-			/*for (CategoriaAnunciosDTO cat : listCategoriaAnuncios) {
-				 logger.info(" ---> " + cat.toString());
-			}*/
-			
+			listCategoriaAnuncios = categoriaService.findCategoriasAnuncios(form);			
 		} catch (EMCAException e) {
-			// TODO Auto-generated catch block			
-			e.printStackTrace();
+			logger.error("No se han podido obtener las categorias con el fitlo: " + e.getMessage());
 		}
     	
     	
+		//Trazas para ver registros de paginacion
 		logger.info(" --> AnuncioSearchForm: " + form.toString());
+		
 		
     	//Obtenemos el listado de anuncios filtrado y paginado.
     	listAnunciosFitradoPaginado = anuncioService.findAnunciosPaginados(form, pagina, listadoNumRegistrosPorPagina, form.getListadoOrdenarPor());
     	listadoTotalRegistros = anuncioService.countAnunciosPaginados(form);
     	
-    	//logger.info(" --> Estoy en search: " + f_idCategoria);
     	
-    	logger.info(" --> AnuncioSearchForm: " + form.toString());
-    	
+    	//Trazas para ver registros de paginacion
+    	logger.info(" --> AnuncioSearchForm: " + form.toString());    	
     	logger.info(" ---------------- paginacion -- pageable.getPageNumber() = " + pageable.getPageNumber());
     	logger.info(" ---------------- paginacion -- offset = " + pageable.getOffset());
-    	logger.info(" ---------------- paginacion -- pageable.getPageSize() = " + pageable.getPageSize());
-		
+    	logger.info(" ---------------- paginacion -- pageable.getPageSize() = " + pageable.getPageSize());		
     	
     	logger.info(" ---------------- listAnunciosFitradoPaginado.size() = " + listAnunciosFitradoPaginado.size());
     	logger.info(" ---------------- listadoTotalRegistros = " + listadoTotalRegistros);
@@ -143,12 +128,18 @@ public class AnuncioController {
 		Page<AnuncioDTO> page = new PageImpl<AnuncioDTO>(listAnunciosFitradoPaginado, pageable, listadoTotalRegistros);
 		
 		
-		
+		//Enviamos datos a la view
     	model.addAttribute("page", page);
     	model.addAttribute("anuncioSearchForm", form);
     	model.addAttribute("filtrosListCategoriaAnuncios", listCategoriaAnuncios);
     	
     	model.addAttribute("menuDinamico", "Opción xxxxx");
+    	
+    	//Si se ha filtrado por filtroIdCategoria obtenemos el obteto del dato y se lo pasamos a la view.
+		if (form.getFiltroIdCategoria() != null) {
+			// ************************** Categoria filtroCategoria = categoriaService. .findOne(Integer.parseInt(form.getFiltroIdCategoria()));
+		}
+    	
     	
         return "web/anuncios"; 
     }
