@@ -36,7 +36,11 @@ public class CategoriaServiceImpl implements CategoriaService {
 	}
 	
 	
-	
+	@Override
+    public Categoria findById(int idCategoria) {
+		Categoria categoria = categoriaRepository.findOne(idCategoria);
+        return categoria;
+    }
 	
 	
 }

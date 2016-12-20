@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.NumberUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,6 +74,9 @@ public class AnuncioController {
     	int listadoNumRegistrosPorPagina = pageable.getPageSize();
     	int listadoTotalRegistros = 0;
     	
+    	//Detalles de filtros
+    	Categoria filtroCategoria = null;
+    	
     	
     	//Inicializamos datos de la paginación si estan en blanco.
     	if (form.getListadoVista() == null) {
@@ -96,6 +100,12 @@ public class AnuncioController {
     		logger.info(" --> Estoy en search: error en la validación:  " + result.toString());
             return "web/anuncios";
         }
+    	
+    	
+    	//Si se ha filtrado por filtroIdCategoria obtenemos el obteto del dato y se lo pasamos a la view.
+		if (!StringUtils.isEmpty(form.getFiltroIdCategoria())) {
+			filtroCategoria = categoriaService.findById(Integer.parseInt(form.getFiltroIdCategoria()));
+		}
 
            	
     	//Obtenemos el listgado de categorias que existen según el filtro
@@ -132,14 +142,11 @@ public class AnuncioController {
     	model.addAttribute("page", page);
     	model.addAttribute("anuncioSearchForm", form);
     	model.addAttribute("filtrosListCategoriaAnuncios", listCategoriaAnuncios);
-    	
-    	model.addAttribute("menuDinamico", "Opción xxxxx");
-    	
-    	//Si se ha filtrado por filtroIdCategoria obtenemos el obteto del dato y se lo pasamos a la view.
-		if (form.getFiltroIdCategoria() != null) {
-			// ************************** Categoria filtroCategoria = categoriaService. .findOne(Integer.parseInt(form.getFiltroIdCategoria()));
+    	if (categoriaService != null) {
+			model.addAttribute("filtroCategoria", filtroCategoria);
 		}
     	
+    	model.addAttribute("menuDinamico", "Opción xxxxx");    	
     	
         return "web/anuncios"; 
     }

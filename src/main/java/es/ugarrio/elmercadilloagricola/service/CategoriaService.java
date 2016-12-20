@@ -19,6 +19,9 @@ public interface CategoriaService {
 	
 	
 	public List<CategoriaAnunciosDTO> findCategoriasAnuncios(AnuncioSearchForm anuncioSearchForm) throws EMCAException;
+
+
+	public Categoria findById(int idCategoria);
 	
 	
 	

@@ -205,6 +205,25 @@
                                     <div class="accordion-heading togglize active"> <a class="accordion-toggle active" data-toggle="collapse" data-parent="#" href="#collapseCatN1">Categorias<i class="fa fa-angle-down"></i> </a> </div>
                                     <div id="collapseCatN1" class="accordion-body collapse in" aria-expanded="true">
                                         <div class="accordion-inner">
+                                        
+                                        
+                                        
+                                          <c:if test="${not empty filtroCategoria}">
+								                <ol class="breadcrumb menu-group-categoria">
+								                
+								                <li><a href="${pageContext.servletContext.contextPath}/anuncios" class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="">Ver todas</a></li>
+								                
+								                 <c:choose>
+								                	<c:when test="${filtroCategoria.getNivel() == 2  }">
+								                		<li>(N2)<a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=${filtroCategoria.getCategoria().getIdCategoria()}"  class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="${filtroCategoria.getCategoria().getIdCategoria()}" >${filtroCategoria.getCategoria().getNombreCategoria()}</a></li>
+								                	</c:when>
+													<c:otherwise>
+													       <li>(N1)<a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=${filtroCategoria.getIdCategoria()}" class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="${filtroCategoria.getIdCategoria()}">${filtroCategoria.getNombreCategoria()}</a></li>
+													</c:otherwise>
+												</c:choose>
+								                  
+											
+										  </c:if> 
                                            
                                            <c:choose>
 										   		<c:when test="${not empty filtrosListCategoriaAnuncios }">
