@@ -10,16 +10,13 @@ import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 
 
 
 import org.springframework.util.StringUtils;
 
-import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
-import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
 import es.ugarrio.elmercadilloagricola.dto.CategoriaAnunciosDTO;
 import es.ugarrio.elmercadilloagricola.form.AnuncioSearchForm;
 import es.ugarrio.elmercadilloagricola.repository.custom.CategoriaRepositoryCustom;

@@ -3,20 +3,16 @@ package es.ugarrio.elmercadilloagricola.service.impl;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-
-
 import es.ugarrio.elmercadilloagricola.domain.Provincia;
+import es.ugarrio.elmercadilloagricola.dto.ProvinciaAnunciosDTO;
 import es.ugarrio.elmercadilloagricola.exception.EMCAException;
+import es.ugarrio.elmercadilloagricola.form.AnuncioSearchForm;
 import es.ugarrio.elmercadilloagricola.repository.ProvinciaRepository;
 import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
 
@@ -78,6 +74,13 @@ public class ProvinciaServiceImpl  implements ProvinciaService {
 	@Override
 	public List<Provincia> findAll() {
 		return provinciaRepository.findAllActivas();
+	}
+
+
+
+	@Override
+	public List<ProvinciaAnunciosDTO> findProvinciasAnuncios(AnuncioSearchForm anuncioSearchForm) throws EMCAException {		
+		return provinciaRepository.findProvinciasAnuncios(anuncioSearchForm);		
 	}
 	
 	/*@Override

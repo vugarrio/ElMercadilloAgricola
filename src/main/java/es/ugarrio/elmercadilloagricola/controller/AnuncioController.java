@@ -1,8 +1,6 @@
 package es.ugarrio.elmercadilloagricola.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,17 +21,15 @@ import org.springframework.util.NumberUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.HandlerMapping;
 
-import es.ugarrio.elmercadilloagricola.domain.Anuncio;
-import es.ugarrio.elmercadilloagricola.domain.AnuncioImagen;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
+import es.ugarrio.elmercadilloagricola.domain.Provincia;
 import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
 import es.ugarrio.elmercadilloagricola.dto.CategoriaAnunciosDTO;
+import es.ugarrio.elmercadilloagricola.dto.ProvinciaAnunciosDTO;
 import es.ugarrio.elmercadilloagricola.exception.EMCAException;
 import es.ugarrio.elmercadilloagricola.form.AnuncioSearchForm;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
@@ -69,6 +65,7 @@ public class AnuncioController {
        
     	List<AnuncioDTO> listAnunciosFitradoPaginado = new ArrayList<AnuncioDTO>();
     	List<CategoriaAnunciosDTO> listCategoriaAnuncios = new ArrayList<CategoriaAnunciosDTO>();
+    	List<ProvinciaAnunciosDTO> listProvinciaAnuncios = new ArrayList<ProvinciaAnunciosDTO>();
     	
     	int pagina = pageable.getPageNumber() + 1;
     	int listadoNumRegistrosPorPagina = pageable.getPageSize();
@@ -76,6 +73,7 @@ public class AnuncioController {
     	
     	//Detalles de filtros
     	Categoria filtroCategoria = null;
+    	Provincia filtroProvincia = null;
     	
     	
     	//Inicializamos datos de la paginación si estan en blanco.
@@ -102,17 +100,28 @@ public class AnuncioController {
         }
     	
     	
-    	//Si se ha filtrado por filtroIdCategoria obtenemos el obteto del dato y se lo pasamos a la view.
+    	//Si se ha filtrado por filtroIdCategoria obtenemos el objeto del dato y se lo pasamos a la view.
 		if (!StringUtils.isEmpty(form.getFiltroIdCategoria())) {
 			filtroCategoria = categoriaService.findById(Integer.parseInt(form.getFiltroIdCategoria()));
 		}
+		//Si se ha filtrado por filtroIdProvincia obtenemos el objeto del dato y se lo pasamos a la view.
+		if (!StringUtils.isEmpty(form.getFiltroIdProvincia())) {
+			filtroProvincia = provinciaService.findById(Integer.parseInt(form.getFiltroIdProvincia()));
+		}
 
            	
-    	//Obtenemos el listgado de categorias que existen según el filtro
+    	//Obtenemos el listado de categorias que existen según el filtro
 		try {
 			listCategoriaAnuncios = categoriaService.findCategoriasAnuncios(form);			
 		} catch (EMCAException e) {
 			logger.error("No se han podido obtener las categorias con el fitlo: " + e.getMessage());
+		}
+		
+		//Obtenemos el listado de provincias que existen según el filtro
+		try {
+			listProvinciaAnuncios = provinciaService.findProvinciasAnuncios(form);			
+		} catch (EMCAException e) {
+			logger.error("No se han podido obtener las provincias con el fitlo: " + e.getMessage());
 		}
     	
     	
@@ -142,8 +151,13 @@ public class AnuncioController {
     	model.addAttribute("page", page);
     	model.addAttribute("anuncioSearchForm", form);
     	model.addAttribute("filtrosListCategoriaAnuncios", listCategoriaAnuncios);
+    	model.addAttribute("filtrosListProvinciaAnuncios", listProvinciaAnuncios);
+    	
     	if (categoriaService != null) {
 			model.addAttribute("filtroCategoria", filtroCategoria);
+		}
+    	if (provinciaService != null) {
+			model.addAttribute("filtroProvincia", filtroProvincia);
 		}
     	
     	model.addAttribute("menuDinamico", "Opción xxxxx");    	

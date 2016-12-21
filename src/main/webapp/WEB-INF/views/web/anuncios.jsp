@@ -207,7 +207,6 @@
                                         <div class="accordion-inner">
                                         
                                         
-                                        
                                           <c:if test="${not empty filtroCategoria}">
 								                <ol class="breadcrumb menu-group-categoria">
 								                
@@ -215,18 +214,16 @@
 								                
 								                 <c:choose>
 								                	<c:when test="${filtroCategoria.getNivel() == 2  }">
-								                		<li>(N2)<a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=${filtroCategoria.getCategoria().getIdCategoria()}"  class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="${filtroCategoria.getCategoria().getIdCategoria()}" >${filtroCategoria.getCategoria().getNombreCategoria()}</a></li>
+								                		<li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=${filtroCategoria.getCategoria().getIdCategoria()}"  class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="${filtroCategoria.getCategoria().getIdCategoria()}" >${filtroCategoria.getCategoria().getNombreCategoria()}</a></li>
 								                	</c:when>
 													<c:otherwise>
-													       <li>(N1)<a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=${filtroCategoria.getIdCategoria()}" class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="${filtroCategoria.getIdCategoria()}">${filtroCategoria.getNombreCategoria()}</a></li>
+													       <li><a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdCategoria=${filtroCategoria.getIdCategoria()}" class="filtro_buscador_link" filtro_nombre="filtroIdCategoria" filtro_valor="${filtroCategoria.getIdCategoria()}">${filtroCategoria.getNombreCategoria()}</a></li>
 													</c:otherwise>
 												</c:choose>
-								                  
-											
 										  </c:if> 
                                            
                                            <c:choose>
-										   		<c:when test="${not empty filtrosListCategoriaAnuncios }">
+                                           		<c:when test="${not empty filtrosListCategoriaAnuncios }">
 											  		 <ul class="filter-options-list list-group">
 											  		 	<c:forEach var="row" items="${filtrosListCategoriaAnuncios}">
 											  		 		<li class="list-group-item">
@@ -247,20 +244,44 @@
                                 
                                 
                                 
-                                <%--
+                               
                                 
                                 <!-- Filter by Provincias -->
                                 <div class="accordion-group panel">
                                     <div class="accordion-heading togglize active"> <a class="accordion-toggle active" data-toggle="collapse" data-parent="#" href="#collapseProv">Provincias<i class="fa fa-angle-down"></i> </a> </div>
                                     <div id="collapseProv" class="accordion-body collapse in" aria-expanded="true">
                                         <div class="accordion-inner">
-                                            <%= beanBuscadorAnuncios.pintaResultadoBuscadorProvincias(filtros)%>
+                                            
+                                            
+                                            <c:if test="${not empty filtroProvincia}">
+								               	<ol class="breadcrumb menu-group-categoria">									                
+								                	<li><a href="${pageContext.servletContext.contextPath}/anuncios" class="filtro_buscador_link" filtro_nombre="filtroIdProvincia" filtro_valor="">Ver todas</a></li>									                
+								                </ol>
+									        </c:if>  
+                                            
+                                            <c:choose>
+										   		<c:when test="${not empty filtrosListProvinciaAnuncios }">
+											  		 <ul class="filter-options-list list-group">
+											  		 	<c:forEach var="row" items="${filtrosListProvinciaAnuncios}">
+											  		 		<li class="list-group-item">
+											  		 			<span class="badge">${row.getCountProvincias()}</span>
+											  		 			<a href="${pageContext.servletContext.contextPath}/anuncios?filtroIdProvincia=${row.getIdProvincia()}" class="filtro_buscador_link" filtro_nombre="filtroIdProvincia" filtro_valor="${row.getIdProvincia()}">${row.getNombreProvincia()}</a>
+											  		 		</li>
+											  		 	</c:forEach>
+											  		 </ul>
+											  	</c:when>
+												<c:otherwise>
+												       <span  class="filter-options-list-sin-resultado">Sin provincias</span>
+												</c:otherwise>
+											</c:choose>
+                                            
                                         </div>
                                     </div>
                                 </div>
                                 
                                 
-                                
+                               <%--
+                                 
                                 <!-- Filter by Texto -->
                                 <div class="accordion-group panel">
                                     <div class="accordion-heading togglize <%if (!filtro_cp.trim().equals("")) { %> active<% } %>"> <a class="accordion-toggle <%if (!filtro_cp.trim().equals("")) { %> active<% } %>" data-toggle="collapse" data-parent="#" href="#collapseCP">Código Postal<i class="fa fa-angle-down"></i> </a> </div>
@@ -278,7 +299,7 @@
                                 </div>
                                 
                                 
-                                
+                                  
                               
                                
                                 <!-- Filter by Precio -->
