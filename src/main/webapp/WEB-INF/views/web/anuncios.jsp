@@ -280,16 +280,15 @@
                                 </div>
                                 
                                 
-                               <%--
-                                 
-                                <!-- Filter by Texto -->
+                                
+                                
                                 <div class="accordion-group panel">
-                                    <div class="accordion-heading togglize <%if (!filtro_cp.trim().equals("")) { %> active<% } %>"> <a class="accordion-toggle <%if (!filtro_cp.trim().equals("")) { %> active<% } %>" data-toggle="collapse" data-parent="#" href="#collapseCP">Código Postal<i class="fa fa-angle-down"></i> </a> </div>
-                                    <div id="collapseCP" class="accordion-body collapse <%if (!filtro_cp.trim().equals("")) { %> in<% } %>" <%if (!filtro_cp.trim().equals("")) { %> aria-expanded="true"<% } %>>
+                                    <div class="accordion-heading togglize <c:if test="${not empty param.filtroCP}"> active</c:if>"> <a class="accordion-toggle <c:if test="${not empty param.filtroCP}"> active</c:if>" data-toggle="collapse" data-parent="#" href="#collapseCP">Código Postal<i class="fa fa-angle-down"></i> </a> </div>
+                                    <div id="collapseCP" class="accordion-body collapse <c:if test="${not empty param.filtroCP}"> in</c:if>" <c:if test="${not empty param.filtroCP}"> aria-expanded="true"</c:if>>
                                         <div class="accordion-inner">
                                             <div class="form-inline">
   						<div class="form-group form-group-sm">
-                                                    <input type="text" name="filtroCP" id="filtroCP" class="form-control  input-120" value="<%=filtro_cp%>"  placeholder="C.P" />                                                    
+                                                    <input type="text" name="filtroCP" id="filtroCP" class="form-control  input-120" value="${param.filtroCP}"  placeholder="C.P" />                                                    
                                                 </div>
                                                 
                                                 <button type="button" class="btn btn-default btn-sm pull-right" onclick="filtro_buscador('filtroCP')">Filtar</button>
@@ -298,8 +297,9 @@
                                     </div>
                                 </div>
                                 
-                                
-                                  
+                              
+                               
+                                    <%--  
                               
                                
                                 <!-- Filter by Precio -->
