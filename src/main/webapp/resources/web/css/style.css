@@ -3040,6 +3040,10 @@ h1.page-title{
         max-width: 150px;
 }
 
+.search-filters .form-inline .form-group .form-control.input-100{
+        max-width: 100px;
+}
+
 .search-filters .form-inline .form-group.last-child{
 	margin-right:0;
 }

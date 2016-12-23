@@ -299,39 +299,45 @@
                                 
                               
                                
-                                    <%--  
+                                   
                               
                                
                                 <!-- Filter by Precio -->
                                 <div class="accordion-group">
-                                    <div class="accordion-heading togglize" <%if (!filtro_precio_desde.trim().equals("") || !filtro_precio_hasta.trim().equals("")) { %> active<% } %>> <a class="accordion-toggle <%if (!filtro_precio_desde.trim().equals("") || !filtro_precio_hasta.trim().equals("")) { %> active<% } %>" data-toggle="collapse" data-parent="#" href="#collapseEight">Precio <i class="fa fa-angle-down"></i> </a> </div>
-                                    <div id="collapseEight" class="accordion-body collapse <%if (!filtro_precio_desde.trim().equals("") || !filtro_precio_hasta.trim().equals("")) { %> in<% } %>" <%if (!filtro_precio_desde.trim().equals("") || !filtro_precio_hasta.trim().equals("")) { %>  aria-expanded="true"<% } %>>
-                                        <div class="accordion-inner">
+                                    <div class="accordion-heading togglize <c:if test="${not empty param.filtroPrecioDesde or not empty param.filtroPrecioHasta}"> active</c:if>"> <a class="accordion-toggle <c:if test="${not empty param.filtroPrecioDesde or not empty param.filtroPrecioHasta}"> active</c:if>" data-toggle="collapse" data-parent="#" href="#collapseEight">Precio<i class="fa fa-angle-down"></i> </a> </div>
+                                    <div id="collapseEight" class="accordion-body collapse <c:if test="${not empty param.filtroPrecioDesde or not empty param.filtroPrecioHasta}"> in</c:if>" <c:if test="${not empty param.filtroPrecioDesde or not empty param.filtroPrecioHasta}"> aria-expanded="true"</c:if>>
+                                      <div class="accordion-inner">
                                             <div class="form-inline">
-                                                <% 
+                                                <%-- 
                                                     String[] anArray = {"100", "500", "1.000", "5.000", "10.000", "20.000", "30.000", "40.000", "50.000", "60.000", "10.000", "20.000", "90.000", "100.000"};
-                                                %>
+                                                --%>
   						<div class="form-group doble">
                                                     <label>Precio Mínimo</label>
-                                                    <select name="filtroPrecioDesde" id="filtroPrecioDesde" class="form-control selectpicker">
+                                                    <%--<select name="filtroPrecioDesde" id="filtroPrecioDesde" class="form-control selectpicker">
                                                         <option value="" <%if (filtro_precio_desde.trim().equals("")) { %> selected<% } %>></option>
-                                                        <%
+                                                        
                                                             for (String num: anArray) {
-                                                        %><option value="<%= num.replace(".", "") %>" <%if (filtro_precio_desde.equals(num.replace(".", ""))) { %> selected<% } %>><%= num %> €</option><%
+                                                        <option value="<%= num.replace(".", "") %>" <%if (filtro_precio_desde.equals(num.replace(".", ""))) { %> selected<% } %>><%= num %> €</option><%
                                                             }
-                                                        %>                                                                                                            
-                                                    </select>
+                                                                                                                                                             
+                                                    </select>--%>  
+                                                    
+                                                    <input type="text" name="filtroPrecioDesde" id="filtroPrecioDesde" class="form-control  input-100" value="${param.filtroPrecioDesde}"  placeholder="" />
+                                                    
                                                 </div>
                                                 <div class="form-group last-child doble">
                                                     <label>Precio Máximo</label>
-                                                    <select name="filtroPrecioHasta" id="filtroPrecioHasta" class="form-control selectpicker">
+                                                    <%--<select name="filtroPrecioHasta" id="filtroPrecioHasta" class="form-control selectpicker">
                                                         <option value="" <%if (filtro_precio_hasta.trim().equals("")) { %> selected<% } %>></option>
                                                         <%
                                                             for (String num: anArray) {
                                                         %><option value="<%= num.replace(".", "") %>" <%if (filtro_precio_hasta.equals(num.replace(".", ""))) { %> selected<% } %>><%= num %> €</option><%
                                                             }
-                                                        %>                                                     
-                                                    </select>
+                                                        %>                                                    
+                                                    </select> --%>  
+                                                    
+                                                    <input type="text" name="filtroPrecioHasta" id="filtroPrecioHasta" class="form-control  input-100" value="${param.filtroPrecioHasta}"  placeholder="" />
+                                                    
                                                 </div>
                                                 <button type="button" class="btn btn-default btn-sm pull-right" onclick="filtro_buscador('filtroPrecio')">Filtrar</button>
                                             </div>
@@ -339,7 +345,7 @@
                                     </div>
                                 </div>
                                 
-                                 --%>
+                                
                                 
                             </div>
                             <!-- End Toggle -->

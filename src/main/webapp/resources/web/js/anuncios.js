@@ -31,7 +31,7 @@ $(function() {
         var campo = $(this).attr('campo');
         var texto = $(this).html();
         $("#formBuscarAnuncios input[name='listadoOrdenarPor']").val(campo);
-        $("#  ").html(texto);
+        $("#dLabel987").html(texto);
         lanzarBusquedaFiltrada();
      });
      

@@ -19,10 +19,6 @@
 	
 	<tiles:insertAttribute name="head_css_js_metas_comunes"/>
 	
-	<c:forEach var="jsValue" items="${jsList}">
-	    <script src="<c:url value="${jsValue}"/>"></script>
-	</c:forEach>
-
 </head>
 <body>
 	<!--[if lt IE 7]>

@@ -106,10 +106,10 @@ public class CategoriaRepositoryImpl implements CategoriaRepositoryCustom  {
             consulta += " and a.cp = :cp ";
         }
         if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroTxt())) {
-            consulta += " and (upper(a.titulo) like :filtroTxt "
-                     + "  or upper(a.descripcion) like :filtroTxt"
-                     + "  or upper(a.marca) like :filtroTxt"
-                     + "  or upper(a.modelo) like :filtroTxt)  ";
+            consulta += " and (upper(a.titulo) like :filtro_txt "
+                     + "  or upper(a.descripcion) like :filtro_txt"
+                     + "  or upper(a.marca) like :filtro_txt"
+                     + "  or upper(a.modelo) like :filtro_txt)  ";
         }
         
         if (!StringUtils.isEmpty(anuncioSearchForm.getFiltroPrecioDesde())) {
