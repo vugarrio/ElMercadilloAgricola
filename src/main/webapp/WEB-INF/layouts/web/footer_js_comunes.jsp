@@ -7,11 +7,14 @@
 <script src="${pageContext.servletContext.contextPath}/resources/web/vendor/owl-carousel/js/owl.carousel.min.js"></script> <!-- Owl Carousel -->
 <script src="${pageContext.servletContext.contextPath}/resources/web/vendor/password-checker.js"></script> <!-- Password Checker -->
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/bootstrap.js"></script> <!-- UI -->
+<script src="${pageContext.servletContext.contextPath}/resources/web/js/autoNumeric.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/init.js"></script> <!-- All Scripts -->
 <script src="${pageContext.servletContext.contextPath}/resources/web/vendor/flexslider/js/jquery.flexslider.js"></script> <!-- FlexSlider -->
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/validaciones.js"></script> 
-<script src="${pageContext.servletContext.contextPath}/resources/web/js/jquery.validaFormulariosVUBootstrap.js"></script> 
+<script src="${pageContext.servletContext.contextPath}/resources/web/js/jquery.validaFormulariosVUBootstrap.js"></script>
+
+
 <%--
     if (!beanSession.isLogin())  {
 --%>

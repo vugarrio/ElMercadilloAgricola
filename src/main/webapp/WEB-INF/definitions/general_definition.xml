@@ -29,15 +29,33 @@
             	<add-attribute value="/resources/web/js/anuncios.js" />
          </put-list-attribute>	 	  		 
 	 </definition> 
-	 
-	 
 	 	 
 	 <definition name="web/anuncio" extends="baseLayoutWeb">	 
 		  <put-attribute name="title" value="Anuncios"/>		  		  
 		  <put-attribute name="body" value="/WEB-INF/views/web/anuncio.jsp" />		  
 	 </definition>  
+	 
+	 
+	 <definition name="web/userarea/home" extends="baseLayoutWeb">	 
+		  <put-attribute name="title" value="Anuncios"/>		  		  
+		  <put-attribute name="body" value="/WEB-INF/views/web/userarea/home.jsp" />		  
+	 </definition> 
+	 
+	 <!-- ***************** INICIO PLANTILLAS DE ADMIN ******************* 
+	 
+	  <definition name="baseLayoutWeb" template="/WEB-INF/layouts/admin/layout.jsp">
+		  <put-attribute name="title" value="Sample Title" />
+		  <put-attribute name="head_css_js_metas_comunes" value="/WEB-INF/layouts/web/head_css_js_metas_comunes.jsp" />
+		  <put-attribute name="header" value="/WEB-INF/layouts/web/header.jsp" />
+		  <put-attribute name="menu" value="/WEB-INF/layouts/web/menu.jsp" />
+		  <put-attribute name="body" value="" />
+		  <put-attribute name="footer" value="/WEB-INF/layouts/web/footer.jsp" />
+		  <put-attribute name="modals_windows" value="/WEB-INF/layouts/web/modals.jsp"/>
+		  <put-attribute name="footer_js_comunes" value="/WEB-INF/layouts/web/footer_js_comunes.jsp" />
+		  <put-list-attribute name="jsList" />
+	 </definition>
 	 	 
-		 
+	 -->	 
 	 
 	 
 	 <!-- ***************** INICIO PLANTILLAS DE PRUEBAS *******************  -->

@@ -53,15 +53,20 @@ $(function() {
       });
      
      
+     $('.numeric-euro').autoNumeric('init', {aSign:' €', pSign:'s', aPad:false});    
+     
+     
+     
      
 });
 
 
 function filtro_buscador(txt_var) {
     if (txt_var == "filtroPrecio") {
-        
-        var filtro_valor_desde = $('#filtroPrecioDesde').val();
-        var filtro_valor_hasta = $('#filtroPrecioHasta').val();
+        //var filtro_valor_desde = $('#filtroPrecioDesde').val();
+        //var filtro_valor_hasta = $('#filtroPrecioHasta').val();    	
+    	var filtro_valor_desde = $('#filtroPrecioDesde').autoNumeric('get');
+        var filtro_valor_hasta = $('#filtroPrecioHasta').autoNumeric('get');
         $("#formBuscarAnuncios input[name='filtroPrecioDesde']").val(filtro_valor_desde);
         $("#formBuscarAnuncios input[name='filtroPrecioHasta']").val(filtro_valor_hasta);
         

@@ -1,6 +1,12 @@
 jQuery(function($){
 	"use strict";
 
+	
+	$.extend($.fn.autoNumeric.defaults, {              
+		aSep: '.',              
+		aDec: ','          
+	});	
+	
 var MERCADILLO = window.AUTOSTARS || {};
 
 

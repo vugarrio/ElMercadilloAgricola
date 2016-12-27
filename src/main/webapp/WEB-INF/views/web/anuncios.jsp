@@ -1,13 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
-<%@ taglib prefix="util" tagdir="/WEB-INF/tags/util" %>
-
 
 
 <!-- Start Page header -->
@@ -115,9 +105,9 @@
                     <div class="toggle-view view-count-choice pull-right">
                         <label>Mostrar</label>
                         <div class="btn-group">
-                            <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 1 ? 'active' : ''}">1</a>
-                            <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 2 ? 'active' : ''}">2</a>
                             <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 5 ? 'active' : ''}">5</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 10 ? 'active' : ''}">10</a>
+                            <a href="#" class="btn btn-default result-list-num-registros ${anuncioSearchForm.getListadoSize() == 20 ? 'active' : ''}">20</a>
                         </div>
                     </div>
                     
@@ -155,21 +145,21 @@
 							   name="formBuscarAnuncios" id="formBuscarAnuncios" >
 						
 						<%-- Info para el objeto AnuncioSearchForm --%>
-						<input name="filtroIdCategoria" type="text" value="${param.filtroIdCategoria}"/>
-                        <input name="filtroIdProvincia" type="text" value="${param.filtroIdProvincia}"/>
-                        <input name="filtroTxt" type="text" value="${param.filtroTxt}"/>
-                        <input name="filtroCP" type="text" value="${param.filtroCP}"/>
-                        <input name="filtroPrecioDesde" type="text" value="${param.filtroPrecioDesde}"/>
-                        <input name="filtroPrecioHasta" type="text" value="${param.filtroPrecioHasta}"/>
+						<input name="filtroIdCategoria" type="hidden" value="${param.filtroIdCategoria}"/>
+                        <input name="filtroIdProvincia" type="hidden" value="${param.filtroIdProvincia}"/>
+                        <input name="filtroTxt" type="hidden" value="${param.filtroTxt}"/>
+                        <input name="filtroCP" type="hidden" value="${param.filtroCP}"/>
+                        <input name="filtroPrecioDesde" type="hidden" value="${param.filtroPrecioDesde}"/>
+                        <input name="filtroPrecioHasta" type="hidden" value="${param.filtroPrecioHasta}"/>
                         
-                        <input name="listadoVista" type="text" value="${anuncioSearchForm.getListadoVista()}"/><%-- results-list-view | results-grid-view --%>
-                        <input name="listadoOrdenarPor" type="text" value="${anuncioSearchForm.getListadoOrdenarPor()}"/>
-                        <input name="listadoSize" type="text" value="${anuncioSearchForm.getListadoSize()}"/>
+                        <input name="listadoVista" type="hidden" value="${anuncioSearchForm.getListadoVista()}"/><%-- results-list-view | results-grid-view --%>
+                        <input name="listadoOrdenarPor" type="hidden" value="${anuncioSearchForm.getListadoOrdenarPor()}"/>
+                        <input name="listadoSize" type="hidden" value="${anuncioSearchForm.getListadoSize()}"/>
                         
                         
                         <%-- Info para el objeto Pageable --%>                                                
-                        <input name="page.page" type="text" value="${page.number + 1}"/>
-                        <input name="page.size" type="text" value="${anuncioSearchForm.getListadoSize()}"/>
+                        <input name="page.page" type="hidden" value="${page.number + 1}"/>
+                        <input name="page.size" type="hidden" value="${anuncioSearchForm.getListadoSize()}"/>
 						
 					</form:form>
 					
@@ -322,7 +312,7 @@
                                                                                                                                                              
                                                     </select>--%>  
                                                     
-                                                    <input type="text" name="filtroPrecioDesde" id="filtroPrecioDesde" class="form-control  input-100" value="${param.filtroPrecioDesde}"  placeholder="" />
+                                                    <input type="text" name="filtroPrecioDesde" id="filtroPrecioDesde" class="form-control input-100 numeric-euro" value="${param.filtroPrecioDesde}"  placeholder="" />
                                                     
                                                 </div>
                                                 <div class="form-group last-child doble">
@@ -336,7 +326,7 @@
                                                         %>                                                    
                                                     </select> --%>  
                                                     
-                                                    <input type="text" name="filtroPrecioHasta" id="filtroPrecioHasta" class="form-control  input-100" value="${param.filtroPrecioHasta}"  placeholder="" />
+                                                    <input type="text" name="filtroPrecioHasta" id="filtroPrecioHasta" class="form-control input-100 numeric-euro" value="${param.filtroPrecioHasta}"  placeholder="" />
                                                     
                                                 </div>
                                                 <button type="button" class="btn btn-default btn-sm pull-right" onclick="filtro_buscador('filtroPrecio')">Filtrar</button>
