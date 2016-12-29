@@ -21,5 +21,6 @@ public class UserAreaController {
 		
 		return "web/userarea/home";		
 	}
+	
 
 }

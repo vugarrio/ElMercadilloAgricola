@@ -74,7 +74,16 @@ public class NavigationController {
 		
 		
 	}
-
+	
+	
+	@RequestMapping(value = { "login"}, method = RequestMethod.GET)
+	public String login(Model model) {
+		
+		logger.info(" controler ---->  web/login");
+		
+		return "web/login";		
+	}
+	
 	/*@RequestMapping(value = "/{pageName}", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView showPage(final HttpServletRequest request, @PathVariable final String pageName) {

@@ -8,7 +8,7 @@
 	<!-- CARGA EL CONTEXTO DE LA APLICACION -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:META-INF/spring/applicationContext.xml</param-value>
+		<param-value>classpath*:META-INF/spring/applicationContext.xml, classpath*:META-INF/spring/spring-*.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -63,6 +63,19 @@
 	<filter-mapping>
 	    <filter-name>SpringOpenEntityManagerInViewFilter</filter-name>
 	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- filtro de Spring security-->
+	<filter>
+		 <filter-name>springSecurityFilterChain</filter-name>
+		 <filter-class>
+			org.springframework.web.filter.DelegatingFilterProxy
+	 	 </filter-class>
+	</filter>
+	<filter-mapping>
+		 <filter-name>springSecurityFilterChain</filter-name>
+		 <url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
 </web-app>

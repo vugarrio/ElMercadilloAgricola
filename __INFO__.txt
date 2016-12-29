@@ -14,7 +14,12 @@ Secusecurity
 
 
 Información para hacer el cms
+
 - Angular 2 + ACMAScript 6.  Compilar CSS y JavaScript con Gulp.
+- https://github.com/noobandy/admin-template
+- https://github.com/lakshmanbabu/SpringMvc-JPA
+
+- Template admin gratuito:  https://almsaeedstudio.com/
 
 
 

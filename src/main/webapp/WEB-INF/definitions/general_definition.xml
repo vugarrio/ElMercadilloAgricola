@@ -36,8 +36,14 @@
 	 </definition>  
 	 
 	 
+	 <definition name="web/login" extends="baseLayoutWeb">	 
+		  <put-attribute name="title" value="Login"/>		  		  
+		  <put-attribute name="body" value="/WEB-INF/views/web/login.jsp" />		  
+	 </definition> 
+	 
+	 
 	 <definition name="web/userarea/home" extends="baseLayoutWeb">	 
-		  <put-attribute name="title" value="Anuncios"/>		  		  
+		  <put-attribute name="title" value="Area de Usuario"/>		  		  
 		  <put-attribute name="body" value="/WEB-INF/views/web/userarea/home.jsp" />		  
 	 </definition> 
 	 

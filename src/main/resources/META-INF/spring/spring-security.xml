@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bean:beans xmlns:bean="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	                    http://www.springframework.org/schema/security 
+	                    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	
+	
+	<!--  Información y tutoriales
+	      
+	      http://www.arquitecturajava.com/spring-security-configuracion/ 
+	      
+	 	  Login Ajax:  http://stackoverflow.com/questions/4912485/spring-security-ajax-login     
+	 -->
+	
+	<http auto-config="true">
+		<intercept-url pattern="/userarea/**" access="ROLE_Usuario" />
+		
+		<form-login  login-page="/login" 
+		             authentication-failure-url="/login?error=true" />
+					 <!-- 
+						login-page: Pagina a la que nos vamos a redirigir para logearnos
+						authentication-failure-url: Pagina a la que vamos si el usuario y clave son incorrectos
+						username-parameter:Parámetro del formulario  que hace referencia al usuario
+						password-parameter:Parámetro del formulario que hace referencia a la clave
+						login-processing-url:Url a la que invoca el formulario para realizar la autentificacion
+					 -->	
+					 
+					 
+		<logout logout-url="/logout"
+		        invalidate-session="true" 
+                logout-success-url="/login" />		
+                	 
+	</http>
+	
+	
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="usuario" password="1234" authorities="ROLE_Usuario" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+</bean:beans>
