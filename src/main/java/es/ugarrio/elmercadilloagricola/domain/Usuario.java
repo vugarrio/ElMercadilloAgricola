@@ -61,6 +61,14 @@ public class Usuario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="usuario_estado_id", nullable=false)
 	private UsuarioEstado usuariosEstado;
+	
+	
+	@ManyToMany
+    @JoinTable(name = "usuarios_r_roles",
+    		  joinColumns=@JoinColumn(name="id_usuario", referencedColumnName="id_usuario"),
+    	      inverseJoinColumns=@JoinColumn(name="id_role", referencedColumnName="id_role"))
+    private List<Role> roles;
+	
 
 	public Usuario() {
 	}
@@ -182,5 +190,15 @@ public class Usuario implements Serializable {
 	public void setUsuariosEstado(UsuarioEstado usuariosEstado) {
 		this.usuariosEstado = usuariosEstado;
 	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	
 
 }

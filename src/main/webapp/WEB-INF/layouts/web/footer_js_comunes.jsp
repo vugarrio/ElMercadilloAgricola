@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 
 <script src="${pageContext.servletContext.contextPath}/resources/web/js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
 <script src="${pageContext.servletContext.contextPath}/resources/web/vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->

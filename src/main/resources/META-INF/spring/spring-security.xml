@@ -7,17 +7,26 @@
 	
 	
 	<!--  Información y tutoriales
+	      ........................
 	      
 	      http://www.arquitecturajava.com/spring-security-configuracion/ 
 	      
-	 	  Login Ajax:  http://stackoverflow.com/questions/4912485/spring-security-ajax-login     
+	 	  Login Ajax:  http://stackoverflow.com/questions/4912485/spring-security-ajax-login    
+	 	  
+	 	  Redireccionar segun el role: http://www.baeldung.com/spring_redirect_after_login
+	 	                               http://stackoverflow.com/questions/23642325/how-redirect-based-on-role-after-authentication-with-spring-security 
+	 	                               
+	 	  Custom:  https://github.com/fycth/spring-security-hibernate-auth-example                            
 	 -->
 	
-	<http auto-config="true">
-		<intercept-url pattern="/userarea/**" access="ROLE_Usuario" />
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/userarea/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		
 		<form-login  login-page="/login" 
-		             authentication-failure-url="/login?error=true" />
+		             authentication-failure-url="/login?error=true"
+		             
+		              />
 					 <!-- 
 						login-page: Pagina a la que nos vamos a redirigir para logearnos
 						authentication-failure-url: Pagina a la que vamos si el usuario y clave son incorrectos
@@ -29,15 +38,15 @@
 					 
 		<logout logout-url="/logout"
 		        invalidate-session="true" 
-                logout-success-url="/login" />		
-                	 
+                logout-success-url="/login" />
 	</http>
 	
 	
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="usuario" password="1234" authorities="ROLE_Usuario" />
+				<user name="usuario" password="1234" authorities="ROLE_USER" />
+				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
