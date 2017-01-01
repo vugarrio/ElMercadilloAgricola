@@ -13,9 +13,13 @@
 	        
 	            
 	            <form class="form-signin" role="form" action="<spring:url value="/j_spring_security_check"/>" method="POST">
-	                <label for="j_username"><spring:message code="page.login.login"/></label>
+	                <%--<label for="j_username"><spring:message code="page.login.login"/></label>
 	                <input type="text" id="j_username" name="j_username" class="form-control"
-	                       placeholder="<spring:message code="page.login.login"/>" required autofocus>
+	                       placeholder="<spring:message code="page.login.login"/>" required autofocus> --%>
+	                       
+	                <label for="j_email"><spring:message code="page.login.email"/></label>
+	                <input type="text" id="j_email" name="email" class="form-control"
+	                       placeholder="<spring:message code="page.login.email"/>" required autofocus>
 	                       
 	                <label for="j_password"><spring:message code="page.login.password"/></label>
 	                <input type="password" id="j_password" name="j_password" class="form-control"

@@ -25,29 +25,39 @@
 		
 		<form-login  login-page="/login" 
 		             authentication-failure-url="/login?error=true"
-		             
-		              />
-					 <!-- 
+		             username-parameter="email"
+		             />
+					 
+					 
+		<logout logout-url="/logout"
+		        invalidate-session="true" 
+                logout-success-url="/login"
+                 />
+	</http>
+	
+	                <!-- form-login:
 						login-page: Pagina a la que nos vamos a redirigir para logearnos
 						authentication-failure-url: Pagina a la que vamos si el usuario y clave son incorrectos
 						username-parameter:Parámetro del formulario  que hace referencia al usuario
 						password-parameter:Parámetro del formulario que hace referencia a la clave
 						login-processing-url:Url a la que invoca el formulario para realizar la autentificacion
 					 -->	
-					 
-					 
-		<logout logout-url="/logout"
-		        invalidate-session="true" 
-                logout-success-url="/login" />
-	</http>
+					
 	
 	
 	<authentication-manager>
 		<authentication-provider>
-			<user-service>
+			<!--<user-service>
 				<user name="usuario" password="1234" authorities="ROLE_USER" />
-				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
-			</user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN" /> 
+			</user-service> -->	
+			 <jdbc-user-service data-source-ref="dataSource"
+                authorities-by-username-query="SELECT usuarios.email, roles.nombre       
+                                               FROM usuarios JOIN usuarios_r_roles on usuarios.id_usuario = usuarios_r_roles.id_usuario 
+                                                             JOIN roles on usuarios_r_roles.id_role = roles.id_role 
+                                               WHERE usuarios.email = ?"
+                users-by-username-query="SELECT email,password,usuario_estado_id FROM usuarios WHERE email = ?"/>
+			
 		</authentication-provider>
 	</authentication-manager>
 </bean:beans>
