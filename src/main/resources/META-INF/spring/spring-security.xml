@@ -61,7 +61,7 @@
                                                FROM usuarios JOIN usuarios_r_roles on usuarios.id_usuario = usuarios_r_roles.id_usuario 
                                                              JOIN roles on usuarios_r_roles.id_role = roles.id_role 
                                                WHERE usuarios.email = ?"
-                users-by-username-query="SELECT email, password, IF(usuario_estado_id &lt;&gt; 1, 0, 1) as activo FROM usuarios WHERE email = ?"/>
+                users-by-username-query="SELECT email, password, IF(usuario_estado_id = 1, 1, 0) as activo FROM usuarios WHERE email = ?"/>
 			
 		</authentication-provider>
 	</authentication-manager>
