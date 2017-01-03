@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bean:beans xmlns:bean="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
 	                    http://www.springframework.org/schema/security 
 	                    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
@@ -16,7 +18,9 @@
 	 	  Redireccionar segun el role: http://www.baeldung.com/spring_redirect_after_login
 	 	                               http://stackoverflow.com/questions/23642325/how-redirect-based-on-role-after-authentication-with-spring-security 
 	 	                               
-	 	  Custom:  https://github.com/fycth/spring-security-hibernate-auth-example                            
+	 	  Custom:  https://github.com/fycth/spring-security-hibernate-auth-example       
+	 	  
+	 	  Obtener los datos del usuuario logado:  http://www.baeldung.com/get-user-in-spring-security                     
 	 -->
 	
 	<http auto-config="true" use-expressions="true">
@@ -26,6 +30,7 @@
 		<form-login  login-page="/login" 
 		             authentication-failure-url="/login?error=true"
 		             username-parameter="email"
+		             authentication-success-handler-ref="myUrlAuthenticationSuccessHandler"
 		             />
 					 
 					 
@@ -56,8 +61,13 @@
                                                FROM usuarios JOIN usuarios_r_roles on usuarios.id_usuario = usuarios_r_roles.id_usuario 
                                                              JOIN roles on usuarios_r_roles.id_role = roles.id_role 
                                                WHERE usuarios.email = ?"
-                users-by-username-query="SELECT email,password,usuario_estado_id FROM usuarios WHERE email = ?"/>
+                users-by-username-query="SELECT email, password, IF(usuario_estado_id &lt;&gt; 1, 0, 1) as activo FROM usuarios WHERE email = ?"/>
 			
 		</authentication-provider>
 	</authentication-manager>
+	
+	
+	<beans:bean id="myUrlAuthenticationSuccessHandler" class="es.ugarrio.elmercadilloagricola.security.UrlAuthenticationSuccessHandler" />	
+	
+	
 </bean:beans>
