@@ -60,7 +60,8 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
         } else if (isUser) {
             return "/userarea/";
         } else {
-            throw new IllegalStateException();
+            //throw new IllegalStateException();
+        	return "/login/";
         }
     }
  

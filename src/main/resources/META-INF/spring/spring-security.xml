@@ -18,9 +18,19 @@
 	 	  Redireccionar segun el role: http://www.baeldung.com/spring_redirect_after_login
 	 	                               http://stackoverflow.com/questions/23642325/how-redirect-based-on-role-after-authentication-with-spring-security 
 	 	                               
-	 	  Custom:  https://github.com/fycth/spring-security-hibernate-auth-example       
+	 	  Custom:  https://github.com/fycth/spring-security-hibernate-auth-example
+	 	 
+	 	  Custom con customUserDetailsService:  http://www.baeldung.com/registration-with-spring-mvc-and-spring-security
+	 	                                        http://javapointers.com/tutorial/spring-custom-userdetailsservice-example/
+	 	 
+	 	  Custom con customProvider:  http://www.baeldung.com/spring-security-authentication-provider
+	 	                              https://aykutakin.wordpress.com/2013/07/08/spring-security-spring-custom-authentication-provider/         
+	 	 
+	 	  Cusot con  customProvider y utilizando customUserDetailsService: http://stackoverflow.com/questions/10607696/spring-security-custom-userdetails
 	 	  
-	 	  Obtener los datos del usuuario logado:  http://www.baeldung.com/get-user-in-spring-security                     
+	 	  Obtener los datos del usuuario logado:  http://www.baeldung.com/get-user-in-spring-security
+	 	  
+	 	   
 	 -->
 	
 	<http auto-config="true" use-expressions="true">

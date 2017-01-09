@@ -1,6 +1,7 @@
 package es.ugarrio.elmercadilloagricola.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.ugarrio.elmercadilloagricola.domain.Anuncio;
 import es.ugarrio.elmercadilloagricola.domain.Categoria;
 import es.ugarrio.elmercadilloagricola.domain.Provincia;
+import es.ugarrio.elmercadilloagricola.domain.Role;
+import es.ugarrio.elmercadilloagricola.domain.Usuario;
 import es.ugarrio.elmercadilloagricola.dto.AnuncioDTO;
 import es.ugarrio.elmercadilloagricola.exception.EMCAException;
+import es.ugarrio.elmercadilloagricola.repository.UsuarioRepository;
 import es.ugarrio.elmercadilloagricola.service.AnuncioService;
 import es.ugarrio.elmercadilloagricola.service.CategoriaService;
 import es.ugarrio.elmercadilloagricola.service.ProvinciaService;
@@ -31,6 +35,9 @@ public class NavigationController {
 	
 	@Autowired
 	private CategoriaService categoriaService;
+	
+	@Autowired
+    private UsuarioRepository usuarioRepository;
 	
 	/** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
@@ -80,6 +87,14 @@ public class NavigationController {
 	public String login(Model model) {
 		
 		logger.info(" controler ---->  web/login");
+		
+		/* //TEST usuario
+		Usuario testUser = usuarioRepository.findByEmail("usambru@gmail.com");
+		List<Role> roles = testUser.getRoles();
+		logger.info(testUser.toString());		
+		for( Role role: roles ) { 
+        	logger.info("Role -> " + role.getNombre());
+        }*/
 		
 		return "web/login";		
 	}

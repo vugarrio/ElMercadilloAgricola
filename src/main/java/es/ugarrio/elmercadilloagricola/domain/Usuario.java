@@ -198,6 +198,14 @@ public class Usuario implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", confirmacionCode=" + confirmacionCode + ", createdAt=" + createdAt
+				+ ", email=" + email + ", lastIp=" + lastIp + ", lastLoggedIn=" + lastLoggedIn + ", nombre=" + nombre
+				+ ", password=" + password + ", telefono=" + telefono + ", updatedAt=" + updatedAt + ", urlFoto="
+				+ urlFoto + ", anuncios=" + anuncios + ", usuariosEstado=" + usuariosEstado + ", roles=[" + roles + "] ]";
+	}
 	
 	
 
