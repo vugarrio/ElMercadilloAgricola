@@ -3,6 +3,8 @@ package es.ugarrio.elmercadilloagricola.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,6 +25,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
     private UsuarioRepository usuarioRepository;
 	
+	/** Logger for this class and subclasses */
+    protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		
@@ -40,11 +45,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         	enabled = false; 
         }
         
-        return  new org.springframework.security.core.userdetails.User
-          (user.getEmail(), 
-          user.getPassword(), enabled, accountNonExpired, 
-          credentialsNonExpired, accountNonLocked, 
-          getAuthorities(user.getRoles()));
+        logger.info("CustomUserDetailsService --> Usuario login : " + user.toString());
+        
+        return  new org.springframework.security.core.userdetails.User (  user.getEmail(), user.getPassword(), enabled, 
+        		                                                          accountNonExpired, credentialsNonExpired, accountNonLocked, 
+																          getAuthorities(user.getRoles()));
 	}
 	
 	//Obtenemos la lista de Roles Autorizados para el usuario

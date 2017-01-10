@@ -8,7 +8,47 @@
 	                    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 	
 	
-	<!--  Información y tutoriales
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/userarea/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+		
+		<form-login  login-page="/login" 
+		             authentication-failure-url="/login?error=true"
+		             username-parameter="email"
+		             authentication-success-handler-ref="urlAuthenticationSuccessHandler"
+		             />
+					 
+					 
+		<logout logout-url="/logout"
+		        invalidate-session="true" 
+                logout-success-url="/login"
+                 />
+	</http>
+	
+	                <!-- form-login:
+						login-page: Pagina a la que nos vamos a redirigir para logearnos
+						authentication-failure-url: Pagina a la que vamos si el usuario y clave son incorrectos
+						username-parameter:Parámetro del formulario  que hace referencia al usuario
+						password-parameter:Parámetro del formulario que hace referencia a la clave
+						login-processing-url:Url a la que invoca el formulario para realizar la autentificacion
+					 -->	
+					
+	
+	
+	<authentication-manager>
+	    <authentication-provider user-service-ref="userDetailsService" /> 
+	</authentication-manager>
+	
+	<beans:bean id="userDetailsService" class="es.ugarrio.elmercadilloagricola.security.CustomUserDetailsService"/>	
+	
+	<beans:bean id="urlAuthenticationSuccessHandler" class="es.ugarrio.elmercadilloagricola.security.UrlAuthenticationSuccessHandler" />	
+	
+	
+</bean:beans>
+
+
+
+<!--  Información y tutoriales
 	      ........................
 	      
 	      http://www.arquitecturajava.com/spring-security-configuracion/ 
@@ -30,54 +70,11 @@
 	 	  
 	 	  Obtener los datos del usuuario logado:  http://www.baeldung.com/get-user-in-spring-security
 	 	  
+	 	  Limit login attempts example (Numero de intentos):  https://www.mkyong.com/spring-security/spring-security-limit-login-attempts-example/
+	 	  
+	 	  Recordar login:  https://www.mkyong.com/spring-security/spring-security-check-if-user-is-from-remember-me-cookie/
+	 	  
+	 	  Encriptar password:  https://www.mkyong.com/spring-security/spring-security-password-hashing-example/
+	 	 
 	 	   
 	 -->
-	
-	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/userarea/**" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-		
-		<form-login  login-page="/login" 
-		             authentication-failure-url="/login?error=true"
-		             username-parameter="email"
-		             authentication-success-handler-ref="myUrlAuthenticationSuccessHandler"
-		             />
-					 
-					 
-		<logout logout-url="/logout"
-		        invalidate-session="true" 
-                logout-success-url="/login"
-                 />
-	</http>
-	
-	                <!-- form-login:
-						login-page: Pagina a la que nos vamos a redirigir para logearnos
-						authentication-failure-url: Pagina a la que vamos si el usuario y clave son incorrectos
-						username-parameter:Parámetro del formulario  que hace referencia al usuario
-						password-parameter:Parámetro del formulario que hace referencia a la clave
-						login-processing-url:Url a la que invoca el formulario para realizar la autentificacion
-					 -->	
-					
-	
-	
-	<authentication-manager>
-		<authentication-provider>
-			<!--<user-service>
-				<user name="usuario" password="1234" authorities="ROLE_USER" />
-				<user name="admin" password="admin" authorities="ROLE_ADMIN" /> 
-			</user-service> -->	
-			 <jdbc-user-service data-source-ref="dataSource"
-                authorities-by-username-query="SELECT usuarios.email, roles.nombre       
-                                               FROM usuarios JOIN usuarios_r_roles on usuarios.id_usuario = usuarios_r_roles.id_usuario 
-                                                             JOIN roles on usuarios_r_roles.id_role = roles.id_role 
-                                               WHERE usuarios.email = ?"
-                users-by-username-query="SELECT email, password, IF(usuario_estado_id = 1, 1, 0) as activo FROM usuarios WHERE email = ?"/>
-			
-		</authentication-provider>
-	</authentication-manager>
-	
-	
-	<beans:bean id="myUrlAuthenticationSuccessHandler" class="es.ugarrio.elmercadilloagricola.security.UrlAuthenticationSuccessHandler" />	
-	
-	
-</bean:beans>
