@@ -8,4 +8,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="util" tagdir="/WEB-INF/tags/util" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <fmt:requestEncoding value="UTF-8" />

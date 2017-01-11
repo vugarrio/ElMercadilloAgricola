@@ -18,7 +18,7 @@
 	                       placeholder="<spring:message code="page.login.login"/>" required autofocus> --%>
 	                       
 	                <label for="j_email"><spring:message code="page.login.email"/></label>
-	                <input type="text" id="j_email" name="email" class="form-control"
+	                <input type="text" id="j_email" name="email" class="form-control" value=""
 	                       placeholder="<spring:message code="page.login.email"/>" required autofocus>
 	                       
 	                <label for="j_password"><spring:message code="page.login.password"/></label>

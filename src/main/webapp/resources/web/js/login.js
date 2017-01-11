@@ -2,13 +2,23 @@ $(function() {
     
     $('[data-toggle="tooltip"]').tooltip()
     
-    $("#formLogin").on("submit", function(event) {                   	
+    $("#formLogin").on("submit", function(event) {
+    		return  $(this).validaFormulariosVU();                             
+	 });
+    
+    /* 
+     *  En el caso de login por ajax
+     * 
+     * $("#formLogin").on("submit", function(event) {                   	
             event.preventDefault();
             enviarDatosLogin($(this));                                
-     }); 
+     }); */
 });
 
-function enviarDatosLogin(obj) {
+/* 
+ * En el caso de login por ajax
+ * 
+ * function enviarDatosLogin(obj) {
     if ( obj.validaFormulariosVU() ) {
 
         $('.enviar-formulario-btn', obj).button('loading');
@@ -54,7 +64,7 @@ function enviarDatosLogin(obj) {
             mostrarCajaFormMensajeError (obj, "Por favor, revisa los campos marcados."); 
     }
   
-} 
+} */
     
 
 

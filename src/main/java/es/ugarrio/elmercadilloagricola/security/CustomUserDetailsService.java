@@ -45,11 +45,26 @@ public class CustomUserDetailsService implements UserDetailsService {
         	enabled = false; 
         }
         
-        logger.info("CustomUserDetailsService --> Usuario login : " + user.toString());
+        //logger.info("CustomUserDetailsService --> Usuario login : " + user.toString());
         
-        return  new org.springframework.security.core.userdetails.User (  user.getEmail(), user.getPassword(), enabled, 
+       
+        
+         /*return  new org.springframework.security.core.userdetails.User (  user.getEmail(), user.getPassword(), enabled, 
         		                                                          accountNonExpired, credentialsNonExpired, accountNonLocked, 
-																          getAuthorities(user.getRoles()));
+																          getAuthorities(user.getRoles()));  */
+        
+        /* Devolvermos UserProfile que es la clase customizada de UserDetail */                
+        UserProfile userProfile = new UserProfile( user.getIdUsuario(), user.getEmail(), user.getPassword(), user.getEmail(), user.getNombre(), user.getUrlFoto(),
+				        		getAuthorities(user.getRoles()), 
+				        		accountNonExpired, 
+				        		accountNonLocked,
+				    			credentialsNonExpired, 
+				    			enabled
+				    		  );
+        
+        logger.info("CustomUserDetailsService --> Usuario userProfile : " + userProfile.toString());
+        
+        return userProfile; 
 	}
 	
 	//Obtenemos la lista de Roles Autorizados para el usuario
@@ -60,5 +75,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         return authorities;
     }
-
+	
+	
 }
