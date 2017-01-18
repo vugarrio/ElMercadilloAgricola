@@ -2,6 +2,8 @@ package es.ugarrio.elmercadilloagricola.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +17,23 @@ public class UserAreaController {
     protected final Log logger = LogFactory.getLog(getClass());
 	
 	@RequestMapping(value = { "/", "home", "index" }, method = RequestMethod.GET)
-	public String index(Model model) {
+	public String index(Model model, Authentication authentication) {
+		
+		UserDetails userDetails = null;
 		
 		logger.info(" controler ---->  web/userarea/home");
+		
+		if (authentication.isAuthenticated())  {
+			userDetails = (UserDetails) authentication.getPrincipal();
+			//logger.info(" authentication ---->  " + authentication.toString());
+			logger.info(" authentication ---->  Autorizaciones: " + userDetails.getAuthorities());
+			logger.info(" authentication ---->  UserName: " + userDetails.getUsername());
+			logger.info(" authentication ---->  HashCode: " + userDetails.hashCode());
+			
+		} else {
+			logger.info(" authentication ---->  No esta identificado");
+		}
+		
 		
 		return "web/userarea/home";		
 	}

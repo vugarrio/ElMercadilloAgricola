@@ -101,6 +101,15 @@ public class NavigationController {
 		return "web/login";		
 	}
 	
+	 
+	@RequestMapping(value = { "registro"}, method = RequestMethod.GET)
+	public String registro(Model model) {
+		
+		logger.info(" controler ---->  web/registro");
+				
+		return "web/registro";		
+	}
+	
 	/*@RequestMapping(value = "/{pageName}", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView showPage(final HttpServletRequest request, @PathVariable final String pageName) {

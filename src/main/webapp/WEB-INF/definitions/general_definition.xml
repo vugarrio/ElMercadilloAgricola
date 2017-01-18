@@ -39,6 +39,14 @@
 	 <definition name="web/login" extends="baseLayoutWeb">	 
 		  <put-attribute name="title" value="Login"/>		  		  
 		  <put-attribute name="body" value="/WEB-INF/views/web/login.jsp" />		  
+	 </definition>
+	 
+	 <definition name="web/registro" extends="baseLayoutWeb">	 
+		  <put-attribute name="title" value="Registro"/>		  		  
+		  <put-attribute name="body" value="/WEB-INF/views/web/registro.jsp" />	
+		  <put-list-attribute name="jsList" inherit="true">
+            	<add-attribute value="/resources/web/js/registro_corto.js" />
+         </put-list-attribute>		  
 	 </definition> 
 	 
 	 

@@ -3,4 +3,7 @@ encoding//src/main/java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/anuncio.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/anuncios.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/web/home.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/login.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/registro.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/web/userarea/home.jsp=UTF-8
 encoding//src/test/java=UTF-8
