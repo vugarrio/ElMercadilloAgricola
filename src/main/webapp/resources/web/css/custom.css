@@ -1,3 +1,22 @@
+.main[role="login"] .hero-area {
+	background: none;
+	/*background-image: url("/elmercadilloagricola/resources/web/images/slides/slide1.jpg"); 
+	width: 100%; */
+}
+
+
+.login-principal > .col-md-4 {
+  float: none;
+  margin: 0 auto;
+  width: 400px;
+  margin-top: 100px;	
+  margin-bottom: 50px;
+}
+
+.login-principal .input-group {
+    margin-bottom: 20px;  
+}
+
 .result-item-categoria {
     padding-bottom: 10px;
 }
@@ -144,6 +163,10 @@
     display: none;
 }
 
+.login-principal .regular-signup #message {
+    display: block;
+}
+
 
 #formPublicarAnuncio .panel-info.price-suggestion {
     margin-left: 0;
@@ -226,4 +249,8 @@
 }
 
 .numeric-euro {text-align: right};
+
+
+
+
 
