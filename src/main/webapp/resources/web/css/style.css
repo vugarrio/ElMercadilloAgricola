@@ -4833,7 +4833,7 @@ single-vehicle-details .badge-premium-listing a:before{
 	background-repeat:no-repeat;
 	background-color:#f8f8f8;
 }
-.touch .parallax, .page-header.parallax{
+.touch .parallax, .page-header.parallax, .main[role="login"] .parallax {
 	background-attachment:scroll!important;
 }
 .page-header{

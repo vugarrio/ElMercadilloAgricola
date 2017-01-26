@@ -61,7 +61,7 @@
 	                        </div>
 	                        <div class="topnav dd-menu">
 	                            <ul class="top-navigation sf-menu">
-	                                <li><a href="registro.jsp">Registrate</a></li>
+	                                <li><a href="${pageContext.servletContext.contextPath}/registro/">Registrate</a></li>
 	                            </ul>
 	                        </div>
 					        

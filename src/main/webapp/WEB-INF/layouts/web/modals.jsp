@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4>INICIA SESIÓN</h4>
+                <h4>INICIAR SESIÓN</h4>
             </div>
             <div class="modal-body form-validate-vu">
                 <form name="formLogin" id="formLogin" action="<spring:url value="/j_spring_security_check"/>"  data-origen="${param.origen}" method="post">

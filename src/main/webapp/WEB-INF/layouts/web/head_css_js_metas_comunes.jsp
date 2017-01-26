@@ -14,7 +14,7 @@
 <link href="${pageContext.servletContext.contextPath}/resources/web/vendor/owl-carousel/css/owl.carousel.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.servletContext.contextPath}/resources/web/vendor/owl-carousel/css/owl.theme.css" rel="stylesheet" type="text/css">
 <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="${pageContext.servletContext.contextPath}/resources/web/css/ie.css" media="screen" /><![endif]-->
-<link href="${pageContext.servletContext.contextPath}/resources/web/css/custom.css?189" rel="stylesheet" type="text/css"><!-- CUSTOM STYLESHEET FOR STYLING -->
+<link href="${pageContext.servletContext.contextPath}/resources/web/css/custom.css?19" rel="stylesheet" type="text/css"><!-- CUSTOM STYLESHEET FOR STYLING -->
 <!-- Color Style -->
 <link href="${pageContext.servletContext.contextPath}/resources/web/css/color7.css" rel="stylesheet" type="text/css">
 <!-- SCRIPTS

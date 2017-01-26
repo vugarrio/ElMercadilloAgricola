@@ -2,7 +2,7 @@
 
 	<div class="main" role="login">
     	
-    	<div class="hero-area">
+    	<div class="hero-area parallax">
     	
             	<div class="row login-principal" >
                     
@@ -13,7 +13,7 @@
 	                                <form name="formLogin" id="formLogin" action="<spring:url value="/j_spring_security_check"/>"  method="post">
 	                                    <input type="hidden" name="accion" value="login"/>
 	                                    
-	                        	    	<h3>INICIA SESIÓN</h3>
+	                        	    	<h3>INICIAR SESIÓN</h3>
 	                                    
 	                                    <div class="input-group">
 					                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -42,6 +42,13 @@
 	                                <span class="or-break">o</span>
 	                                <button type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-facebook"></i> Iniciar con Facebook</button>
 	                                <button type="button" class="btn btn-block btn-twitter btn-social"><i class="fa fa-twitter"></i> Iniciar con Twitter</button>
+	                            </div>
+	                            
+	                            <div class="registro-signup">
+	                            	<span class="or-break">¿Eres un nuevo usuario?</span>
+	                                <a href="${pageContext.servletContext.contextPath}/registro/" class="btn btn-default btn-rounded">Registrate</a>
+	                                
+	                            
 	                            </div>
 	                            
 	                        </section>
