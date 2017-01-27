@@ -15,11 +15,13 @@ public class UserAreaController {
 	
 	/** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
-	
-	@RequestMapping(value = { "/", "home", "index" }, method = RequestMethod.GET)
+    
+    
+   
+    @RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	public String index(Model model, Authentication authentication) {
-		
-		UserDetails userDetails = null;
+    	
+    	UserDetails userDetails = null;
 		
 		logger.info(" controler ---->  web/userarea/home");
 		
@@ -34,8 +36,17 @@ public class UserAreaController {
 			logger.info(" authentication ---->  No esta identificado");
 		}
 		
+    	
+    	 return "redirect:/userarea/anuncios/";
+    }
+	
+	@RequestMapping(value = {"anuncios" }, method = RequestMethod.GET)
+	public String getListAnuncios(Model model, Authentication authentication) {
 		
-		return "web/userarea/home";		
+		logger.info(" controler ---->  web/userarea/anuncios");
+		
+		
+		return "web/userarea/anuncios";		
 	}
 	
 
