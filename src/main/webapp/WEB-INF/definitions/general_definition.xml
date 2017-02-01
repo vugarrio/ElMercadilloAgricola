@@ -52,7 +52,7 @@
 	 
 	 <definition name="web/userarea/anuncios" extends="baseLayoutWeb">	 
 		  <put-attribute name="title" value="Area de Usuario"/>		  		  
-		  <put-attribute name="body" value="/WEB-INF/views/web/userarea/anuncios.jsp" />		  
+		  <put-attribute name="body" name="/WEB-INF/views/web/userarea/anuncios.jsp"/>	  
 	 </definition> 
 	 
 	 <!-- ***************** INICIO PLANTILLAS DE ADMIN *******************  -->	

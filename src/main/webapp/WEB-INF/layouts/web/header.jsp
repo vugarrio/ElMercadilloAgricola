@@ -40,8 +40,8 @@
 	                                <span class="user-dd-dropper"><i class="fa fa-angle-down"></i></span>
 	                            </a>
 	                            <ul class="dropdown-menu" role="menu" aria-labelledby="userdropdown">
-	                                <li><a href="area_usuario_anuncios.jsp">Anuncios</a></li>
-	                                <li><a href="area_usuario_mensajes.jsp">Mensajes</a></li>
+	                                <li><a href="${pageContext.servletContext.contextPath}/userarea/anuncios/">Anuncios</a></li>
+	                                <li><a href="${pageContext.servletContext.contextPath}/userarea/mensajes/">Mensajes</a></li>
 	                                <li><a href="javascript:alert('Proximamente');"> Mis datos</a></li>
 	                                <li><a href="javascript:alert('Proximamente');"> Configuración</a></li>
 	                                <li><a href="${pageContext.servletContext.contextPath}/logout">Cerrar sesion</a></li>
@@ -57,7 +57,8 @@
 					         <%-- USUARIO NO LOGADO --%>
 					         
 					        <div class="user-login-panel">
-	                            <a title="Iniciar sesión" href="#" class="user-login-btn" data-toggle="modal" data-target="#loginModal"><i class="icon-profile"></i></a>
+	                            <%-- <a title="Iniciar sesión" href="#" class="user-login-btn" data-toggle="modal" data-target="#loginModal"><i class="icon-profile"></i></a> --%>
+	                            <a title="Iniciar sesión" href="${pageContext.servletContext.contextPath}/login/" class="user-login-btn" ><i class="icon-profile"></i></a>
 	                        </div>
 	                        <div class="topnav dd-menu">
 	                            <ul class="top-navigation sf-menu">
